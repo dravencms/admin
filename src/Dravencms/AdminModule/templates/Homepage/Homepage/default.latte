@@ -1,0 +1,38 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+    <div class="jumbotron">
+        <h1>{_"Welcome!"}</h1>
+        <p>{_"Welcome to DravenCMS, Content Management System"}</p>
+        {*<p><a n:href=":Admin:Wiki:Wiki:" class="btn btn-primary btn-lg" role="button">{_"Learn more"}</a></p>*}
+    </div>
+    <div class="panels">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">{_"System Info"}</h3>
+            </div>
+            <div class="panel-body">
+                <b>PHP:</b> {=PHP_VERSION}<br/>
+                {ifset $_SERVER['SERVER_SOFTWARE']}
+                    <b>Server:</b> {$_SERVER['SERVER_SOFTWARE']}<br/>
+                {/ifset}
+                <b>Nette Framework:</b> {=Nette\Framework::VERSION}<br/>
+            </div>
+        </div>
+    </div>
+    <ul n:if="$tree">
+        <li n:foreach="$tree AS $moduleName => $components">
+            {$moduleName}
+            <ul>
+                <li n:foreach="$components AS $componentName => $actions">
+                    {$componentName} {$actions['repository']['class']}
+                    <ul n:ifset="$actions['actions']">
+                        <li n:foreach="$actions['actions'] AS $actionName => $action">
+                            {$actionName} {$action['implement']}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+{/block}

@@ -1,0 +1,119 @@
+{var $name = 'DravenCMS'}
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="ie8" lang="{$lang}"> <![endif]-->
+<!--[if IE 9]>
+<html class="ie9 gt-ie8" lang="{$lang}"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="gt-ie8 gt-ie9 not-ie" lang="{$lang}"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="author" content="Adam Schubert <adam.schubert@sg1-game.net>">
+    <link rel="shortcut icon" href="{$basePath}/modules/admin/img/favicon.ico"/>
+    <title>{$name|upper}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    {control css}
+</head>
+
+<body class="theme-default main-menu-animated {ifset $bodyClass} {$bodyClass} {/ifset}">
+
+<div id="main-wrapper">
+
+
+    <!-- 2. $MAIN_NAVIGATION ===========================================================================
+
+        Main navigation
+    -->
+    <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+        <!-- Main menu toggle -->
+        <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">Skrýt menu</span></button>
+
+        <div class="navbar-inner">
+            <!-- Main navbar header -->
+            <div class="navbar-header">
+
+                <!-- Logo -->
+                <a n:href=":Admin:Homepage:Homepage:" class="navbar-brand">
+                    {$name|stripHtml|upper}
+                </a>
+
+                <!-- Main navbar toggle -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+
+            </div> <!-- / .navbar-header -->
+
+            <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+                <div>
+
+                    <div class="right clearfix">
+                        <ul class="nav navbar-nav pull-right right-navbar-nav">
+                            {*
+                                <li>
+                                    <form class="navbar-form pull-left nav-search" action="{link Search:default}" method="get">
+                                        <input type="text" name="q" value="{$q}" class="form-control search-main" autocomplete="off" placeholder="Vyhledat..."
+                                               data-target="{link Search:whisper, 'query' => '%QUERY'}">
+                                    </form>
+                                </li>
+                            *}
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                                    <img n:gravatar="$userInfo->getEmail(), 100" alt="{$userInfo->getFirstName()} {$userInfo->getLastName()}">
+                                    <span>{$userInfo->getFirstName()} {$userInfo->getLastName()}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!--li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li-->
+                                    <li><a n:href=":Admin:User:Account:"><!--span class="badge badge-primary pull-right">New</span--><i class="dropdown-icon fa fa-user"></i>&nbsp;&nbsp;Múj profil</a>
+                                    </li>
+                                    <!--li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li-->
+                                    <li class="divider"></li>
+                                    <li><a n:href=":Admin:User:Sign:out"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Odhlásit</a></li>
+                                </ul>
+                            </li>
+                        </ul> <!-- / .navbar-nav -->
+                    </div> <!-- / .right -->
+                </div>
+            </div> <!-- / #main-navbar-collapse -->
+        </div> <!-- / .navbar-inner -->
+    </div>
+
+    <div id="main-menu" role="navigation">
+        <div id="main-menu-inner">
+            <div class="menu-content top animated fadeIn" id="menu-content-demo">
+                <div>
+                    <div class="text-bg"><span class="text-slim">{_"Welcome"},</span> <span class="text-semibold">{$userInfo->getFirstName()|inflection}</span></div>
+
+                    <img n:gravatar="$userInfo->getEmail(), 100" alt="{$userInfo->getFirstName()} {$userInfo->getLastName()}" class="">
+                    <div class="btn-group">
+                        <!--a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a-->
+                        <a n:href=":Admin:User:Account:" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+                        <!--a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a-->
+                        <a n:href=":Admin:User:Sign:out" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+                    </div>
+                </div>
+            </div>
+            {control menu}
+        </div> <!-- / #main-menu-inner -->
+    </div> <!-- / #main-menu -->
+    <!-- /4. $MAIN_MENU -->
+
+
+    <div id="content-wrapper">
+        <div n:foreach="$flashes as $flash" class="alert alert-page alert {$flash->type}" data-animate="true">{$flash->message|noescape}</div>
+        {control menuBreadcrumb}
+        {include #content}
+        Time: {microtime(true) - \Tracy\Debugger::$time|number:5} s
+    </div> <!-- / #content-wrapper -->
+    <div id="main-menu-bg"></div>
+</div> <!-- / #main-wrapper -->
+{control js}
+{ifset #js}
+    <!--JS from included templates-->
+    {include #js}
+{/ifset}
+
+{include 'global.latte'}
+
+</body>
+</html>
