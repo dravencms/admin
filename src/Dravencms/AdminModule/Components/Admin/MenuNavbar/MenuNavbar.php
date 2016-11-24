@@ -7,7 +7,7 @@
 
 namespace Dravencms\AdminModule\Components\Admin\MenuNavbar;
 
-use Dravencms\Components\BaseControl;
+use Dravencms\Components\BaseControl\BaseControl;
 
 use Dravencms\Model\Admin\Repository\MenuRepository;
 use Dravencms\Model\User\Entities\User;
