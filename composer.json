@@ -15,7 +15,8 @@
     }
   ],
   "require": {
-    "dravencms/user": "@dev"
+    "dravencms/user": "@dev",
+    "ipub/gravatar": "^2.0"
   },
   "require-dev": {
     "nette/tester": "@dev"
