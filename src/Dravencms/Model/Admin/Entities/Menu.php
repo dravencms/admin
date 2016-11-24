@@ -3,7 +3,7 @@
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  */
 
-namespace App\Model\Admin\Entities;
+namespace Dravencms\Model\Admin\Entities;
 
 use Dravencms\Model\User\Entities\AclOperation;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,7 +16,7 @@ use Nette;
 
 /**
  * Class Menu
- * @package App\Model\Structure\Entities
+ * @package Dravencms\Model\Structure\Entities
  * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
  * @ORM\Table(name="adminMenu")

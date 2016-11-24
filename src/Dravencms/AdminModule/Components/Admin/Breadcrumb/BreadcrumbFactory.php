@@ -1,6 +1,6 @@
 <?php
 
-namespace Dravencms\AdminModule\Components\Admin;
+namespace Dravencms\AdminModule\Components\Admin\Breadcrumb;
 
 use Dravencms\Model\User\Entities\User;
 

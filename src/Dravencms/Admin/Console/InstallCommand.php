@@ -2,11 +2,6 @@
 
 namespace Dravencms\Admin\Console;
 
-use App\Model\Admin\Entities\Menu;
-use App\Model\Admin\Repository\MenuRepository;
-use App\Model\User\Entities\AclOperation;
-use App\Model\User\Entities\AclResource;
-use Kdyby\Doctrine\EntityManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

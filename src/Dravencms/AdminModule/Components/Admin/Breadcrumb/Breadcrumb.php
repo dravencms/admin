@@ -1,9 +1,9 @@
 <?php
 
-namespace Dravencms\AdminModule\Components\Admin;
+namespace Dravencms\AdminModule\Components\Admin\Breadcrumb;
 
 use Dravencms\Components\BaseControl;
-use App\Model\Admin\Repository\MenuRepository;
+use Dravencms\Model\Admin\Repository\MenuRepository;
 use Dravencms\Model\User\Entities\User;
 
 /**
