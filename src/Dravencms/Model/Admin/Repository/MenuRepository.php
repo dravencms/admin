@@ -160,4 +160,13 @@ class MenuRepository
     {
         return array_reverse($this->buildParentTreeResolver($menu));
     }
+
+    /**
+     * @param $presenter
+     * @return mixed|null|Menu
+     */
+    public function getOneByPresenter($presenter)
+    {
+        return $this->menuRepository->findOneBy(['presenter' => $presenter]);
+    }
 }
