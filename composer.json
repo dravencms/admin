@@ -1,6 +1,6 @@
 {
   "name": "dravencms/admin",
-  "type": "library",
+  "type": "dravencms-package",
   "description": "Admin module for dravencms",
   "keywords": [
     "dravencms",
@@ -24,6 +24,19 @@
   "autoload": {
     "psr-0": {
       "Dravencms\\": "src/"
+    }
+  },
+  "extra": {
+    "dravencms": {
+      "configuration": {
+        "extensions": {
+          "timeline": "Dravencms\\Admin\\DI\\AdminExtension"
+        }
+      },
+      "scripts": {
+        "post-install": "Dravencms\\Admin\\Script\\PostInstall",
+        "pre-uninstall": "Dravencms\\Admin\\Script\\PreUninstall"
+      }
     }
   }
 }
