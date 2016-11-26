@@ -30,7 +30,7 @@
     "dravencms": {
       "configuration": {
         "extensions": {
-          "timeline": "Dravencms\\Admin\\DI\\AdminExtension"
+          "admin": "Dravencms\\Admin\\DI\\AdminExtension"
         }
       },
       "scripts": {
