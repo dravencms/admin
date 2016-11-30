@@ -82,7 +82,7 @@
         <div id="main-menu-inner">
             <div class="menu-content top animated fadeIn" id="menu-content-demo">
                 <div>
-                    <div class="text-bg"><span class="text-slim">{_"Welcome"},</span> <span class="text-semibold">{$userInfo->getFirstName()|inflection}</span></div>
+                    <div class="text-bg"><span class="text-slim">{_"Welcome"},</span> <span class="text-semibold">{$userInfo->getFirstName()}</span></div>
 
                     <img n:gravatar="$userInfo->getEmail(), 100" alt="{$userInfo->getFirstName()} {$userInfo->getLastName()}" class="">
                     <div class="btn-group">
