@@ -21,19 +21,4 @@
             </div>
         </div>
     </div>
-    <ul n:if="$tree">
-        <li n:foreach="$tree AS $moduleName => $components">
-            {$moduleName}
-            <ul>
-                <li n:foreach="$components AS $componentName => $actions">
-                    {$componentName} {$actions['repository']['class']}
-                    <ul n:ifset="$actions['actions']">
-                        <li n:foreach="$actions['actions'] AS $actionName => $action">
-                            {$actionName} {$action['implement']}
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
 {/block}
