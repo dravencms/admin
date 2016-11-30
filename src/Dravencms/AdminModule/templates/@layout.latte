@@ -102,6 +102,13 @@
     <div id="content-wrapper">
         <div n:foreach="$flashes as $flash" class="alert alert-page alert {$flash->type}" data-animate="true">{$flash->message|noescape}</div>
         {control menuBreadcrumb}
+        <div class="page-header" n:ifset="$h1">
+            <div class="row">
+                <div class="col-md-4">
+                    <h1>{$h1}</h1>
+                </div>
+            </div>
+        </div>
         {include #content}
         Time: {microtime(true) - \Tracy\Debugger::$time|number:5} s
     </div> <!-- / #content-wrapper -->
