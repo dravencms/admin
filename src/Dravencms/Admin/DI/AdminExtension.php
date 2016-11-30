@@ -6,7 +6,6 @@ use Kdyby\Console\DI\ConsoleExtension;
 use Nette;
 use Nette\DI\Compiler;
 use Nette\DI\Configurator;
-use Salamek\Cms\DI\CmsExtension;
 /**
  * Class AdminExtension
  * @package Dravencms\Admin\DI
