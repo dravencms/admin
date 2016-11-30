@@ -2,7 +2,7 @@
 
 namespace Dravencms\Admin;
 
-use Dravencms\Structure\IRouterFactory;
+use Dravencms\Base\IRouterFactory;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
 
