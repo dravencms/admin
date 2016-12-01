@@ -16,7 +16,8 @@
   ],
   "require": {
     "dravencms/user": "@dev",
-    "ipub/gravatar": "^2.0"
+    "ipub/gravatar": "^2.0",
+    "o5/grido": "dev-master"
   },
   "require-dev": {
     "nette/tester": "@dev"
