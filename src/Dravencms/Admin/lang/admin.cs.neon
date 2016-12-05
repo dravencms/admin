@@ -1,0 +1,16 @@
+component:
+    breadcrumb:
+        YouAreHere: Jse zde
+        Home: Domů
+
+presenter:
+    homepage:
+        SystemInfo: Systémové informace
+        Welcome: Vítejte
+        WelcomeToDravenCMSaContentManagementSystem: "Vítejte v DravenCMS, systému pro správu verzí"
+
+layout:
+    HideMenu: Skrýt menu
+    MyProfile: Múj profil
+    LogOut: Odhlásit
+    Welcome: Vítejte

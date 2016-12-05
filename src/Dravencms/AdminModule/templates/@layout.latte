@@ -27,7 +27,7 @@
     -->
     <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
         <!-- Main menu toggle -->
-        <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">Skrýt menu</span></button>
+        <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">{_"admin.layout.HideMenu"}</span></button>
 
         <div class="navbar-inner">
             <!-- Main navbar header -->
@@ -64,11 +64,11 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!--li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li-->
-                                    <li><a n:href=":Admin:User:Account:"><!--span class="badge badge-primary pull-right">New</span--><i class="dropdown-icon fa fa-user"></i>&nbsp;&nbsp;Múj profil</a>
+                                    <li><a n:href=":Admin:User:Account:"><!--span class="badge badge-primary pull-right">New</span--><i class="dropdown-icon fa fa-user"></i>&nbsp;&nbsp;{_"admin.layout.MyProfile"}</a>
                                     </li>
                                     <!--li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li-->
                                     <li class="divider"></li>
-                                    <li><a n:href=":Admin:User:Sign:out"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Odhlásit</a></li>
+                                    <li><a n:href=":Admin:User:Sign:out"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;{_"admin.layout.LogOut"}</a></li>
                                 </ul>
                             </li>
                         </ul> <!-- / .navbar-nav -->
@@ -82,7 +82,7 @@
         <div id="main-menu-inner">
             <div class="menu-content top animated fadeIn" id="menu-content-demo">
                 <div>
-                    <div class="text-bg"><span class="text-slim">{_"Welcome"},</span> <span class="text-semibold">{$userInfo->getFirstName()}</span></div>
+                    <div class="text-bg"><span class="text-slim">{_"admin.layout.Welcome"},</span> <span class="text-semibold">{$userInfo->getFirstName()}</span></div>
 
                     <img n:gravatar="$userInfo->getEmail(), 100" alt="{$userInfo->getFirstName()} {$userInfo->getLastName()}" class="">
                     <div class="btn-group">

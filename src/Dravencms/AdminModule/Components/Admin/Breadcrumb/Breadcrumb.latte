@@ -1,9 +1,9 @@
 <ul class="breadcrumb breadcrumb-page">
-    <div class="breadcrumb-label text-light-gray">You are here: </div>
+    <div class="breadcrumb-label text-light-gray">{_"admin.component.breadcrumb.YouAreHere"}: </div>
     {if $homepage}
-        <li><a href="{plink $homepage->getPresenter().':'.$homepage->getAction()}">Home</a></li>
+        <li><a href="{plink $homepage->getPresenter().':'.$homepage->getAction()}">{_"admin.component.breadcrumb.Home"}</a></li>
     {else}
-        <li><a href="{plink :Admin:Homepage:Homepage:}">Home</a></li>
+        <li><a href="{plink :Admin:Homepage:Homepage:}">{_"admin.component.breadcrumb.Home"}</a></li>
     {/if}
 
     <li n:foreach="$breadcrumbs AS $breadcrumb" {if $thisPage == $breadcrumb} class="active"{/if}>
