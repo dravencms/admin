@@ -29,6 +29,9 @@
   },
   "extra": {
     "dravencms": {
+      "files": {
+        "src/assets/*": "%wwwDir%/templates"
+      },
       "configuration": {
         "extensions": {
           "admin": "Dravencms\\Admin\\DI\\AdminExtension"
