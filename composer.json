@@ -30,7 +30,7 @@
   "extra": {
     "dravencms": {
       "files": {
-        "assets/*": "%wwwDir%/templates/admin"
+        "assets/*": "%wwwDir%/assets/admin"
       },
       "configuration": {
         "extensions": {
