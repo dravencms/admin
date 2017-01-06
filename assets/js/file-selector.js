@@ -85,7 +85,7 @@ $(document).ready(function () {
     };
 
     $button.each(function () {
-        var $sId = $(this).next('.file-manager-selector-id');
+        var $sId = $(this).closest('.file-manager-selector').find('.file-manager-selector-id');
         loadItem($sId, $sId.val());
     });
 
