@@ -49,7 +49,7 @@ $(document).ready(function () {
                 e.preventDefault();
                 e.stopPropagation();
                 var filesid = $(this).data('filesid');
-                var $sId = obj.next('.file-manager-selector-id');
+                var $sId = obj.closest('.file-manager-selector').find('.file-manager-selector-id');
                 $sId.val(filesid);
                 loadItem($sId, filesid);
 
