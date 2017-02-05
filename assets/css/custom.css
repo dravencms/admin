@@ -1,0 +1,152 @@
+/*
+ Copyright (C) 2014 Adam Schubert <adam.schubert@sg1-game.net>.
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ MA 02110-1301  USA
+ */
+/*
+ Created on : 20.12.2014, 15:32:36
+ Author     : Adam Schubert <adam.schubert@sg1-game.net>
+ */
+.nav-search .tt-hint {
+    margin-top: 6px;
+    margin-left: -2px; }
+
+pre.tracy-dump {
+    margin-left: 70px; }
+
+kbd {
+    background-color: #333;
+    border-radius: 3px;
+    color: #fff;
+    padding: 2px 4px; }
+/* -- Circle Tiles */
+.circle-tile {
+    margin-bottom: 15px;
+    text-align: center; }
+
+.circle-tile-heading {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto -40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 100%;
+    color: #fff;
+    transition: all ease-in-out 0.3s; }
+.circle-tile-heading .fa {
+    line-height: 80px; }
+
+.circle-tile-content {
+    padding-top: 50px; }
+
+.circle-tile-number {
+    padding: 5px 0 15px;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1; }
+
+.circle-tile-description {
+    text-transform: uppercase; }
+
+.circle-tile-footer {
+    display: block;
+    padding: 5px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all ease-in-out 0.3s; }
+.circle-tile-footer:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.2); }
+
+.circle-tile-heading.dark-blue:hover {
+    background-color: #2e4154; }
+
+.circle-tile-heading.green:hover {
+    background-color: #138f77; }
+
+.circle-tile-heading.orange:hover {
+    background-color: #da8c10; }
+
+.circle-tile-heading.blue:hover {
+    background-color: #2473a6; }
+
+.circle-tile-heading.red:hover {
+    background-color: #cf4435; }
+
+.circle-tile-heading.purple:hover {
+    background-color: #7f3d9b; }
+/* -- Background Helper Classes */
+/* Use these to cuztomize the background color of a div. These are used along with tiles, or any other div you want to customize. */
+.dark-blue {
+    background-color: #34495e; }
+
+.green {
+    background-color: #16a085; }
+
+.blue {
+    background-color: #2980b9; }
+
+.orange {
+    background-color: #f39c12; }
+
+.red {
+    background-color: #e74c3c; }
+
+.purple {
+    background-color: #8e44ad; }
+
+.dark-gray {
+    background-color: #7f8c8d; }
+
+.gray {
+    background-color: #95a5a6; }
+
+.light-gray {
+    background-color: #bdc3c7; }
+
+.yellow {
+    background-color: #f1c40f; }
+/* -- Text Color Helper Classes */
+.text-dark-blue {
+    color: #34495e; }
+
+.text-green {
+    color: #16a085; }
+
+.text-blue {
+    color: #2980b9; }
+
+.text-orange {
+    color: #f39c12; }
+
+.text-red {
+    color: #e74c3c; }
+
+.text-purple {
+    color: #8e44ad; }
+
+.text-faded {
+    color: rgba(255, 255, 255, 0.7); }
+
+@media (min-width: 768px) {
+    .circle-tile {
+        margin-bottom: 30px; } }
+
+.notification-description a {
+    line-height: normal !important; }
+
+.grido td.actions .btn-group {
+    margin-right: 3px; }
+.grido td.actions .btn-group a {
+    margin-right: 0; }

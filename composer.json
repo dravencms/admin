@@ -60,6 +60,7 @@
                 "admin/css/typeahead.css",
                 "admin/css/rtl.min.css",
                 "admin/css/themes.min.css",
+                "admin/css/custom.css",
                 "admin/bower_components/dropzone/dist/min/dropzone.min.css",
                 "admin/grido-new/grido.css",
                 "admin/bower_components/blueimp-gallery/css/blueimp-gallery.min.css",
