@@ -131,6 +131,28 @@ $(document).ready(function () {
             mode: self.data('codemirror-mode') || 'htmlmixed'
         });
     });
+
+    $('.graph').each(function(){
+        var that = $(this);
+        var colors = ["#71c73e", "#77b7c5", "#d54848", "#6c42e5", "#e8e64e", "#dd56e6", "#ecad3f", "#618b9d", "#b68b68", "#36a766", "#3156be", "#00b3ff", "#646464", "#a946e8", "#9d9d9d"];
+        Morris.Area({
+            element: that,
+            data: that.data('data'),
+            xkey: 'period',
+            ykeys: ['amount'],
+            labels: ['Amount'],
+            hideHover: 'auto',
+            lineColors: colors,
+            fillOpacity: 0.3,
+            behaveLikeLine: true,
+            lineWidth: 2,
+            pointSize: 4,
+            gridLineColor: '#cfcfcf',
+            resize: true
+        });
+    });
+
+    $('.pop').popover();
 });
 
 function initAjaxDependend() {
