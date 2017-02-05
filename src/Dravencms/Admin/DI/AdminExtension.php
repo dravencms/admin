@@ -22,6 +22,8 @@ class AdminExtension extends Nette\DI\CompilerExtension
         $builder->addDefinition($this->prefix('admin'))
             ->setClass('Dravencms\Admin\Admin', []);
 
+        $builder->addDefinition($this->prefix('adminFiltersLatte'))->setClass('Dravencms\Admin\Filters\Latte');
+
         $this->loadComponents();
         $this->loadModels();
         $this->loadConsole();
@@ -39,6 +41,27 @@ class AdminExtension extends Nette\DI\CompilerExtension
         };
     }
 
+    public function beforeCompile()
+    {
+        $builder = $this->getContainerBuilder();
+
+        $registerToLatte = function (Nette\DI\ServiceDefinition $def) {
+            $def->addSetup('addFilter', ['formatCounter', [$this->prefix('@adminFiltersLatte'), 'formatCounter']]);
+        };
+
+        $latteFactoryService = $builder->getByType('Nette\Bridges\ApplicationLatte\ILatteFactory');
+        if (!$latteFactoryService || !self::isOfType($builder->getDefinition($latteFactoryService)->getClass(), 'Latte\engine')) {
+            $latteFactoryService = 'nette.latteFactory';
+        }
+
+        if ($builder->hasDefinition($latteFactoryService) && self::isOfType($builder->getDefinition($latteFactoryService)->getClass(), 'Latte\Engine')) {
+            $registerToLatte($builder->getDefinition($latteFactoryService));
+        }
+
+        if ($builder->hasDefinition('nette.latte')) {
+            $registerToLatte($builder->getDefinition('nette.latte'));
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -95,5 +118,15 @@ class AdminExtension extends Nette\DI\CompilerExtension
                 throw new \InvalidArgumentException;
             }
         }
+    }
+
+    /**
+     * @param string $class
+     * @param string $type
+     * @return bool
+     */
+    private static function isOfType($class, $type)
+    {
+        return $class === $type || is_subclass_of($class, $type);
     }
 }
