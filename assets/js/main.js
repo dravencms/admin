@@ -153,6 +153,45 @@ $(document).ready(function () {
     });
 
     $('.pop').popover();
+
+    $('.typeahead-dependend').each(function(){
+
+        var url = $(this).data('suggest-handler');
+        var replacement = $(this).data('suggest-replacement');
+        var depedency = $(this).data('suggest-depedency');
+        var $depedency = $('#' + depedency);
+        var depedency_replacement = $(this).data('suggest-depedency-replacement');
+        var mySource = new Bloodhound({
+            datumTokenizer: function (datum) {
+                return Bloodhound.tokenizers.whitespace(datum.value);
+            },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: url,
+                replace: function(url, uriEncodedQuery) {
+                    console.log(uriEncodedQuery);
+                    return url.replace(depedency_replacement, $depedency.val()).replace(replacement, uriEncodedQuery);
+                },
+                filter: function (parsedResponse) {
+                    return $.map(parsedResponse.results, function (item) {
+                        return {
+                            value: item
+                        };
+                    });
+                }
+            }
+        });
+
+        mySource.initialize();
+
+        $(this).typeahead({
+                minLength: 3,
+                highlight: true
+            },
+            {
+                source: mySource.ttAdapter()
+            });
+    });
 });
 
 function initAjaxDependend() {
