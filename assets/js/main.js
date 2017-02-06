@@ -159,6 +159,7 @@ $(document).ready(function () {
         var url = $(this).data('suggest-handler');
         var replacement = $(this).data('suggest-replacement');
         var depedency = $(this).data('suggest-depedency');
+        var minLength = $(this).data('suggest-min');
         var $depedency = $('#' + depedency);
         var depedency_replacement = $(this).data('suggest-depedency-replacement');
         var mySource = new Bloodhound({
@@ -168,14 +169,13 @@ $(document).ready(function () {
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
                 url: url,
-                replace: function(url, uriEncodedQuery) {
-                    console.log(uriEncodedQuery);
-                    return url.replace(depedency_replacement, $depedency.val()).replace(replacement, uriEncodedQuery);
+                replace: function(u, uriEncodedQuery) {
+                    return u.replace(depedency_replacement, $depedency.val()).replace(replacement, uriEncodedQuery);
                 },
                 filter: function (parsedResponse) {
                     return $.map(parsedResponse.results, function (item) {
                         return {
-                            value: item
+                            value: item[0]
                         };
                     });
                 }
@@ -185,7 +185,7 @@ $(document).ready(function () {
         mySource.initialize();
 
         $(this).typeahead({
-                minLength: 3,
+                minLength: minLength,
                 highlight: true
             },
             {
