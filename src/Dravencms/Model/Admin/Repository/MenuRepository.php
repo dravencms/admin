@@ -52,6 +52,7 @@ class MenuRepository
             ->orderBy('node.root, node.lft', 'ASC')
             ->where('node.isActive = :isActive')
             ->andWhere('gu = :user')
+            ->groupBy('node')
             ->setParameters(
                 [
                     'user' => $user,
