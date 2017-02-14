@@ -1,2 +1,3 @@
 - Dravencms\AdminModule\Components\Admin\MenuNavbar\MenuNavbarFactory
 - Dravencms\AdminModule\Components\Admin\Breadcrumb\BreadcrumbFactory
+- Dravencms\AdminModule\Components\Admin\MenuNotification\MenuNotificationFactory

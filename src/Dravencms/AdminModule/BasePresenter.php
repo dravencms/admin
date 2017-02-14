@@ -4,6 +4,7 @@ namespace Dravencms\AdminModule;
 
 use Dravencms\AdminModule\Components\Admin\MenuNavbar\MenuNavbarFactory;
 use Dravencms\AdminModule\Components\Admin\Breadcrumb\BreadcrumbFactory;
+use Dravencms\AdminModule\Components\Admin\MenuNotification\MenuNotificationFactory;
 
 /**
  * Base presenter for all application presenters.
@@ -16,6 +17,9 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     /** @var BreadcrumbFactory @inject */
     public $menuBreadcrumbFactory;
 
+    /** @var MenuNotificationFactory @inject */
+    public $menuNotificationFactory;
+
     /**
      * Checks authorization.
      * @return void
@@ -27,11 +31,17 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
         $this->getUser()->getStorage()->setNamespace('Admin');
     }
 
+    /**
+     * @return \WebLoader\Nette\CssLoader
+     */
     public function createComponentCss()
     {
         return $this->webLoader->createCssLoader('admin');
     }
 
+    /**
+     * @return \WebLoader\Nette\JavaScriptLoader
+     */
     public function createComponentJs()
     {
         return $this->webLoader->createJavaScriptLoader('admin');
@@ -46,11 +56,19 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     }
 
     /**
-     * @return \Dravencms\FrontModule\Components\Structure\Menu\Breadcrumb\Breadcrumb
+     * @return Components\Admin\Breadcrumb\Breadcrumb
      */
     public function createComponentMenuBreadcrumb()
     {
         return $this->menuBreadcrumbFactory->create($this->getUserEntity());
+    }
+
+    /**
+     * @return Components\Admin\MenuNotification\MenuNotification
+     */
+    public function createComponentMenuNotification()
+    {
+        return $this->menuNotificationFactory->create($this->getUserEntity());
     }
 
     /**
