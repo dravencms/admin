@@ -8,10 +8,6 @@
 
 namespace Dravencms\Admin;
 
-
-use Dravencms\Model\User\Entities\User;
-use Dravencms\Model\User\Entities\AclOperation;
-
 /**
  * Interface INotification
  * @package Dravencms\Admin
@@ -23,7 +19,7 @@ interface INotification
     const TYPE_SUCCESS = 'success';
     const TYPE_WARNING = 'warning';
     const TYPE_DANGER = 'danger';
-    
+
     /**
      * @return string
      */
@@ -45,7 +41,7 @@ interface INotification
     public function getIcon();
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getUrl();
 
@@ -55,12 +51,7 @@ interface INotification
     public function getUrlArguments();
 
     /**
-     * @return User
+     * @return \DateTimeInterface|null
      */
-    public function getUser();
-
-    /**
-     * @return AclOperation
-     */
-    public function getAclOperation();
+    public function getCreatedAt();
 }

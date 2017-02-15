@@ -22,8 +22,8 @@ class AdminExtension extends Nette\DI\CompilerExtension
         $builder->addDefinition($this->prefix('admin'))
             ->setClass('Dravencms\Admin\Admin', []);
 
-        $builder->addDefinition($this->prefix('notification'))
-            ->setClass('Dravencms\Admin\Notification', []);
+        $builder->addDefinition($this->prefix('notifications'))
+            ->setClass('Dravencms\Admin\Notifications', []);
 
         $builder->addDefinition($this->prefix('adminFiltersLatte'))->setClass('Dravencms\Admin\Filters\Latte');
 
@@ -65,7 +65,7 @@ class AdminExtension extends Nette\DI\CompilerExtension
             $registerToLatte($builder->getDefinition('nette.latte'));
         }
 
-        $notification = $builder->getDefinition($this->prefix('notification'));
+        $notification = $builder->getDefinition($this->prefix('notifications'));
 
 
         foreach ($builder->findByType('Dravencms\Admin\INotificationArea') AS $serviceName => $service) {

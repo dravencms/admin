@@ -4,10 +4,10 @@ namespace Dravencms\Admin;
 
 
 /**
- * Class Notification
+ * Class Notifications
  * @package Dravencms\Admin
  */
-class Notification extends \Nette\Object
+class Notifications extends \Nette\Object
 {
     /**
      * @var array
