@@ -5,6 +5,7 @@
 
 namespace Dravencms\Model\Admin\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Dravencms\Admin\INotification;
 use Dravencms\Model\User\Entities\AclOperation;
@@ -84,6 +85,12 @@ class Notification extends Nette\Object implements INotification
     private $aclOperation;
 
     /**
+     * @var NotificationViewed[]
+     * @ORM\OneToMany(targetEntity="NotificationViewed", mappedBy="notification")
+     */
+    private $notificationsViewed;
+
+    /**
      * Notification constructor.
      * @param string $name
      * @param string $description
@@ -104,6 +111,7 @@ class Notification extends Nette\Object implements INotification
         $this->urlArguments = $urlArguments;
         $this->user = $user;
         $this->aclOperation = $aclOperation;
+        $this->notificationsViewed = new ArrayCollection();
     }
 
     /**
@@ -237,5 +245,13 @@ class Notification extends Nette\Object implements INotification
     public function getAclOperation()
     {
         return $this->aclOperation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotificationsViewed()
+    {
+        return $this->notificationsViewed;
     }
 }

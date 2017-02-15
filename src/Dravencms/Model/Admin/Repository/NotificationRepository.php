@@ -8,6 +8,7 @@ namespace Dravencms\Model\Admin\Repository;
 use Dravencms\Model\Admin\Entities\Notification;
 use Dravencms\Model\User\Entities\User;
 use Kdyby\Doctrine\EntityManager;
+use Doctrine\ORM\Query\Expr;
 use Nette;
 
 class NotificationRepository
@@ -49,15 +50,15 @@ class NotificationRepository
             ->leftJoin('n.aclOperation', 'ao')
             ->leftJoin('ao.groups', 'g')
             ->leftJoin('g.users', 'gu')
+            ->leftJoin('n.notificationsViewed', 'nv', Expr\Join::WITH, 'nv.user = :user')
             ->orderBy('n.createdAt', 'DESC')
+            ->where('gu.id = :user AND n.user IS NULL AND nv.id IS NULL')
 
-            ->where('gu.id = :user AND n.user IS NULL')
+            ->orWhere('n.user = :user AND gu.id IS NULL AND nv.id IS NULL')
 
-            ->orWhere('n.user = :user AND gu.id IS NULL')
+            ->orWhere('n.user = :user AND gu.id = :user AND nv.id IS NULL')
 
-            ->orWhere('n.user = :user AND gu.id = :user')
-
-            ->orWhere('gu.id IS NULL AND n.user IS NULL')
+            ->orWhere('gu.id IS NULL AND n.user IS NULL AND nv.id IS NULL')
 
             ->groupBy('n')
             ->setParameters(

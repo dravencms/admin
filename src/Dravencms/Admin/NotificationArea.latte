@@ -1,7 +1,7 @@
 <div class="widget-notifications-item" n:foreach="$notifications AS $notification">
     <div class="widget-notifications-title text-{$notification->getType()}">
         {if $notification->getUrl()}
-            <a href="{plink $notification->getUrl(), (expand)$notification->getUrlArguments()}">{$notification->getName()}</a>
+            <a href="{plink :Admin:Notification:Notification:url, id => $notification->getId()}">{$notification->getName()}</a>
         {else}
             {$notification->getName()}
         {/if}
