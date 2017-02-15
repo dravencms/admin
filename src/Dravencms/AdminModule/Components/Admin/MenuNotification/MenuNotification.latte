@@ -1,16 +1,28 @@
-<li n:foreach="$notificationAreas AS $notificationArea" class="dropdown">
-    {var $notifications = $notificationArea->getNotifications($user)}
-    {var $count = count($notifications)}
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-        <i class="px-navbar-icon fa fa-{$notificationArea->getIcon()}"></i>
-        <span class="px-navbar-icon-label">{$notificationArea->getName()}</span>
-        <span class="px-navbar-label label label-{$notificationArea->getCountType($count)}">{$count}</span>
-    </a>
-    <div class="dropdown-menu p-a-0" style="width: 300px">
-        <div class="navbar-notifications" style="height: 280px; position: relative;">
-            {include $notificationArea->getNotificationTemplate(), notifications => $notifications}
-        </div>
+{define dropdown}
+    <li class="dropdown">
+        {var $notifications = $notificationArea->getNotifications($user)}
+        {var $count = count($notifications)}
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="px-navbar-icon fa fa-{$notificationArea->getIcon()}"></i>
+            <span class="px-navbar-icon-label">{$notificationArea->getName()}</span>
+            <span class="px-navbar-label label label-{$notificationArea->getCountType($count)}">{$count}</span>
+        </a>
+        <div class="dropdown-menu p-a-0" style="width: 300px">
+            <div class="navbar-notifications" style="height: 280px; position: relative;">
+                {include $notificationArea->getNotificationTemplate(), notifications => $notifications}
+            </div>
 
-        <a n:if="$notificationArea->getMoreUrl()" href="{plink $notificationArea->getMoreUrl(), (expand)$notification->getMoreUrlArguments()}" class="widget-more-link">{_$notificationArea->getMoreTitle()}</a>
-    </div>
-</li>
+            <a n:if="$notificationArea->getMoreUrl()" href="{plink $notificationArea->getMoreUrl(), (expand)$notification->getMoreUrlArguments()}" class="widget-more-link">{_$notificationArea->getMoreTitle()}</a>
+        </div>
+    </li>
+{/define}
+
+{foreach $notificationAreas AS $notificationArea}
+    {if $notificationArea->getAclResource() && $notificationArea->getAclOperation()}
+        {isAllowed $notificationArea->getAclResource(), $notificationArea->getAclOperation()}
+            {include dropdown}
+        {/isAllowed}
+    {else}
+        {include dropdown}
+    {/if}
+{/foreach}

@@ -91,4 +91,20 @@ class NotificationArea implements INotificationArea
     {
         return $this->notificationRepository->getForUser($user);
     }
+
+    /**
+     * @return null
+     */
+    public function getAclResource()
+    {
+        return null;
+    }
+
+    /**
+     * @return null
+     */
+    public function getAclOperation()
+    {
+        return null;
+    }
 }

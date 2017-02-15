@@ -60,4 +60,14 @@ interface INotificationArea
      * @return INotification
      */
     public function getNotifications(User $user);
+
+    /**
+     * @return string|null
+     */
+    public function getAclResource();
+
+    /**
+     * @return string|null
+     */
+    public function getAclOperation();
 }
