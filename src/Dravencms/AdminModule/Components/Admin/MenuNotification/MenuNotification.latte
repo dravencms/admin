@@ -1,9 +1,10 @@
 <li n:foreach="$notificationAreas AS $notificationArea" class="dropdown">
     {var $notifications = $notificationArea->getNotifications($user)}
+    {var $count = count($notifications)}
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         <i class="px-navbar-icon fa fa-{$notificationArea->getIcon()}"></i>
         <span class="px-navbar-icon-label">{$notificationArea->getName()}</span>
-        <span class="px-navbar-label label label-{$notificationArea->getCountType()}">{count($notifications)}</span>
+        <span class="px-navbar-label label label-{$notificationArea->getCountType($count)}">{$count}</span>
     </a>
     <div class="dropdown-menu p-a-0" style="width: 300px">
         <div class="navbar-notifications" style="height: 280px; position: relative;">

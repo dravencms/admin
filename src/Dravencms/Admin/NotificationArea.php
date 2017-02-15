@@ -67,11 +67,12 @@ class NotificationArea implements INotificationArea
     }
 
     /**
+     * @param $count
      * @return string
      */
-    public function getCountType()
+    public function getCountType($count)
     {
-        return INotificationArea::COUNT_TYPE_SUCCESS;
+        return ($count > 0 ? INotificationArea::COUNT_TYPE_WARNING : INotificationArea::COUNT_TYPE_SUCCESS);
     }
 
     /**

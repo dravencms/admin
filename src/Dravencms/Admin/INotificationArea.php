@@ -45,9 +45,10 @@ interface INotificationArea
     public function getMoreTitle();
 
     /**
+     * @param integer $count
      * @return string
      */
-    public function getCountType();
+    public function getCountType($count);
 
     /**
      * @return string
