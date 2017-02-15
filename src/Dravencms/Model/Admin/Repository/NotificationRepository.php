@@ -37,5 +37,37 @@ class NotificationRepository
         return $this->notificationRepository->findOneBy(['id' => $id]);
     }
 
+    /**
+     * @param User $user
+     * @return Notification[]
+     */
+    public function getForUser(User $user)
+    {
+        $qb = $this->notificationRepository->createQueryBuilder('n');
+
+        $query  = $qb->select('n')
+            ->leftJoin('n.aclOperation', 'ao')
+            ->leftJoin('ao.groups', 'g')
+            ->leftJoin('g.users', 'gu')
+            ->orderBy('n.createdAt', 'DESC')
+
+            ->where('gu.id = :user AND n.user IS NULL')
+
+            ->orWhere('n.user = :user AND gu.id IS NULL')
+
+            ->orWhere('n.user = :user AND gu.id = :user')
+
+            ->orWhere('gu.id IS NULL AND n.user IS NULL')
+
+            ->groupBy('n')
+            ->setParameters(
+                [
+                    'user' => $user
+                ]
+            )
+            ->getQuery();
+
+        return $query->getResult();
+    }
     
 }

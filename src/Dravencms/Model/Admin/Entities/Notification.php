@@ -6,7 +6,7 @@
 namespace Dravencms\Model\Admin\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use Dravencms\Model\User\Entities\AclResource;
+use Dravencms\Model\User\Entities\AclOperation;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
@@ -82,11 +82,11 @@ class Notification extends Nette\Object
     private $user;
 
     /**
-     * @var AclResource
-     * @ORM\ManyToOne(targetEntity="Dravencms\Model\User\Entities\AclResource")
-     * @ORM\JoinColumn(name="acl_resource_id", referencedColumnName="id",nullable=true)
+     * @var AclOperation
+     * @ORM\ManyToOne(targetEntity="Dravencms\Model\User\Entities\AclOperation")
+     * @ORM\JoinColumn(name="acl_operation_id", referencedColumnName="id",nullable=true)
      */
-    private $aclResource;
+    private $aclOperation;
 
     /**
      * Notification constructor.
@@ -97,9 +97,9 @@ class Notification extends Nette\Object
      * @param string $url
      * @param array $urlArguments
      * @param User $user
-     * @param AclResource $aclResource
+     * @param AclOperation $aclOperation
      */
-    public function __construct($name, $description, $icon, $type = self::TYPE_DEFAULT, $url = null, array $urlArguments = [], User $user = null, AclResource $aclResource = null)
+    public function __construct($name, $description, $icon, $type = self::TYPE_DEFAULT, $url = null, array $urlArguments = [], User $user = null, AclOperation $aclOperation = null)
     {
         $this->name = $name;
         $this->description = $description;
@@ -108,7 +108,7 @@ class Notification extends Nette\Object
         $this->url = $url;
         $this->urlArguments = $urlArguments;
         $this->user = $user;
-        $this->aclResource = $aclResource;
+        $this->aclOperation = $aclOperation;
     }
 
     /**
@@ -173,12 +173,74 @@ class Notification extends Nette\Object
     }
 
     /**
-     * @param AclResource $aclResource
+     * @param AclOperation $aclOperation
      */
-    public function setAclResource(AclResource $aclResource)
+    public function setAclResource(AclOperation $aclOperation)
     {
-        $this->aclResource = $aclResource;
+        $this->aclOperation = $aclOperation;
     }
 
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUrlArguments()
+    {
+        return $this->urlArguments;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @return AclOperation
+     */
+    public function getAclOperation()
+    {
+        return $this->aclOperation;
+    }
 }
