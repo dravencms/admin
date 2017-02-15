@@ -6,6 +6,7 @@
 namespace Dravencms\Model\Admin\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Dravencms\Admin\INotification;
 use Dravencms\Model\User\Entities\AclOperation;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -19,20 +20,14 @@ use Dravencms\Model\User\Entities\User;
  * @ORM\Entity
  * @ORM\Table(name="adminNotification")
  */
-class Notification extends Nette\Object
+class Notification extends Nette\Object implements INotification
 {
-    const TYPE_INFO = 'info';
-    const TYPE_DEFAULT = 'default';
-    const TYPE_SUCCESS = 'success';
-    const TYPE_WARNING = 'warning';
-    const TYPE_DANGER = 'danger';
-
     public static $typeList = [
-        self::TYPE_INFO,
-        self::TYPE_DEFAULT,
-        self::TYPE_SUCCESS,
-        self::TYPE_WARNING,
-        self::TYPE_DANGER
+        INotification::TYPE_INFO,
+        INotification::TYPE_DEFAULT,
+        INotification::TYPE_SUCCESS,
+        INotification::TYPE_WARNING,
+        INotification::TYPE_DANGER
     ];
 
     use Identifier;
@@ -99,7 +94,7 @@ class Notification extends Nette\Object
      * @param User $user
      * @param AclOperation $aclOperation
      */
-    public function __construct($name, $description, $icon, $type = self::TYPE_DEFAULT, $url = null, array $urlArguments = [], User $user = null, AclOperation $aclOperation = null)
+    public function __construct($name, $description, $icon, $type = INotification::TYPE_DEFAULT, $url = null, array $urlArguments = [], User $user = null, AclOperation $aclOperation = null)
     {
         $this->name = $name;
         $this->description = $description;

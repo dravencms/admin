@@ -1,25 +1,15 @@
-<li class="dropdown">
+<li n:foreach="$notificationAreas AS $notificationArea" class="dropdown">
+    {var $notifications = $notificationArea->getNotifications($user)}
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-        <i class="px-navbar-icon fa fa-bullhorn"></i>
-        <span class="px-navbar-icon-label">Notifications</span>
-        <span class="px-navbar-label label label-success">{count($notifications)}</span>
+        <i class="px-navbar-icon fa fa-{$notificationArea->getIcon()}"></i>
+        <span class="px-navbar-icon-label">{$notificationArea->getName()}</span>
+        <span class="px-navbar-label label label-{$notificationArea->getCountType()}">{count($notifications)}</span>
     </a>
     <div class="dropdown-menu p-a-0" style="width: 300px">
         <div class="navbar-notifications" style="height: 280px; position: relative;">
-            <div class="widget-notifications-item" n:foreach="$notifications AS $notification">
-                <div class="widget-notifications-title text-{$notification->getType()}">
-                    {if $notification->getUrl()}
-                        <a href="{plink $notification->getUrl(), (expand)$notification->getUrlArguments()}">{$notification->getName()}</a>
-                    {else}
-                        {$notification->getName()}
-                    {/if}
-                </div>
-                <div class="widget-notifications-description">{$notification->getDescription()|noescape}</div>
-                <div class="widget-notifications-date">{$notification->getCreatedAt()|date:'H:i'}</div>
-                <div class="widget-notifications-icon fa fa-{$notification->getIcon()} bg-{$notification->getType()}"></div>
-            </div>
+            {include $notificationArea->getNotificationTemplate(), notifications => $notifications}
         </div>
 
-        <a href="#" class="widget-more-link">MORE NOTIFICATIONS</a>
+        <a n:if="$notificationArea->getMoreUrl()" href="{plink $notificationArea->getMoreUrl(), (expand)$notification->getMoreUrlArguments()}" class="widget-more-link">{_$notificationArea->getMoreTitle()}</a>
     </div>
 </li>

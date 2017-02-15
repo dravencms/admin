@@ -1,2 +1,4 @@
 - Dravencms\Model\Admin\Repository\MenuRepository
 - Dravencms\Model\Admin\Repository\NotificationRepository
+
+- Dravencms\Admin\NotificationArea

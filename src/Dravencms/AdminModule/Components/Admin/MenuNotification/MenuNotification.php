@@ -7,10 +7,9 @@
 
 namespace Dravencms\AdminModule\Components\Admin\MenuNotification;
 
+use Dravencms\Admin\Notification;
 use Dravencms\Components\BaseControl\BaseControl;
 
-use Dravencms\Model\Admin\Repository\MenuRepository;
-use Dravencms\Model\Admin\Repository\NotificationRepository;
 use Dravencms\Model\User\Entities\User;
 
 class MenuNotification extends BaseControl
@@ -18,20 +17,20 @@ class MenuNotification extends BaseControl
     /** @var User */
     private $user;
 
-    /** @var NotificationRepository */
-    private $notificationRepository;
+    /** @var Notification */
+    private $notification;
 
     /**
-     * MenuNavbar constructor.
+     * MenuNotification constructor.
      * @param User $user
-     * @param NotificationRepository $notificationRepository
+     * @param Notification $notification
      */
-    public function __construct(User $user, NotificationRepository $notificationRepository)
+    public function __construct(User $user, Notification $notification)
     {
         parent::__construct();
 
         $this->user = $user;
-        $this->notificationRepository = $notificationRepository;
+        $this->notification = $notification;
     }
 
 
@@ -39,8 +38,8 @@ class MenuNotification extends BaseControl
     {
         $template = $this->template;
 
-        $template->notifications = $this->notificationRepository->getForUser($this->user);
-
+        $template->notificationAreas = $this->notification->getNotificationAreaProviders();
+        $template->user = $this->user;
         $template->setFile(__DIR__ . '/MenuNotification.latte');
         $template->render();
     }

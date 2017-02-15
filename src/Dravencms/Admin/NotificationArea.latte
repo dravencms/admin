@@ -1,0 +1,12 @@
+<div class="widget-notifications-item" n:foreach="$notifications AS $notification">
+    <div class="widget-notifications-title text-{$notification->getType()}">
+        {if $notification->getUrl()}
+            <a href="{plink $notification->getUrl(), (expand)$notification->getUrlArguments()}">{$notification->getName()}</a>
+        {else}
+            {$notification->getName()}
+        {/if}
+    </div>
+    <div class="widget-notifications-description">{$notification->getDescription()|noescape}</div>
+    <div class="widget-notifications-date">{$notification->getCreatedAt()|date:'H:i'}</div>
+    <div class="widget-notifications-icon fa fa-{$notification->getIcon()} bg-{$notification->getType()}"></div>
+</div>
