@@ -7,7 +7,7 @@ presenter:
     homepage:
         SystemInfo: Systémové informace
         Welcome: Vítejte
-        WelcomeToDravenCMSaContentManagementSystem: "Vítejte v DravenCMS, systému pro správu verzí"
+        WelcomeToDravenCMSaContentManagementSystem: "Vítejte v DravenCMS, systému pro správu obsahu"
 
 layout:
     HideMenu: Skrýt menu

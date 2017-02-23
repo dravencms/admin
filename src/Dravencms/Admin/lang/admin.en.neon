@@ -1,0 +1,16 @@
+component:
+    breadcrumb:
+        YouAreHere: You are here
+        Home: Home
+
+presenter:
+    homepage:
+        SystemInfo: System information
+        Welcome: Welcome
+        WelcomeToDravenCMSaContentManagementSystem: "Welocome in DravenCMS a content management system"
+
+layout:
+    HideMenu: Hide menu
+    MyProfile: My profile
+    LogOut: Log Out
+    Welcome: Welcome
