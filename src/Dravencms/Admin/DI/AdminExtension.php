@@ -3,6 +3,7 @@
 namespace Dravencms\Admin\DI;
 
 use Kdyby\Console\DI\ConsoleExtension;
+use Kdyby\Translation\DI\ITranslationProvider;
 use Nette;
 use Nette\DI\Compiler;
 use Nette\DI\Configurator;
@@ -10,9 +11,13 @@ use Nette\DI\Configurator;
  * Class AdminExtension
  * @package Dravencms\Admin\DI
  */
-class AdminExtension extends Nette\DI\CompilerExtension
+class AdminExtension extends Nette\DI\CompilerExtension implements ITranslationProvider
 {
-
+    public function getTranslationResources()
+    {
+        return [__DIR__.'/../lang'];
+    }
+    
     public function loadConfiguration()
     {
         $config = $this->getConfig();
@@ -24,6 +29,9 @@ class AdminExtension extends Nette\DI\CompilerExtension
 
         $builder->addDefinition($this->prefix('notifications'))
             ->setClass('Dravencms\Admin\Notifications', []);
+
+        $builder->addDefinition($this->prefix('translation'))
+            ->setClass('Dravencms\Admin\TranslationProvider', []);
 
         $builder->addDefinition($this->prefix('adminFiltersLatte'))->setClass('Dravencms\Admin\Filters\Latte');
 

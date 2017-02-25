@@ -44,11 +44,6 @@
             ]
           }
         },
-        "translation": {
-          "dirs": [
-            "%appDir%/../vendor/dravencms/admin/src/Dravencms/Admin/lang"
-          ]
-        },
         "webloader": {
           "css": {
             "admin": {
