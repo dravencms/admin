@@ -5,12 +5,15 @@ namespace Dravencms\AdminModule;
 use Dravencms\AdminModule\Components\Admin\MenuNavbar\MenuNavbarFactory;
 use Dravencms\AdminModule\Components\Admin\Breadcrumb\BreadcrumbFactory;
 use Dravencms\AdminModule\Components\Admin\MenuNotification\MenuNotificationFactory;
+use Dravencms\Locale\TLocalizedPresenter;
 
 /**
  * Base presenter for all application presenters.
  */
 abstract class BasePresenter extends \Dravencms\BasePresenter
 {
+    use TLocalizedPresenter;
+    
     /** @var MenuNavbarFactory @inject */
     public $menuNavbarFactory;
 
