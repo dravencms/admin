@@ -17,7 +17,7 @@ class AdminExtension extends Nette\DI\CompilerExtension implements ITranslationP
     {
         return [__DIR__.'/../lang'];
     }
-    
+
     public function loadConfiguration()
     {
         $config = $this->getConfig();
@@ -29,10 +29,7 @@ class AdminExtension extends Nette\DI\CompilerExtension implements ITranslationP
 
         $builder->addDefinition($this->prefix('notifications'))
             ->setClass('Dravencms\Admin\Notifications', []);
-
-        $builder->addDefinition($this->prefix('translation'))
-            ->setClass('Dravencms\Admin\TranslationProvider', []);
-
+        
         $builder->addDefinition($this->prefix('adminFiltersLatte'))->setClass('Dravencms\Admin\Filters\Latte');
 
         $this->loadComponents();
