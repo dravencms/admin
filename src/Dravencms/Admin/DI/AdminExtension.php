@@ -29,7 +29,7 @@ class AdminExtension extends Nette\DI\CompilerExtension implements ITranslationP
 
         $builder->addDefinition($this->prefix('notifications'))
             ->setClass('Dravencms\Admin\Notifications', []);
-        
+
         $builder->addDefinition($this->prefix('adminFiltersLatte'))->setClass('Dravencms\Admin\Filters\Latte');
 
         $this->loadComponents();

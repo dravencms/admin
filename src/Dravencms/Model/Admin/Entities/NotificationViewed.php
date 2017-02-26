@@ -27,7 +27,7 @@ class NotificationViewed extends Nette\Object
 
     /**
      * @var Notification
-     * @ORM\ManyToOne(targetEntity="Notification")
+     * @ORM\ManyToOne(targetEntity="Notification", inversedBy="notificationsViewed")
      * @ORM\JoinColumn(name="notification_id", referencedColumnName="id",nullable=true)
      */
     private $notification;
