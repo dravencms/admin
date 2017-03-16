@@ -49,7 +49,7 @@ class MenuRepository
             ->join('node.aclOperation', 'ao')
             ->join('ao.groups', 'g')
             ->join('g.users', 'gu')
-            ->orderBy('node.root, node.lft', 'ASC')
+            ->orderBy('node.lft', 'ASC')
             ->where('node.isActive = :isActive')
             ->andWhere('gu = :user')
             ->groupBy('node')

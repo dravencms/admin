@@ -45,7 +45,7 @@ class MenuNavbar extends BaseControl
                 if (count($tree) && ($tree[0]['lvl'] == 0)) {
                     return '<ul class="navigation">';
                 } else {
-                    return '<ul id="menu-item-'.$tree[0]['root'].'">';
+                    return '<ul id="menu-item-'.$tree[0]['lvl'].'">';
                 }
             },
             'rootClose' => function ($tree) {

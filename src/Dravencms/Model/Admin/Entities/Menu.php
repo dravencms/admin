@@ -6,10 +6,8 @@
 namespace Dravencms\Model\Admin\Entities;
 
 use Dravencms\Model\User\Entities\AclOperation;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Nette;
@@ -95,12 +93,6 @@ class Menu extends Nette\Object
      * @ORM\Column(name="lvl", type="integer")
      */
     private $lvl;
-
-    /**
-     * @Gedmo\TreeRoot
-     * @ORM\Column(name="root", type="integer", nullable=true)
-     */
-    private $root;
 
     /**
      * @Gedmo\TreeParent
@@ -223,14 +215,6 @@ class Menu extends Nette\Object
     public function getChildren()
     {
         return $this->children;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoot()
-    {
-        return $this->root;
     }
 
     /**
