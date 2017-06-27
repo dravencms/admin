@@ -15,7 +15,7 @@
     }
   ],
   "require": {
-    "dravencms/user": "dev-master",
+    "dravencms/user": "^v1.0",
     "ipub/gravatar": "^2.0|1.0.1",
     "o5/grido": "dev-master"
   },
