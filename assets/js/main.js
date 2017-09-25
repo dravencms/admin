@@ -154,6 +154,10 @@ $(document).ready(function () {
 
     $('.pop').popover();
 
+    $('.selfpost').change(function() {
+        $($(this).data('target')).submit();
+    });
+    
     $('.typeahead-dependend').each(function(){
 
         var url = $(this).data('suggest-handler');
