@@ -32,7 +32,7 @@ $(document).ready(function () {
             selector: null
         });
 
-    $('.date').not(".grido .date").each(function () {
+    $('.datetime, .date, .time').not(".grido .date").each(function () {
         var format = $(this).data('format');
         var language = $("html").attr('lang');
         if (!language) {
@@ -40,9 +40,9 @@ $(document).ready(function () {
         }
 
         if (!format) {
-            format = 'yyyy-mm-dd';
+            format = 'YYYY-MM-DD';
         }
-        $(this).datepicker({'format': format, language: language});
+        $(this).datetimepicker({format: format, locale: language});
 
         //Do i need to wrap it into input-group
         if (!$(this).parent('.input-group').length) {
@@ -56,32 +56,7 @@ $(document).ready(function () {
         });
         $(this).after($icon);
     });
-
-    $('.time').not(".grido .date").each(function () {
-        var options2 = {
-            minuteStep: 1,
-            showSeconds: false,
-            showMeridian: false,
-            showInputs: false/*,
-             orientation: $('body').hasClass('right-to-left') ? { x: 'right', y: 'auto'} : { x: 'auto', y: 'auto'}*/
-        }
-        $(this).timepicker(options2);
-
-
-        //Do i need to wrap it into input-group
-        if (!$(this).parent('.input-group').length) {
-            $(this).wrap('<div class="input-group"></div>');
-        }
-        var $icon = $('<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>');
-
-        var self = $(this);
-        $icon.click(function () {
-            self.focus();
-        });
-        $(this).after($icon);
-    });
-
-
+    
     //Inits of ajax dependent things to init at load
     initAjaxDependend();
 
