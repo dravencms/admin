@@ -6,14 +6,16 @@ use Dravencms\Model\Admin\Repository\NotificationRepository;
 use Dravencms\Model\User\Entities\User;
 use Dravencms\Model\User\Entities\AclResource;
 use Kdyby\Doctrine\EntityManager;
-
+use Nette\SmartObject;
 
 /**
  * Class Admin
  * @package Dravencms\Admin
  */
-class Admin extends \Nette\Object
+class Admin
 {
+    use SmartObject;
+    
     /** @var NotificationRepository */
     private $notificationRepository;
 
