@@ -2,13 +2,16 @@
 
 namespace Dravencms\Admin;
 
+use Nette;
 
 /**
  * Class Notifications
  * @package Dravencms\Admin
  */
-class Notifications extends \Nette\Object
+class Notifications
 {
+    use Nette\SmartObject;
+    
     /**
      * @var array
      */
