@@ -20,8 +20,9 @@ use Dravencms\Model\User\Entities\User;
  * @ORM\Entity
  * @ORM\Table(name="adminNotificationViewed")
  */
-class NotificationViewed extends Nette\Object
+class NotificationViewed
 {
+    use Nette\SmartObject;
     use Identifier;
     use TimestampableEntity;
 
