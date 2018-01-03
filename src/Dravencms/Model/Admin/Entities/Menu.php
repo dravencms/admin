@@ -19,8 +19,9 @@ use Nette;
  * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
  * @ORM\Table(name="adminMenu")
  */
-class Menu extends Nette\Object
+class Menu
 {
+    use Nette\SmartObject;
     use Identifier;
     use TimestampableEntity;
 
