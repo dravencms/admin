@@ -21,7 +21,7 @@ use Dravencms\Model\User\Entities\User;
  * @ORM\Entity
  * @ORM\Table(name="adminNotification")
  */
-class Notification extends Nette\Object implements INotification
+class Notification implements INotification
 {
     public static $typeList = [
         INotification::TYPE_INFO,
@@ -31,6 +31,7 @@ class Notification extends Nette\Object implements INotification
         INotification::TYPE_DANGER
     ];
 
+    use Nette\SmartObject;
     use Identifier;
     use TimestampableEntity;
 
