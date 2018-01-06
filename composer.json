@@ -104,7 +104,6 @@
                 "admin/bower_components/happy/dist/happy.js",
                 "admin/bower_components/jquery-ui-sortable/jquery-ui-sortable.js",
                 "admin/bower_components/ublaboo-datagrid/assets/dist/datagrid.js",
-                "admin/bower_components/ublaboo-datagrid/assets/dist/datagrid-instant-url-refresh.js",
                 "admin/bower_components/ublaboo-datagrid/assets/dist/datagrid-spinners.js",
                 "admin/bower_components/blueimp-gallery/js/jquery.blueimp-gallery.min.js",
                 "admin/bower_components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js",
