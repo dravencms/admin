@@ -29,5 +29,8 @@
     "morris.js": ">=0.5.1",
     "jquery-slimscroll": "",
     "codemirror": "^5.19.0"
+  },
+  "resolutions": {
+    "nette-forms": "^2.3"
   }
 }
