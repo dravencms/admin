@@ -174,7 +174,7 @@ $(document).ready(function () {
 });
 
 function initAjaxDependend() {
-    $("select").not(".grido tfoot select").select2({'width': 'resolve'});
+    $("select").not(".datagrid select").select2({'width': 'resolve'});
 
     $('.invalidator').each(function () {
         var elem = $(this);
