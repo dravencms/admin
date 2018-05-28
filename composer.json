@@ -43,6 +43,11 @@
             ]
           }
         },
+        "doctrine":{
+          "metadata": {
+            "Dravencms\\Model\\Admin": "%appDir%/../vendor/dravencms/admin/src/Dravencms/Model/Admin"
+          }
+        },
         "webloader": {
           "css": {
             "admin": {
