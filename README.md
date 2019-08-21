@@ -8,7 +8,7 @@ The best way to install dravencms/admin is using  [Composer](http://getcomposer.
 
 
 ```sh
-$ composer require dravencms/admin:@dev
+$ composer require dravencms/admin
 ```
 
 Then you have to register extension in `config.neon`.
