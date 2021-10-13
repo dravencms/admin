@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  */
@@ -6,13 +6,11 @@
 namespace Dravencms\Model\Admin\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use Dravencms\Admin\INotification;
-use Dravencms\Model\User\Entities\AclOperation;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Kdyby\Doctrine\Entities\Attributes\Identifier;
-use Nette;
+use Dravencms\Database\Attributes\Identifier;
 use Dravencms\Model\User\Entities\User;
+use Nette\SmartObject;
 
 
 /**
@@ -22,7 +20,7 @@ use Dravencms\Model\User\Entities\User;
  */
 class NotificationViewed
 {
-    use Nette\SmartObject;
+    use SmartObject;
     use Identifier;
     use TimestampableEntity;
 
@@ -54,7 +52,7 @@ class NotificationViewed
     /**
      * @param Notification $notification
      */
-    public function setNotification(Notification $notification)
+    public function setNotification(Notification $notification): void
     {
         $this->notification = $notification;
     }
@@ -62,7 +60,7 @@ class NotificationViewed
     /**
      * @param User $user
      */
-    public function setUser(User $user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
@@ -70,7 +68,7 @@ class NotificationViewed
     /**
      * @return Notification
      */
-    public function getNotification()
+    public function getNotification(): Notification
     {
         return $this->notification;
     }
@@ -78,7 +76,7 @@ class NotificationViewed
     /**
      * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }

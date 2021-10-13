@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Created by PhpStorm.
  * User: sadam
@@ -22,52 +22,52 @@ interface INotificationArea
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @return string
      */
-    public function getIcon();
+    public function getIcon(): string;
 
     /**
      * @return string|null
      */
-    public function getMoreUrl();
+    public function getMoreUrl(): ?string;
 
     /**
      * @return array
      */
-    public function getMoreUrlArguments();
+    public function getMoreUrlArguments(): array;
 
     /**
      * @return string
      */
-    public function getMoreTitle();
+    public function getMoreTitle(): string;
 
     /**
      * @param integer $count
      * @return string
      */
-    public function getCountType($count);
+    public function getCountType(int $count): string;
 
     /**
      * @return string
      */
-    public function getNotificationTemplate();
+    public function getNotificationTemplate(): string;
 
     /**
      * @param User $user
-     * @return INotification
+     * @return INotification[]
      */
-    public function getNotifications(User $user);
+    public function getNotifications(User $user): array;
 
     /**
      * @return string|null
      */
-    public function getAclResource();
+    public function getAclResource(): ?string;
 
     /**
      * @return string|null
      */
-    public function getAclOperation();
+    public function getAclOperation(): ?string;
 }

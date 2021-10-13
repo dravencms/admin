@@ -1,10 +1,9 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Dravencms\Admin\Console;
 
-use Dravencms\Eshop\Statistic;
 use Dravencms\Model\Admin\Repository\MenuRepository;
-use Kdyby\Doctrine\EntityManager;
+use Dravencms\Database\EntityManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,6 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FixMenuTreeCommand extends Command
 {
+    public static $defaultName = 'admin:menuTree:recover';
+    public static $defaultDescription = 'Recovers admin menu tree';
+
     /** @var EntityManager */
     private $entityManager;
 
@@ -26,17 +28,12 @@ class FixMenuTreeCommand extends Command
         MenuRepository $menuRepository
     )
     {
-        parent::__construct(null);
+        parent::__construct();
 
         $this->entityManager = $entityManager;
         $this->menuRepository = $menuRepository;
     }
 
-    protected function configure()
-    {
-        $this->setName('admin:menuTree:recover')
-            ->setDescription('Recovers admin menu tree');
-    }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {

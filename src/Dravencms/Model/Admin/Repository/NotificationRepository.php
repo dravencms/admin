@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  */
@@ -7,13 +7,13 @@ namespace Dravencms\Model\Admin\Repository;
 
 use Dravencms\Model\Admin\Entities\Notification;
 use Dravencms\Model\User\Entities\User;
-use Kdyby\Doctrine\EntityManager;
+use Dravencms\Database\EntityManager;
 use Doctrine\ORM\Query\Expr;
-use Nette;
+
 
 class NotificationRepository
 {
-    /** @var \Kdyby\Doctrine\EntityRepository */
+    /** @var \Doctrine\Persistence\ObjectRepository|Notification|string */
     private $notificationRepository;
 
     /** @var EntityManager */
@@ -33,7 +33,7 @@ class NotificationRepository
      * @param $id
      * @return null|Notification
      */
-    public function getOneById($id)
+    public function getOneById(int $id): ?Notification
     {
         return $this->notificationRepository->findOneBy(['id' => $id]);
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  */
@@ -9,7 +9,7 @@ use Dravencms\Model\User\Entities\AclOperation;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Kdyby\Doctrine\Entities\Attributes\Identifier;
+use Dravencms\Database\Attributes\Identifier;
 use Nette;
 
 /**
@@ -70,14 +70,6 @@ class Menu
     private $aclOperation;
 
     /**
-     * @Gedmo\Locale
-     * Used locale to override Translation listener`s locale
-     * this is not a mapped field of entity metadata, just a simple property
-     * and it is not necessary because globally locale can be set in listener
-     */
-    private $locale;
-
-    /**
      * @Gedmo\TreeLeft
      * @ORM\Column(name="lft", type="integer")
      */
@@ -118,13 +110,13 @@ class Menu
      * @param bool $isHomePage
      */
     public function __construct(
-        $name,
-        $presenter,
-        $icon,
+        string $name,
+        string $presenter,
+        string $icon,
         AclOperation $aclOperation = null,
-        $action = 'default',
-        $isActive = true,
-        $isHomePage = false
+        string $action = 'default',
+        bool $isActive = true,
+        bool $isHomePage = false
     ) {
         $this->name = $name;
         $this->icon = $icon;
@@ -139,7 +131,7 @@ class Menu
      * @param Menu|null $parent
      * @return $this
      */
-    public function setParent(Menu $parent = null)
+    public function setParent(Menu $parent = null): Menu
     {
         $this->parent = $parent;
 
@@ -149,7 +141,7 @@ class Menu
     /**
      * @param boolean $isHomePage
      */
-    public function setIsHomePage($isHomePage)
+    public function setIsHomePage(bool $isHomePage): void
     {
         $this->isHomePage = $isHomePage;
     }
@@ -157,7 +149,7 @@ class Menu
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -165,7 +157,7 @@ class Menu
     /**
      * @param boolean $isActive
      */
-    public function setIsActive($isActive)
+    public function setIsActive(bool $isActive): void
     {
         $this->isActive = $isActive;
     }
@@ -173,7 +165,7 @@ class Menu
     /**
      * @param string $presenter
      */
-    public function setPresenter($presenter)
+    public function setPresenter(string $presenter): void
     {
         $this->presenter = $presenter;
     }
@@ -181,7 +173,7 @@ class Menu
     /**
      * @param string $action
      */
-    public function setAction($action)
+    public function setAction(string $action): void
     {
         $this->action = $action;
     }
@@ -189,39 +181,32 @@ class Menu
     /**
      * @return boolean
      */
-    public function isHomePage()
+    public function isHomePage(): bool
     {
         return $this->isHomePage;
     }
-    
-    /**
-     * @param $locale
-     */
-    public function setTranslatableLocale($locale)
-    {
-        $this->locale = $locale;
-    }
+
 
     /**
-     * @return mixed
+     * @return Menu|null
      */
-    public function getParent()
+    public function getParent(): ?Menu
     {
         return $this->parent;
     }
 
     /**
-     * @return mixed
+     * @return Menu|null
      */
-    public function getChildren()
+    public function getChildren(): ?Menu
     {
         return $this->children;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getLvl()
+    public function getLvl(): int
     {
         return $this->lvl;
     }
@@ -229,7 +214,7 @@ class Menu
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -237,7 +222,7 @@ class Menu
     /**
      * @return boolean
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->isActive;
     }
@@ -245,7 +230,7 @@ class Menu
     /**
      * @return boolean
      */
-    public function isIsActive()
+    public function isIsActive(): bool
     {
         return $this->isActive;
     }
@@ -253,7 +238,7 @@ class Menu
     /**
      * @return boolean
      */
-    public function isIsHomePage()
+    public function isIsHomePage(): bool
     {
         return $this->isHomePage;
     }
@@ -261,7 +246,7 @@ class Menu
     /**
      * @return string
      */
-    public function getPresenter()
+    public function getPresenter(): string
     {
         return $this->presenter;
     }
@@ -269,7 +254,7 @@ class Menu
     /**
      * @return string
      */
-    public function getAction()
+    public function getAction(): string
     {
         return $this->action;
     }

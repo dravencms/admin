@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Created by PhpStorm.
  * User: sadam
@@ -29,7 +29,7 @@ class NotificationArea implements INotificationArea
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return 'Notifications';
     }
@@ -37,7 +37,7 @@ class NotificationArea implements INotificationArea
     /**
      * @return string
      */
-    public function getIcon()
+    public function getIcon(): string
     {
         return 'bullhorn';
     }
@@ -45,7 +45,7 @@ class NotificationArea implements INotificationArea
     /**
      * @return null
      */
-    public function getMoreUrl()
+    public function getMoreUrl(): string
     {
         return null;
     }
@@ -53,7 +53,7 @@ class NotificationArea implements INotificationArea
     /**
      * @return array
      */
-    public function getMoreUrlArguments()
+    public function getMoreUrlArguments(): array
     {
         return [];
     }
@@ -61,7 +61,7 @@ class NotificationArea implements INotificationArea
     /**
      * @return string
      */
-    public function getMoreTitle()
+    public function getMoreTitle(): string
     {
         return 'More notifications';
     }
@@ -70,7 +70,7 @@ class NotificationArea implements INotificationArea
      * @param $count
      * @return string
      */
-    public function getCountType($count)
+    public function getCountType(int $count): string
     {
         return ($count > 0 ? INotificationArea::COUNT_TYPE_WARNING : INotificationArea::COUNT_TYPE_SUCCESS);
     }
@@ -78,7 +78,7 @@ class NotificationArea implements INotificationArea
     /**
      * @return string
      */
-    public function getNotificationTemplate()
+    public function getNotificationTemplate(): string
     {
         return __DIR__.'/NotificationArea.latte';
     }
@@ -87,23 +87,23 @@ class NotificationArea implements INotificationArea
      * @param User $user
      * @return \Dravencms\Model\Admin\Entities\Notification[]
      */
-    public function getNotifications(User $user)
+    public function getNotifications(User $user): array
     {
         return $this->notificationRepository->getForUser($user);
     }
 
     /**
-     * @return null
+     * @return string|null
      */
-    public function getAclResource()
+    public function getAclResource(): ?string
     {
         return null;
     }
 
     /**
-     * @return null
+     * @return string|null
      */
-    public function getAclOperation()
+    public function getAclOperation(): ?string
     {
         return null;
     }

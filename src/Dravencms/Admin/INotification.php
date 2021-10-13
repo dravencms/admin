@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Created by PhpStorm.
  * User: sadam
@@ -23,32 +23,32 @@ interface INotification
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @return string
      */
-    public function getDescription();
+    public function getDescription(): string;
 
     /**
      * @return string
      */
-    public function getType();
+    public function getType(): string;
 
     /**
      * @return string
      */
-    public function getIcon();
+    public function getIcon(): string;
 
     /**
      * @return string|null
      */
-    public function getUrl();
+    public function getUrl(): ?string;
 
     /**
      * @return array
      */
-    public function getUrlArguments();
+    public function getUrlArguments(): array;
 
     /**
      * @return \DateTimeInterface|null

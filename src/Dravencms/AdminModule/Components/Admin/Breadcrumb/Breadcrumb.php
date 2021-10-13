@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Dravencms\AdminModule\Components\Admin\Breadcrumb;
 
@@ -19,12 +19,11 @@ class Breadcrumb extends BaseControl
 
     public function __construct(User $user, MenuRepository $menuRepository)
     {
-        parent::__construct();
         $this->user = $user;
         $this->menuRepository = $menuRepository;
     }
 
-    public function render()
+    public function render(): void
     {
         $template = $this->template;
 
@@ -32,7 +31,7 @@ class Breadcrumb extends BaseControl
 
         if (!$thisPage)
         {
-            $thisPage = $this->menuRepository->getByPresenter(':'.$this->presenter->getName());
+            $thisPage = $this->menuRepository->getOneByPresenter(':'.$this->presenter->getName());
         }
 
         $template->thisPage = $thisPage;

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  */
@@ -11,7 +11,7 @@ use Dravencms\Admin\INotification;
 use Dravencms\Model\User\Entities\AclOperation;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Kdyby\Doctrine\Entities\Attributes\Identifier;
+use Dravencms\Database\Attributes\Identifier;
 use Nette;
 use Dravencms\Model\User\Entities\User;
 
@@ -95,14 +95,14 @@ class Notification implements INotification
      * Notification constructor.
      * @param string $name
      * @param string $description
-     * @param string $type
      * @param string $icon
-     * @param string $url
+     * @param string $type
+     * @param string|null $url
      * @param array $urlArguments
-     * @param User $user
-     * @param AclOperation $aclOperation
+     * @param User|null $user
+     * @param AclOperation|null $aclOperation
      */
-    public function __construct($name, $description, $icon, $type = INotification::TYPE_DEFAULT, $url = null, array $urlArguments = [], User $user = null, AclOperation $aclOperation = null)
+    public function __construct(string $name, string $description, string $icon, $type = INotification::TYPE_DEFAULT, string $url = null, array $urlArguments = [], User $user = null, AclOperation $aclOperation = null)
     {
         $this->name = $name;
         $this->description = $description;
@@ -118,7 +118,7 @@ class Notification implements INotification
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -126,7 +126,7 @@ class Notification implements INotification
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -135,7 +135,7 @@ class Notification implements INotification
      * @param $type
      * @throws \Exception
      */
-    public function setType($type)
+    public function setType(string $type): void
     {
         if (!in_array($type, self::$typeList))
         {
@@ -147,7 +147,7 @@ class Notification implements INotification
     /**
      * @param string $icon
      */
-    public function setIcon($icon)
+    public function setIcon(string $icon): void
     {
         $this->icon = $icon;
     }
@@ -155,7 +155,7 @@ class Notification implements INotification
     /**
      * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url): void
     {
         $this->url = $url;
     }
@@ -163,7 +163,7 @@ class Notification implements INotification
     /**
      * @param array $urlArguments
      */
-    public function setUrlArguments(array $urlArguments)
+    public function setUrlArguments(array $urlArguments): void
     {
         $this->urlArguments = $urlArguments;
     }
@@ -171,7 +171,7 @@ class Notification implements INotification
     /**
      * @param User $user
      */
-    public function setUser(User $user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
@@ -179,7 +179,7 @@ class Notification implements INotification
     /**
      * @param AclOperation $aclOperation
      */
-    public function setAclResource(AclOperation $aclOperation)
+    public function setAclResource(AclOperation $aclOperation): void
     {
         $this->aclOperation = $aclOperation;
     }
@@ -187,7 +187,7 @@ class Notification implements INotification
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -195,7 +195,7 @@ class Notification implements INotification
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -203,7 +203,7 @@ class Notification implements INotification
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -211,7 +211,7 @@ class Notification implements INotification
     /**
      * @return string
      */
-    public function getIcon()
+    public function getIcon(): string
     {
         return $this->icon;
     }
@@ -219,7 +219,7 @@ class Notification implements INotification
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -227,7 +227,7 @@ class Notification implements INotification
     /**
      * @return array
      */
-    public function getUrlArguments()
+    public function getUrlArguments(): array
     {
         return $this->urlArguments;
     }
@@ -235,7 +235,7 @@ class Notification implements INotification
     /**
      * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
@@ -243,15 +243,15 @@ class Notification implements INotification
     /**
      * @return AclOperation
      */
-    public function getAclOperation()
+    public function getAclOperation(): AclOperation
     {
         return $this->aclOperation;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getNotificationsViewed()
+    public function getNotificationsViewed(): array
     {
         return $this->notificationsViewed;
     }

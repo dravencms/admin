@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Dravencms\Admin;
 
@@ -20,7 +20,7 @@ class Notifications
     /**
      * @param INotificationArea $notificationArea
      */
-    public function addNotificationAreaProvider(INotificationArea $notificationArea)
+    public function addNotificationAreaProvider(INotificationArea $notificationArea): void
     {
         $this->notificationAreaProviders[] = $notificationArea;
     }
@@ -28,7 +28,7 @@ class Notifications
     /**
      * @return INotificationArea[]
      */
-    public function getNotificationAreaProviders()
+    public function getNotificationAreaProviders(): array
     {
         return $this->notificationAreaProviders;
     }

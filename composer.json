@@ -15,6 +15,7 @@
     }
   ],
   "require": {
+    "dravencms/application": ">=0.0.3",
     "dravencms/user": ">=v2.0"
   },
   "autoload": {

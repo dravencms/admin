@@ -1,11 +1,16 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Dravencms\AdminModule;
 
+use Dravencms\AdminModule\Components\Admin\Breadcrumb\Breadcrumb;
+use Dravencms\AdminModule\Components\Admin\MenuNavbar\MenuNavbar;
 use Dravencms\AdminModule\Components\Admin\MenuNavbar\MenuNavbarFactory;
 use Dravencms\AdminModule\Components\Admin\Breadcrumb\BreadcrumbFactory;
+use Dravencms\AdminModule\Components\Admin\MenuNotification\MenuNotification;
 use Dravencms\AdminModule\Components\Admin\MenuNotification\MenuNotificationFactory;
 use Dravencms\Locale\TLocalizedPresenter;
+use WebLoader\Nette\CssLoader;
+use WebLoader\Nette\JavaScriptLoader;
 
 /**
  * Base presenter for all application presenters.
@@ -24,10 +29,9 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     public $menuNotificationFactory;
 
     /**
-     * Checks authorization.
-     * @return void
+     * @param $element
      */
-    public function checkRequirements($element)
+    public function checkRequirements($element): void
     {
         parent::checkRequirements($element);
 
@@ -37,7 +41,7 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     /**
      * @return \WebLoader\Nette\CssLoader
      */
-    public function createComponentCss()
+    public function createComponentCss(): CssLoader
     {
         return $this->webLoader->createCssLoader('admin');
     }
@@ -45,7 +49,7 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     /**
      * @return \WebLoader\Nette\JavaScriptLoader
      */
-    public function createComponentJs()
+    public function createComponentJs(): JavaScriptLoader
     {
         return $this->webLoader->createJavaScriptLoader('admin');
     }
@@ -53,7 +57,7 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     /**
      * @return Components\Admin\MenuNavbar\MenuNavbar
      */
-    public function createComponentMenu()
+    public function createComponentMenu(): MenuNavbar
     {
         return $this->menuNavbarFactory->create($this->getUserEntity());
     }
@@ -61,7 +65,7 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     /**
      * @return Components\Admin\Breadcrumb\Breadcrumb
      */
-    public function createComponentMenuBreadcrumb()
+    public function createComponentMenuBreadcrumb(): Breadcrumb
     {
         return $this->menuBreadcrumbFactory->create($this->getUserEntity());
     }
@@ -69,7 +73,7 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     /**
      * @return Components\Admin\MenuNotification\MenuNotification
      */
-    public function createComponentMenuNotification()
+    public function createComponentMenuNotification(): MenuNotification
     {
         return $this->menuNotificationFactory->create($this->getUserEntity());
     }
@@ -78,7 +82,7 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
      * Formats layout template file names.
      * @return array
      */
-    public function formatLayoutTemplateFiles()
+    public function formatLayoutTemplateFiles(): array
     {
         $name = $this->getName();
         $presenter = substr($name, strrpos(':' . $name, ':'));
@@ -88,10 +92,10 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
         $layout = $this->layout ? $this->layout : 'layout';
         $dir = dirname($this->getReflection()->getFileName());
         $dir = is_dir("$dir/templates") ? $dir : dirname($dir);
-        $list = array(
+        $list = [
             "$dir/templates/$moduleName/$presenter/@$layout.latte",
             "$dir/templates/$moduleName/$presenter.@$layout.latte",
-        );
+        ];
         do {
             $list[] = "$dir/templates/@$layout.latte";
             $dir = dirname($dir);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Dravencms\AdminModule\NotificationModule;
 
@@ -6,9 +6,8 @@ use Dravencms\AdminModule\SecuredPresenter;
 use Dravencms\Model\Admin\Entities\NotificationViewed;
 use Dravencms\Model\Admin\Repository\NotificationRepository;
 use Dravencms\Model\Admin\Repository\NotificationViewedRepository;
-use Kdyby\Doctrine\EntityManager;
-use Nette;
-use Tracy\Debugger;
+use Dravencms\Database\EntityManager;
+
 
 /**
  * Homepage presenter.
@@ -24,14 +23,13 @@ class NotificationPresenter extends SecuredPresenter
     /** @var EntityManager @inject */
     public $entityManager;
 
-    public function renderDefault()
-    {
-    }
 
     /**
-     * @param $id
+     * @param int $id
+     * @throws \Nette\Application\AbortException
+     * @throws \Nette\Application\BadRequestException
      */
-    public function renderUrl($id)
+    public function renderUrl(int $id): void
     {
         $notification = $this->notificationRepository->getOneById($id);
         if (!$notification || !$notification->getUrl())

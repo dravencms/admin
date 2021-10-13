@@ -1,8 +1,9 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Dravencms\Admin;
 
-use Dravencms\Base\IRouterFactory;
+
+use Dravencms\Routing\IRouterFactory;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
 
@@ -12,9 +13,9 @@ use Nette\Application\Routers\RouteList;
 class RouteFactory implements IRouterFactory
 {
     /**
-     * @return \Nette\Application\IRouter
+     * @return array|RouteList
      */
-    public function createRouter()
+    public function createRouter(): RouteList
     {
         $router = new RouteList();
 

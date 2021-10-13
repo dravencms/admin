@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
@@ -24,18 +24,17 @@ class MenuNavbar extends BaseControl
 
     /**
      * MenuNavbar constructor.
+     * @param User $user
      * @param MenuRepository $menuRepository
      */
     public function __construct(User $user, MenuRepository $menuRepository)
     {
-        parent::__construct();
-
         $this->user = $user;
         $this->menuRepository = $menuRepository;
     }
 
 
-    public function render()
+    public function render(): void
     {
         $template = $this->template;
         

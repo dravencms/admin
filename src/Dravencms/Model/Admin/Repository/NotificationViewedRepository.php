@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  */
@@ -8,12 +8,12 @@ namespace Dravencms\Model\Admin\Repository;
 use Dravencms\Model\Admin\Entities\Notification;
 use Dravencms\Model\Admin\Entities\NotificationViewed;
 use Dravencms\Model\User\Entities\User;
-use Kdyby\Doctrine\EntityManager;
-use Nette;
+use Dravencms\Database\EntityManager;
+
 
 class NotificationViewedRepository
 {
-    /** @var \Kdyby\Doctrine\EntityRepository */
+    /** @var \Doctrine\Persistence\ObjectRepository|NotificationViewed|string */
     private $notificationViewedRepository;
 
     /** @var EntityManager */
@@ -30,10 +30,10 @@ class NotificationViewedRepository
     }
 
     /**
-     * @param $id
-     * @return null|NotificationViewed
+     * @param int $id
+     * @return NotificationViewed|null
      */
-    public function getOneById($id)
+    public function getOneById(int $id): ?NotificationViewed
     {
         return $this->notificationViewedRepository->findOneBy(['id' => $id]);
     }
@@ -41,9 +41,9 @@ class NotificationViewedRepository
     /**
      * @param Notification $notification
      * @param User $user
-     * @return ull|NotificationViewed
+     * @return NotificationViewed|null
      */
-    public function getOneByNotificationAndUser(Notification $notification, User $user)
+    public function getOneByNotificationAndUser(Notification $notification, User $user): ?NotificationViewed
     {
         return $this->notificationViewedRepository->findOneBy(['notification' => $notification, 'user' => $user]);
     }

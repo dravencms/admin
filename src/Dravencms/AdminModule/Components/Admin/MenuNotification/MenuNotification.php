@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
@@ -27,14 +27,12 @@ class MenuNotification extends BaseControl
      */
     public function __construct(User $user, Notifications $notifications)
     {
-        parent::__construct();
-
         $this->user = $user;
         $this->notifications = $notifications;
     }
 
 
-    public function render()
+    public function render(): void
     {
         $template = $this->template;
 

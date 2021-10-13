@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Created by PhpStorm.
  * User: sadam
@@ -31,17 +31,18 @@ class Notification implements INotification
 
     /** @var \DateTimeInterface|null */
     private $createdAt;
+
     /**
      * Notification constructor.
-     * @param $name
-     * @param $description
-     * @param $icon
+     * @param string $name
+     * @param string $description
+     * @param string $icon
      * @param string $type
-     * @param null $url
+     * @param string|null $url
      * @param array $urlArguments
      * @param \DateTimeInterface|null $createdAt
      */
-    public function __construct($name, $description, $icon, $type = INotification::TYPE_DEFAULT, $url = null, $urlArguments = [], \DateTimeInterface $createdAt = null)
+    public function __construct(string $name, string $description, string $icon, $type = INotification::TYPE_DEFAULT, string $url = null, array $urlArguments = [], \DateTimeInterface $createdAt = null)
     {
         $this->name = $name;
         $this->description = $description;
@@ -55,7 +56,7 @@ class Notification implements INotification
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -63,7 +64,7 @@ class Notification implements INotification
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -71,7 +72,7 @@ class Notification implements INotification
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -79,7 +80,7 @@ class Notification implements INotification
     /**
      * @return string
      */
-    public function getIcon()
+    public function getIcon(): string
     {
         return $this->icon;
     }
@@ -87,7 +88,7 @@ class Notification implements INotification
     /**
      * @return null|string
      */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -95,7 +96,7 @@ class Notification implements INotification
     /**
      * @return array
      */
-    public function getUrlArguments()
+    public function getUrlArguments(): array
     {
         return $this->urlArguments;
     }
@@ -103,7 +104,7 @@ class Notification implements INotification
     /**
      * @return \DateTimeInterface|null
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }

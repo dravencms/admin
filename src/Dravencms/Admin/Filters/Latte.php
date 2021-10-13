@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  */
@@ -11,25 +11,27 @@ use Nette\Utils\Html;
 class Latte
 {
     /**
-     * @param $number
+     * @param int $number
      * @param bool $separated
-     * @return static
+     * @return Html
      */
-    public function formatCounter($number, $separated = false)
+    public function formatCounter(int $number, bool $separated = false): Html
     {
         if ($separated) {
             $root = Html::el('div');
             $root->class = 'counter-separated counter-lg';
-            foreach (str_split($number) AS $piece) {
+            foreach (str_split(strval($number)) AS $piece) {
                 $p = Html::el('span', $piece);
                 $root->addHtml($p);
             }
-        } else {
-            $root = Html::el('div');
-            $root->class = 'counter counter-lg';
-            $p = Html::el('span', $number);
-            $root->addHtml($p);
+            return $root;
         }
+
+        $root = Html::el('div');
+        $root->class = 'counter counter-lg';
+        $p = Html::el('span', $number);
+        $root->addHtml($p);
+
         return $root;
     }
 }

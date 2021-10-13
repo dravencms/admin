@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Dravencms\AdminModule\Components\Admin\Breadcrumb;
 
@@ -13,5 +13,5 @@ interface BreadcrumbFactory
      * @param User $user
      * @return Breadcrumb
      */
-    public function create(User $user);
+    public function create(User $user): Breadcrumb;
 }

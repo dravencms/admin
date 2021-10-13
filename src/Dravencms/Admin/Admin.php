@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Dravencms\Admin;
 use Dravencms\Model\Admin\Entities\Notification;
 use Dravencms\Model\Admin\Repository\NotificationRepository;
+use Dravencms\Model\User\Entities\AclOperation;
 use Dravencms\Model\User\Entities\User;
-use Dravencms\Model\User\Entities\AclResource;
-use Kdyby\Doctrine\EntityManager;
+use Dravencms\Database\EntityManager;
 use Nette\SmartObject;
 
 /**
@@ -37,20 +37,19 @@ class Admin
     }
 
     /**
-     * @param $name
-     * @param $description
-     * @param $icon
+     * @param string $name
+     * @param string $description
+     * @param string $icon
      * @param string $type
-     * @param null $url
+     * @param string|null $url
      * @param array $urlArguments
      * @param User|null $user
-     * @param AclResource|null $aclResource
+     * @param AclOperation|null $aclOperation
      * @return Notification
-     * @throws \Exception
      */
-    public function addNotification($name, $description, $icon, $type = Notification::TYPE_DEFAULT, $url = null, array $urlArguments = [], User $user = null, AclResource $aclResource = null)
+    public function addNotification(string $name, string $description, string $icon, $type = Notification::TYPE_DEFAULT, string $url = null, array $urlArguments = [], User $user = null, AclOperation $aclOperation = null)
     {
-        $notification = new Notification($name, $description, $icon, $type, $url, $urlArguments, $user, $aclResource);
+        $notification = new Notification($name, $description, $icon, $type, $url, $urlArguments, $user, $aclOperation);
         $this->entityManager->persist($notification);
         $this->entityManager->flush();
 
