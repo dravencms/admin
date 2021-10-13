@@ -15,8 +15,7 @@
     }
   ],
   "require": {
-    "dravencms/user": "^v1.0",
-    "ipub/gravatar": "v2.2.0|v1.0.1|v2.2.2"
+    "dravencms/user": ">=v2.0"
   },
   "autoload": {
     "psr-0": {
