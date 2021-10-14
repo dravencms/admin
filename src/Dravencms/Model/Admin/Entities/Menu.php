@@ -111,10 +111,10 @@ class Menu
      */
     public function __construct(
         string $name,
-        string $presenter,
-        string $icon,
+        string $presenter = null,
+        string $icon = null,
         AclOperation $aclOperation = null,
-        string $action = 'default',
+        string $action = null,
         bool $isActive = true,
         bool $isHomePage = false
     ) {
@@ -246,7 +246,7 @@ class Menu
     /**
      * @return string
      */
-    public function getPresenter(): string
+    public function getPresenter(): ?string
     {
         return $this->presenter;
     }
@@ -254,7 +254,7 @@ class Menu
     /**
      * @return string
      */
-    public function getAction(): string
+    public function getAction(): ?string
     {
         return $this->action;
     }
