@@ -8,8 +8,8 @@ services:
             - addRouteFactory(@routeFactory.Admin)
 
 
-doctrine:
-    metadata:
+nettrine.orm.annotations:
+    mapping:
         Dravencms\Model\Admin: %appDir%/../vendor/dravencms/admin/src/Dravencms/Model/Admin
 
 webloader:
