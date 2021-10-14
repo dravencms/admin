@@ -43,9 +43,9 @@ class NotificationArea implements INotificationArea
     }
 
     /**
-     * @return null
+     * @return null|string
      */
-    public function getMoreUrl(): string
+    public function getMoreUrl(): ?string
     {
         return null;
     }

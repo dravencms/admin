@@ -19,10 +19,11 @@ class RouteFactory implements IRouterFactory
     {
         $router = new RouteList();
 
+        $admin = new RouteList('Admin');
+        $admin->addRoute('admin/index.php', 'Homepage:Homepage:default', Route::ONE_WAY);
+        $admin->addRoute('admin/[<locale [a-z]{2}>/]<presenter>/<action>[/<id [0-9]+>]', 'Homepage:Homepage:default');
 
-        $router[] = $admin = new RouteList('Admin');
-        $admin[] = new Route('admin/index.php', 'Homepage:Homepage:default', Route::ONE_WAY);
-        $admin[] = new Route('admin/[<locale [a-z]{2}>/]<presenter>/<action>[/<id [0-9]+>]', 'Homepage:Homepage:default');
+        $router->add($admin);
 
         return $router;
     }
