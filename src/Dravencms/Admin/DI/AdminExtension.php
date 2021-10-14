@@ -46,7 +46,7 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
         $builder = $this->getContainerBuilder();
 
         $latteFactoryService = $builder->getDefinitionByType(LatteFactory::class);
-        $latteFactoryService->addSetup('addFilter', ['formatCounter', [$this->prefix('@adminFiltersLatte'), 'formatCounter']]);
+        $latteFactoryService->getResultDefinition()->addSetup('addFilter', ['formatCounter', [$this->prefix('@adminFiltersLatte'), 'formatCounter']]);
 
         $notification = $builder->getDefinition($this->prefix('notifications'));
 
