@@ -16,8 +16,6 @@ use Nette\DI\CompilerExtension;
  */
 class AdminExtension extends CompilerExtension implements TranslationProviderInterface
 {
-    public static $prefix = 'admin';
-
     public function getTranslationResources(): array
     {
         return [__DIR__.'/../lang'];
@@ -28,13 +26,13 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
         $builder = $this->getContainerBuilder();
 
 
-        $builder->addDefinition($this->prefix(self::$prefix))
+        $builder->addDefinition($this->prefix('admin'))
             ->setFactory(Admin::class, []);
 
-        $builder->addDefinition($this->prefix(self::$prefix.'.notifications'))
+        $builder->addDefinition($this->prefix('notifications'))
             ->setFactory(Notifications::class, []);
 
-        $builder->addDefinition($this->prefix(self::$prefix.'.adminFiltersLatte'))
+        $builder->addDefinition($this->prefix('adminFiltersLatte'))
             ->setFactory(Latte::class);
 
         $this->loadComponents();
@@ -48,9 +46,9 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
         $builder = $this->getContainerBuilder();
 
         $latteFactoryService = $builder->getDefinitionByType(LatteFactory::class);
-        $latteFactoryService->addSetup('addFilter', ['formatCounter', [$this->prefix('@'.self::$prefix.'adminFiltersLatte'), 'formatCounter']]);
+        $latteFactoryService->addSetup('addFilter', ['formatCounter', [$this->prefix('@adminFiltersLatte'), 'formatCounter']]);
 
-        $notification = $builder->getDefinition($this->prefix(self::$prefix.'.notifications'));
+        $notification = $builder->getDefinition($this->prefix('notifications'));
 
         foreach ($builder->findByType(INotificationArea::class) AS $serviceName => $service) {
             $notification->addSetup('addNotificationAreaProvider', ['@' . $serviceName]);
