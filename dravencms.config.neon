@@ -43,7 +43,7 @@ webloader:
                 - admin/css/pixeladmin.scss
                 - admin/css/style.scss
             filters:
-                - @cssMin
+                #- @cssMin
             fileFilters:
                 - @wlCssFilter
                 - @sassFilter
@@ -88,4 +88,4 @@ webloader:
                 - admin/js/main.js
 
             fileFilters:
-                - @jsMin
+                #- @jsMin
