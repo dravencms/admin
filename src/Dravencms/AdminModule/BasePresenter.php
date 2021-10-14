@@ -2,13 +2,8 @@
 
 namespace Dravencms\AdminModule;
 
-use Dravencms\AdminModule\Components\Admin\Breadcrumb\Breadcrumb;
-use Dravencms\AdminModule\Components\Admin\MenuNavbar\MenuNavbar;
-use Dravencms\AdminModule\Components\Admin\MenuNavbar\MenuNavbarFactory;
-use Dravencms\AdminModule\Components\Admin\Breadcrumb\BreadcrumbFactory;
-use Dravencms\AdminModule\Components\Admin\MenuNotification\MenuNotification;
-use Dravencms\AdminModule\Components\Admin\MenuNotification\MenuNotificationFactory;
 use Dravencms\Locale\TLocalizedPresenter;
+use Dravencms\User\TUserPresenter;
 use WebLoader\Nette\CssLoader;
 use WebLoader\Nette\JavaScriptLoader;
 
@@ -18,15 +13,7 @@ use WebLoader\Nette\JavaScriptLoader;
 abstract class BasePresenter extends \Dravencms\BasePresenter
 {
     use TLocalizedPresenter;
-    
-    /** @var MenuNavbarFactory @inject */
-    public $menuNavbarFactory;
-
-    /** @var BreadcrumbFactory @inject */
-    public $menuBreadcrumbFactory;
-
-    /** @var MenuNotificationFactory @inject */
-    public $menuNotificationFactory;
+    use TUserPresenter;
 
     /**
      * @param $element
@@ -52,30 +39,6 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     public function createComponentJs(): JavaScriptLoader
     {
         return $this->webLoader->createJavaScriptLoader('admin');
-    }
-
-    /**
-     * @return Components\Admin\MenuNavbar\MenuNavbar
-     */
-    public function createComponentMenu(): MenuNavbar
-    {
-        return $this->menuNavbarFactory->create($this->getUserEntity());
-    }
-
-    /**
-     * @return Components\Admin\Breadcrumb\Breadcrumb
-     */
-    public function createComponentMenuBreadcrumb(): Breadcrumb
-    {
-        return $this->menuBreadcrumbFactory->create($this->getUserEntity());
-    }
-
-    /**
-     * @return Components\Admin\MenuNotification\MenuNotification
-     */
-    public function createComponentMenuNotification(): MenuNotification
-    {
-        return $this->menuNotificationFactory->create($this->getUserEntity());
     }
 
     /**
