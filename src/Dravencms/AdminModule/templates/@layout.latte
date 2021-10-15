@@ -60,7 +60,7 @@
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                                    <img src="https://www.gravatar.com/avatar">
+                                    <img src="{$gravatar}">
                                     <!--img n:gravatar="$userInfo->getEmail(), 100" alt="{$userInfo->getFirstName()} {$userInfo->getLastName()}"-->
                                     <span>{$userInfo->getFirstName()} {$userInfo->getLastName()}</span>
                                 </a>
@@ -85,7 +85,7 @@
             <div class="menu-content top animated fadeIn" id="menu-content-demo">
                 <div>
                     <div class="text-bg"><span class="text-slim">{_"admin.layout.Welcome"},</span> <span class="text-semibold">{$userInfo->getFirstName()}</span></div>
-                    <img src="https://www.gravatar.com/avatar">
+                    <img src="{$gravatar}">
                     <!--img n:gravatar="$userInfo->getEmail(), 100" alt="{$userInfo->getFirstName()} {$userInfo->getLastName()}" class=""-->
                     <div class="btn-group">
                         <!--a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a-->

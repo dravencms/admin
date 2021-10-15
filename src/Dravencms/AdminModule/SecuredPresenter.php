@@ -39,6 +39,16 @@ abstract class SecuredPresenter extends BasePresenter
 
 
     /**
+     * @FIXME remove this and use https://github.com/ipublikuj/gravatar when ported to nette3 and releaset
+     * @throws \Exception
+     */
+    public function beforeRender()
+    {
+        parent::beforeRender();
+        $this->template->gravatar = 'https://www.gravatar.com/avatar/'.md5($this->getUserEntity()->getEmail()).'?d=retro';
+    }
+
+    /**
      * @return Components\Admin\MenuNavbar\MenuNavbar
      */
     public function createComponentMenu(): MenuNavbar
