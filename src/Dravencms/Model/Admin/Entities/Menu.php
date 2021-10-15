@@ -5,6 +5,7 @@
 
 namespace Dravencms\Model\Admin\Entities;
 
+use Doctrine\Common\Collections\Collection;
 use Dravencms\Model\User\Entities\AclOperation;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -95,6 +96,7 @@ class Menu
     private $parent;
 
     /**
+     * @var Menu[]
      * @ORM\OneToMany(targetEntity="Menu", mappedBy="parent")
      */
     private $children;
@@ -196,9 +198,9 @@ class Menu
     }
 
     /**
-     * @return Menu|null
+     * @return Menu[]|Collection
      */
-    public function getChildren(): ?Menu
+    public function getChildren(): Collection
     {
         return $this->children;
     }
