@@ -2,4 +2,6 @@
 - Dravencms\Model\Admin\Repository\NotificationRepository
 - Dravencms\Model\Admin\Repository\NotificationViewedRepository
 
+
 - Dravencms\Admin\NotificationArea
+- Dravencms\Admin\AdminAuthenticator

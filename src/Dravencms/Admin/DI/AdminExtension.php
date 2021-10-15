@@ -7,6 +7,7 @@ use Dravencms\Admin\Admin;
 use Dravencms\Admin\Filters\Latte;
 use Dravencms\Admin\INotificationArea;
 use Dravencms\Admin\Notifications;
+use Dravencms\Security\Authenticator;
 use Nette\Bridges\ApplicationLatte\LatteFactory;
 use Nette\DI\CompilerExtension;
 
@@ -27,10 +28,10 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
 
 
         $builder->addDefinition($this->prefix('admin'))
-            ->setFactory(Admin::class, []);
+            ->setFactory(Admin::class);
 
         $builder->addDefinition($this->prefix('notifications'))
-            ->setFactory(Notifications::class, []);
+            ->setFactory(Notifications::class);
 
         $builder->addDefinition($this->prefix('adminFiltersLatte'))
             ->setFactory(Latte::class);
