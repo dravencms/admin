@@ -67,10 +67,8 @@ class SignPresenter extends BasePresenter
     /**
      * @param Form $form
      */
-    public function signInFormSucceeded(Form $form): void
+    public function signInFormSucceeded(Form $form, $values): void
     {
-        $values = $form->getUnsafeValues();
-
         $user = $this->getUser();
 
         if ($values->remember) {
