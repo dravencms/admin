@@ -20,7 +20,7 @@
     "summernote": ">=v0.6.16",
     "nette-forms": "^3.3",
     "nette.ajax.js": "2.1.0",
-    "moment": ">=2.10.6",
+    "moment": ">=2.29.2",
     "dropzone": ">=4.2.0",
     "formstone": ">=0.8.27",
     "flag-icon-css": ">=1.1.0",
