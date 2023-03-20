@@ -49,6 +49,11 @@
                 //$editor.insertNode($editable, $node[0]);
                 context.invoke('editor.insertNode', $node[0]);
               }
+              else if (type == 'media') 
+              {
+                var $node = $('<video src="' + path +'" class="video-responsive" data-filename="' + name +'" alt="' + name +'" controls>');
+                context.invoke('editor.insertNode', $node[0]);
+              }
               else
               {
                 var $node = $('<a href="' + path +'">' + name + '</a>');
