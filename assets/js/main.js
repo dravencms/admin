@@ -89,7 +89,7 @@ $(document).ready(function () {
         //modules: $.extend($.summernote.options.modules, {"specialchars": FilesManager}),
         toolbar: [
 
-            ['style', ['style', 'fontname', 'bold', 'italic', 'underline', 'clear']],
+            ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
