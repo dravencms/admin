@@ -71,6 +71,12 @@ class Menu
     private $aclOperation;
 
     /**
+     * @var array
+     * @ORM\Column(type="json_array", nullable=true)
+     */
+    private $parameters;
+
+    /**
      * @Gedmo\TreeLeft
      * @ORM\Column(name="lft", type="integer")
      */
@@ -118,7 +124,8 @@ class Menu
         AclOperation $aclOperation = null,
         string $action = null,
         bool $isActive = true,
-        bool $isHomePage = false
+        bool $isHomePage = false,
+        array $parameters = null
     ) {
         $this->name = $name;
         $this->icon = $icon;
@@ -127,6 +134,7 @@ class Menu
         $this->isHomePage = $isHomePage;
         $this->presenter = $presenter;
         $this->action = $action;
+        $this->parameters = $parameters;
     }
 
     /**
@@ -178,6 +186,14 @@ class Menu
     public function setAction(string $action): void
     {
         $this->action = $action;
+    }
+
+    /**
+     * @param array $parameters
+     */
+    public function setParameters(array $parameters = null): void
+    {
+        $this->parameters = $parameters;
     }
 
     /**
@@ -259,5 +275,13 @@ class Menu
     public function getAction(): ?string
     {
         return $this->action;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters(): array
+    {
+        return $this->parameters ?? [];
     }
 }

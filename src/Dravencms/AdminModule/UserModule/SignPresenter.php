@@ -99,11 +99,13 @@ class SignPresenter extends BasePresenter
             /** @var Menu $homepage */
             if ($homepage = $this->adminMenuRepository->getHomePageForUser($this->getUserEntity())) {
                 $redirect = $homepage->getPresenter() . ($homepage->getAction() ? ':' . $homepage->getAction() : ':default');
+                $parameters = $homepage->getParameters();
             } else {
                 $redirect = ':Admin:Homepage:Homepage:default';
+                $parameters = [];
             }
 
-            $this->redirect($redirect);
+            $this->redirect($redirect, $parameters);
         } catch (AuthenticationException $e) {
             $form->addError($e->getMessage());
         }

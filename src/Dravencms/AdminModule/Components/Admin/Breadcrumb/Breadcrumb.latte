@@ -1,7 +1,7 @@
 <ul class="breadcrumb breadcrumb-page">
     <div class="breadcrumb-label text-light-gray">{_"admin.component.breadcrumb.YouAreHere"}: </div>
     {if $homepage}
-        <li><a href="{plink $homepage->getPresenter().':'.$homepage->getAction()}">{_"admin.component.breadcrumb.Home"}</a></li>
+        <li><a href="{plink $homepage->getPresenter().':'.$homepage->getAction() (expand)$homepage->getParameters()}">{_"admin.component.breadcrumb.Home"}</a></li>
     {else}
         <li><a href="{plink :Admin:Homepage:Homepage:}">{_"admin.component.breadcrumb.Home"}</a></li>
     {/if}

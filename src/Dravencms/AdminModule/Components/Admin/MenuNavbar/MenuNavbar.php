@@ -58,19 +58,19 @@ class MenuNavbar extends BaseControl
                 $active = false;
                 if (array_key_exists('__children', $tree) && count($tree['__children'])) {
                     foreach ($tree['__children'] AS $child) {
-                        if ($this->presenter->isLinkCurrent($child['presenter'].':'.$child['action'])) {
+                        if ($this->presenter->isLinkCurrent($child['presenter'].':'.$child['action'], $node['parameters'] ?? [])) {
                             $active = true;
                         }
                     }
                 } else {
-                    $active = $this->presenter->isLinkCurrent($tree['presenter'].':'.$tree['action']);
+                    $active = $this->presenter->isLinkCurrent($tree['presenter'].':'.$tree['action'], $node['parameters'] ?? []);
                 }
 
                 return '<li class="' . ($active ? 'active ' : '') . (!empty($tree['__children']) ? 'mm-dropdown mm-dropdown-root': '') . '">';
             },
             'childClose' => '</li>',
             'nodeDecorator' => function ($node) {
-                return '<a href="' . (!empty($node['__children']) ? '#' : $this->presenter->link($node['presenter'].':'.$node['action'])) . '" '.(!empty($node['__children']) ? ' class="dropdown-toggle" data-toggle="dropdown" data-target="#menu-item-'.$node['id'].'"' : '').'><i class="menu-icon fa '.$node['icon'] .'"></i><span class="mm-text">' . $node['name'] . '</span></a>';
+                return '<a href="' . (!empty($node['__children']) ? '#' : $this->presenter->link($node['presenter'].':'.$node['action'], $node['parameters'])) . '" '.(!empty($node['__children']) ? ' class="dropdown-toggle" data-toggle="dropdown" data-target="#menu-item-'.$node['id'].'"' : '').'><i class="menu-icon fa '.$node['icon'] .'"></i><span class="mm-text">' . $node['name'] . '</span></a>';
             }
         ];
 
