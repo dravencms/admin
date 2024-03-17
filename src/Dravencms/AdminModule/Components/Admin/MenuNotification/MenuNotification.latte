@@ -1,6 +1,6 @@
 {define dropdown}
     <li class="dropdown">
-        {var $notifications = $notificationArea->getNotifications($user)}
+        {var $notifications = $notificationArea->getNotifications($forUser)}
         {var $count = count($notifications)}
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="px-navbar-icon fa fa-{$notificationArea->getIcon()}"></i>

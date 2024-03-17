@@ -37,7 +37,7 @@ class MenuNotification extends BaseControl
         $template = $this->template;
 
         $template->notificationAreas = $this->notifications->getNotificationAreaProviders();
-        $template->user = $this->user;
+        $template->forUser = $this->user;
         $template->setFile(__DIR__ . '/MenuNotification.latte');
         $template->render();
     }
