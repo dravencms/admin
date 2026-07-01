@@ -47,7 +47,7 @@ class Admin
      * @param AclOperation|null $aclOperation
      * @return Notification
      */
-    public function addNotification(string $name, string $description, string $icon, $type = Notification::TYPE_DEFAULT, string $url = null, array $urlArguments = [], User $user = null, AclOperation $aclOperation = null)
+    public function addNotification(string $name, string $description, string $icon, $type = Notification::TYPE_DEFAULT, ?string $url = null, array $urlArguments = [], ?User $user = null, ?AclOperation $aclOperation = null)
     {
         $notification = new Notification($name, $description, $icon, $type, $url, $urlArguments, $user, $aclOperation);
         $this->entityManager->persist($notification);

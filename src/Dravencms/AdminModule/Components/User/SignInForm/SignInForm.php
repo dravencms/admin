@@ -15,6 +15,8 @@ class SignInForm extends BaseControl
     /** @var BaseFormFactory */
     private $baseFormFactory;
 
+    public $onSuccess = [];
+
     /**
      * SignInForm constructor.
      * @param BaseFormFactory $baseFormFactory
@@ -41,6 +43,10 @@ class SignInForm extends BaseControl
         $form->addCheckbox('remember');
 
         $form->addSubmit('sign');
+
+        $form->onSuccess[] = function (Form $form, $values): void {
+            $this->onSuccess($form, $values);
+        };
 
         return $form;
     }

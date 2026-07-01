@@ -79,7 +79,7 @@ class SignUpForm extends BaseControl
             ->setRequired(true)
             ->addRule(Form::EQUAL, 'Hesla nejsou shodná.', $form['password']);
 
-        $form->addReCaptcha();
+        $form->addCaptcha();
 
         $form->addSubmit('send');
 

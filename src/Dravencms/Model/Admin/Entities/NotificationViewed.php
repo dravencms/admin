@@ -7,7 +7,7 @@ namespace Dravencms\Model\Admin\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Dravencms\Database\Attributes\TimestampableEntity;
 use Dravencms\Database\Attributes\Identifier;
 use Dravencms\Model\User\Entities\User;
 use Nette\SmartObject;
@@ -15,9 +15,9 @@ use Nette\SmartObject;
 
 /**
  * Class NotificationViewed
- * @ORM\Entity
- * @ORM\Table(name="adminNotificationViewed")
  */
+#[ORM\Entity]
+#[ORM\Table(name: "adminNotificationViewed")]
 class NotificationViewed
 {
     use SmartObject;
@@ -26,16 +26,16 @@ class NotificationViewed
 
     /**
      * @var Notification
-     * @ORM\ManyToOne(targetEntity="Notification", inversedBy="notificationsViewed")
-     * @ORM\JoinColumn(name="notification_id", referencedColumnName="id",nullable=true)
      */
+    #[ORM\ManyToOne(targetEntity: "Notification", inversedBy: "notificationsViewed")]
+    #[ORM\JoinColumn(name: "notification_id", referencedColumnName: "id", nullable: true)]
     private $notification;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="Dravencms\Model\User\Entities\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id",nullable=true)
      */
+    #[ORM\ManyToOne(targetEntity: "Dravencms\Model\User\Entities\User")]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", nullable: true)]
     private $user;
 
     /**

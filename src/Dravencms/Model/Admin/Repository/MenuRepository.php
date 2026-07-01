@@ -53,12 +53,8 @@ class MenuRepository
             ->where('node.isActive = :isActive')
             ->andWhere('gu = :user')
             ->groupBy('node')
-            ->setParameters(
-                [
-                    'user' => $user,
-                    'isActive' => true
-                ]
-            )
+            ->setParameter('user', $user)
+            ->setParameter('isActive', true)
             ->getQuery();
 
         return $this->menuRepository->buildTree($query->getArrayResult(), $options);
@@ -116,10 +112,8 @@ class MenuRepository
             ->join('g.users', 'gu')
             ->where('gu = :user')
             ->andWhere('m.isHomePage = :isHomePage')
-            ->setParameters([
-                'user' => $user,
-                'isHomePage' => true
-            ]);
+            ->setParameter('user', $user)
+            ->setParameter('isHomePage', true);
 
         return $qb->getQuery()->getOneOrNullResult();
     }

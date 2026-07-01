@@ -26,12 +26,12 @@ class Breadcrumb extends BaseControl
     public function render(): void
     {
         $template = $this->template;
-
-        $thisPage = $this->menuRepository->getByPresenterAndAction(':'.$this->presenter->getName(), $this->presenter->getAction());
+        $presenter = $this->getPresenter();
+        $thisPage = $this->menuRepository->getByPresenterAndAction(':'.$presenter->getName(), $presenter->getAction());
 
         if (!$thisPage)
         {
-            $thisPage = $this->menuRepository->getOneByPresenter(':'.$this->presenter->getName());
+            $thisPage = $this->menuRepository->getOneByPresenter(':'.$presenter->getName());
         }
 
         $template->thisPage = $thisPage;

@@ -22,7 +22,6 @@ namespace Dravencms\AdminModule\Components\User\AccountForm;
 
 use Dravencms\Components\BaseForm\BaseFormFactory;
 use Dravencms\Model\User\Entities\User;
-use Dravencms\Model\User\Repository\AclOperationRepository;
 use Dravencms\Model\User\Repository\UserRepository;
 use Dravencms\Database\EntityManager;
 use Nette\Application\UI\Control;
@@ -41,7 +40,7 @@ class AccountForm extends Control
     /** @var EntityManager */
     private $entityManager;
 
-    /** @var AclOperationRepository */
+    /** @var UserRepository */
     private $userRepository;
 
     /** @var User */
@@ -59,15 +58,6 @@ class AccountForm extends Control
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
         $this->user = $user;
-
-        if ($this->user)
-        {
-            $this['form']->setDefaults([
-                'firstName' => $this->user->getFirstName(),
-                'lastName' => $this->user->getLastName(),
-                'email' => $this->user->getEmail()
-            ]);
-        }
     }
 
 
@@ -88,8 +78,17 @@ class AccountForm extends Control
             ->setHtmlType('email')
             ->addRule(Form::EMAIL, 'Prosím zadejte email.')
             ->setRequired('Prosím zadejte email.');
-        
+
         $form->addSubmit('send');
+
+        if ($this->user)
+        {
+            $form->setDefaults([
+                'firstName' => $this->user->getFirstName(),
+                'lastName' => $this->user->getLastName(),
+                'email' => $this->user->getEmail()
+            ]);
+        }
 
         $form->onValidate[] = [$this, 'editFormValidate'];
         $form->onSuccess[] = [$this, 'editFormSucceeded'];

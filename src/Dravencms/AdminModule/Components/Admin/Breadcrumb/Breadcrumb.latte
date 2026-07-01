@@ -6,7 +6,7 @@
         <li><a href="{plink :Admin:Homepage:Homepage:}">{_"admin.component.breadcrumb.Home"}</a></li>
     {/if}
 
-    <li n:foreach="$breadcrumbs AS $breadcrumb" {if $thisPage == $breadcrumb} class="active"{/if}>
+    <li n:foreach="$breadcrumbs as $breadcrumb" {if $thisPage == $breadcrumb} class="active"{/if}>
         {if $thisPage == $breadcrumb}
             {$breadcrumb->getName()}
         {else}
@@ -17,5 +17,3 @@
     </li>
 
 </ul>
-
-

@@ -17,6 +17,7 @@ use Dravencms\Model\Admin\Entities\Menu;
 use Dravencms\Model\Admin\Repository\MenuRepository;
 use Dravencms\Security\Authenticator;
 use Dravencms\Model\User\Repository\PasswordResetRepository;
+use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
 
@@ -25,7 +26,7 @@ use Nette\Security\AuthenticationException;
  */
 class SignPresenter extends BasePresenter
 {
-    /** @persistent */
+    #[Persistent]
     public $backlink = '';
 
     /** @var PasswordResetRepository @inject */
@@ -53,6 +54,14 @@ class SignPresenter extends BasePresenter
 
     private $foundPasswordReset = null;
 
+    public function beforeRender(): void
+    {
+        parent::beforeRender();
+
+        $this->template->name = 'DravenCMS';
+        $this->template->bodyClass = $this->getAction() === 'up' ? 'page-signup' : 'page-signin';
+    }
+
 
     /**
      * @return \Dravencms\AdminModule\Components\User\SignInForm\SignInForm
@@ -60,17 +69,17 @@ class SignPresenter extends BasePresenter
     protected function createComponentSignInForm(): SignInForm
     {
         $signInControl = $this->signInFormFactory->create();
-        $signInControl['form']->onSuccess[] = [$this, 'signInFormSucceeded'];
+        $signInControl->onSuccess[] = [$this, 'signInFormSucceeded'];
         return $signInControl;
     }
 
     /**
      * @param Form $form
      */
-    public function signInFormSucceeded(Form $form, $values): void
+    public function signInFormSucceeded(Form $form): void
     {
         $user = $this->getUser();
-
+        $values = $form->getValues();
         if ($values->remember) {
             $user->setExpiration('14 days', false);
         } else {

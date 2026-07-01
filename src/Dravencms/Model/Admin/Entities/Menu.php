@@ -9,17 +9,17 @@ use Doctrine\Common\Collections\Collection;
 use Dravencms\Model\User\Entities\AclOperation;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Dravencms\Database\Attributes\TimestampableEntity;
 use Dravencms\Database\Attributes\Identifier;
 use Nette;
 
 /**
  * Class Menu
  * @package Dravencms\Model\Structure\Entities
- * @Gedmo\Tree(type="nested")
- * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
- * @ORM\Table(name="adminMenu")
  */
+#[Gedmo\Tree(type: "nested")]
+#[ORM\Entity(repositoryClass: "Gedmo\Tree\Entity\Repository\NestedTreeRepository")]
+#[ORM\Table(name: "adminMenu")]
 class Menu
 {
     use Nette\SmartObject;
@@ -28,83 +28,75 @@ class Menu
 
     /**
      * @var string
-     * @Gedmo\Translatable
-     * @ORM\Column(type="string",length=255,nullable=false)
      */
+    #[Gedmo\Translatable]
+    #[ORM\Column(type: "string", length: 255, nullable: false)]
     private $name;
 
     /**
      * @var boolean
-     * @ORM\Column(type="boolean", nullable=false)
      */
+    #[ORM\Column(type: "boolean", nullable: false)]
     private $isActive;
 
     /**
      * @var string
-     * @ORM\Column(type="string",length=255, nullable=true)
      */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $presenter;
 
     /**
      * @var string
-     * @ORM\Column(type="string",length=255, nullable=true)
      */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $action;
 
     /**
      * @var boolean
-     * @ORM\Column(type="boolean", nullable=false)
      */
+    #[ORM\Column(type: "boolean", nullable: false)]
     private $isHomePage;
 
     /**
      * @var string
-     * @ORM\Column(type="string",length=255, nullable=true)
      */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $icon;
 
     /**
      * @var AclOperation
-     * @ORM\ManyToOne(targetEntity="Dravencms\Model\User\Entities\AclOperation", inversedBy="adminMenus")
-     * @ORM\JoinColumn(name="acloperation_id", referencedColumnName="id")
      */
+    #[ORM\ManyToOne(targetEntity: "Dravencms\Model\User\Entities\AclOperation", inversedBy: "adminMenus")]
+    #[ORM\JoinColumn(name: "acloperation_id", referencedColumnName: "id")]
     private $aclOperation;
 
     /**
      * @var array
-     * @ORM\Column(type="json_array", nullable=true)
      */
+    #[ORM\Column(type: "json", nullable: true)]
     private $parameters;
 
-    /**
-     * @Gedmo\TreeLeft
-     * @ORM\Column(name="lft", type="integer")
-     */
+    #[Gedmo\TreeLeft]
+    #[ORM\Column(name: "lft", type: "integer")]
     private $lft;
 
-    /**
-     * @Gedmo\TreeRight
-     * @ORM\Column(name="rgt", type="integer")
-     */
+    #[Gedmo\TreeRight]
+    #[ORM\Column(name: "rgt", type: "integer")]
     private $rgt;
 
-    /**
-     * @Gedmo\TreeLevel
-     * @ORM\Column(name="lvl", type="integer")
-     */
+    #[Gedmo\TreeLevel]
+    #[ORM\Column(name: "lvl", type: "integer")]
     private $lvl;
 
-    /**
-     * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
-     */
+    #[Gedmo\TreeParent]
+    #[ORM\ManyToOne(targetEntity: "Menu", inversedBy: "children")]
+    #[ORM\JoinColumn(name: "parent_id", referencedColumnName: "id", onDelete: "SET NULL")]
     private $parent;
 
     /**
      * @var Menu[]
-     * @ORM\OneToMany(targetEntity="Menu", mappedBy="parent")
      */
+    #[ORM\OneToMany(targetEntity: "Menu", mappedBy: "parent")]
     private $children;
 
     /**
@@ -119,13 +111,13 @@ class Menu
      */
     public function __construct(
         string $name,
-        string $presenter = null,
-        string $icon = null,
-        AclOperation $aclOperation = null,
-        string $action = null,
+        ?string $presenter = null,
+        ?string $icon = null,
+        ?AclOperation $aclOperation = null,
+        ?string $action = null,
         bool $isActive = true,
         bool $isHomePage = false,
-        array $parameters = null
+        ?array $parameters = null
     ) {
         $this->name = $name;
         $this->icon = $icon;
@@ -141,7 +133,7 @@ class Menu
      * @param Menu|null $parent
      * @return $this
      */
-    public function setParent(Menu $parent = null): Menu
+    public function setParent(?Menu $parent = null): Menu
     {
         $this->parent = $parent;
 
@@ -191,7 +183,7 @@ class Menu
     /**
      * @param array $parameters
      */
-    public function setParameters(array $parameters = null): void
+    public function setParameters(?array $parameters = null): void
     {
         $this->parameters = $parameters;
     }

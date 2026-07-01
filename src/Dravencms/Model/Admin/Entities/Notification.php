@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Dravencms\Admin\INotification;
 use Dravencms\Model\User\Entities\AclOperation;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Dravencms\Database\Attributes\TimestampableEntity;
 use Dravencms\Database\Attributes\Identifier;
 use Nette;
 use Dravencms\Model\User\Entities\User;
@@ -18,9 +18,9 @@ use Dravencms\Model\User\Entities\User;
 
 /**
  * Class Notification
- * @ORM\Entity
- * @ORM\Table(name="adminNotification")
  */
+#[ORM\Entity]
+#[ORM\Table(name: "adminNotification")]
 class Notification implements INotification
 {
     public static $typeList = [
@@ -37,58 +37,58 @@ class Notification implements INotification
 
     /**
      * @var string
-     * @ORM\Column(type="string",length=255,nullable=false)
      */
+    #[ORM\Column(type: "string", length: 255, nullable: false)]
     private $name;
 
     /**
      * @var string
-     * @ORM\Column(type="text", nullable=false)
      */
+    #[ORM\Column(type: "text", nullable: false)]
     private $description;
 
     /**
      * @var string
-     * @ORM\Column(type="string",length=255, nullable=false)
      */
+    #[ORM\Column(type: "string", length: 255, nullable: false)]
     private $type;
 
     /**
      * @var string
-     * @ORM\Column(type="string",length=255, nullable=false)
      */
+    #[ORM\Column(type: "string", length: 255, nullable: false)]
     private $icon;
 
     /**
      * @var string
-     * @ORM\Column(type="string",length=255, nullable=true)
      */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $url;
 
     /**
      * @var array
-     * @ORM\Column(type="json_array",nullable=true)
      */
+    #[ORM\Column(type: "json", nullable: true)]
     private $urlArguments;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="Dravencms\Model\User\Entities\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id",nullable=true)
      */
+    #[ORM\ManyToOne(targetEntity: "Dravencms\Model\User\Entities\User")]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", nullable: true)]
     private $user;
 
     /**
      * @var AclOperation
-     * @ORM\ManyToOne(targetEntity="Dravencms\Model\User\Entities\AclOperation")
-     * @ORM\JoinColumn(name="acl_operation_id", referencedColumnName="id",nullable=true)
      */
+    #[ORM\ManyToOne(targetEntity: "Dravencms\Model\User\Entities\AclOperation")]
+    #[ORM\JoinColumn(name: "acl_operation_id", referencedColumnName: "id", nullable: true)]
     private $aclOperation;
 
     /**
      * @var NotificationViewed[]
-     * @ORM\OneToMany(targetEntity="NotificationViewed", mappedBy="notification")
      */
+    #[ORM\OneToMany(targetEntity: "NotificationViewed", mappedBy: "notification")]
     private $notificationsViewed;
 
     /**
@@ -102,7 +102,7 @@ class Notification implements INotification
      * @param User|null $user
      * @param AclOperation|null $aclOperation
      */
-    public function __construct(string $name, string $description, string $icon, $type = INotification::TYPE_DEFAULT, string $url = null, array $urlArguments = [], User $user = null, AclOperation $aclOperation = null)
+    public function __construct(string $name, string $description, string $icon, $type = INotification::TYPE_DEFAULT, ?string $url = null, array $urlArguments = [], ?User $user = null, ?AclOperation $aclOperation = null)
     {
         $this->name = $name;
         $this->description = $description;

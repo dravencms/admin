@@ -61,11 +61,7 @@ class NotificationRepository
             ->orWhere('gu.id IS NULL AND n.user IS NULL AND nv.id IS NULL')
 
             ->groupBy('n')
-            ->setParameters(
-                [
-                    'user' => $user
-                ]
-            )
+            ->setParameter('user', $user)
             ->getQuery();
 
         return $query->getResult();

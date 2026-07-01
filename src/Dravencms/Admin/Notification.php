@@ -42,7 +42,7 @@ class Notification implements INotification
      * @param array $urlArguments
      * @param \DateTimeInterface|null $createdAt
      */
-    public function __construct(string $name, string $description, string $icon, $type = INotification::TYPE_DEFAULT, string $url = null, array $urlArguments = [], \DateTimeInterface $createdAt = null)
+    public function __construct(string $name, string $description, string $icon, $type = INotification::TYPE_DEFAULT, ?string $url = null, array $urlArguments = [], ?\DateTimeInterface $createdAt = null)
     {
         $this->name = $name;
         $this->description = $description;

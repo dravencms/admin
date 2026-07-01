@@ -17,11 +17,11 @@
     </li>
 {/define}
 
-{foreach $notificationAreas AS $notificationArea}
+{foreach $notificationAreas as $notificationArea}
     {if $notificationArea->getAclResource() && $notificationArea->getAclOperation()}
-        {isAllowed $notificationArea->getAclResource(), $notificationArea->getAclOperation()}
+        {if isAllowed($notificationArea->getAclResource(), $notificationArea->getAclOperation())}
             {include dropdown}
-        {/isAllowed}
+        {/if}
     {else}
         {include dropdown}
     {/if}

@@ -7,10 +7,28 @@ services:
         setup:
             - addRouteFactory(@routeFactory.Admin)
 
+    admin.homepagePresenter:
+        class: Dravencms\AdminModule\HomepageModule\HomepagePresenter
 
-nettrine.orm.annotations:
-    mapping:
-        Dravencms\Model\Admin: %appDir%/../vendor/dravencms/admin/src/Dravencms/Model/Admin
+    admin.notificationPresenter:
+        class: Dravencms\AdminModule\NotificationModule\NotificationPresenter
+
+    admin.accountPresenter:
+        class: Dravencms\AdminModule\UserModule\AccountPresenter
+
+    admin.signPresenter:
+        class: Dravencms\AdminModule\UserModule\SignPresenter
+
+
+nettrine.orm:
+    managers:
+        default:
+            mapping:
+                admin:
+                    type: attributes
+                    directories:
+                        - %appDir%/../vendor/dravencms/admin/src/Dravencms/Model/Admin
+                    namespace: Dravencms\Model\Admin
 
 webloader:
     css:
