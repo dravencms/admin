@@ -25,7 +25,7 @@
     "formstone": ">=0.8.27",
     "flag-icon-css": ">=1.1.0",
     "pace-js": ">=v0.7.5",
-    "font-awesome": ">=v4.5.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "morris.js": ">=0.5.0",
     "jquery-slimscroll": "",
     "codemirror": "^5.19.0"

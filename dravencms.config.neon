@@ -35,7 +35,8 @@ webloader:
         admin:
             files:
                 - admin/node_modules/bootstrap/dist/css/bootstrap.min.css
-                - admin/node_modules/font-awesome/css/font-awesome.min.css
+                - admin/node_modules/@fortawesome/fontawesome-free/css/all.min.css
+                - admin/node_modules/@fortawesome/fontawesome-free/css/v4-shims.min.css
                 - admin/css/pixel-admin.min.css
                 - admin/css/pages.min.css
                 - admin/css/typeahead.css
