@@ -66,7 +66,7 @@ class Menu
     /**
      * @var AclOperation
      */
-    #[ORM\ManyToOne(targetEntity: "Dravencms\Model\User\Entities\AclOperation", inversedBy: "adminMenus")]
+    #[ORM\ManyToOne(targetEntity: "Dravencms\Model\User\Entities\AclOperation")]
     #[ORM\JoinColumn(name: "acloperation_id", referencedColumnName: "id")]
     private $aclOperation;
 
