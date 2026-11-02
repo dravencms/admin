@@ -1,6 +1,6 @@
 {var $name = 'DravenCMS'}
 <!doctype html>
-<html lang="{$lang}">
+<html lang="{$presenter->translator->getLocale()}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +19,7 @@
         <div n:foreach="$flashes as $flash" class="alert {$flash->type}" role="alert">{$flash->message|noescape}</div>
         {include content}
     </main>
+    {include '../../translations.latte'}
     {control js}
 </body>
 </html>

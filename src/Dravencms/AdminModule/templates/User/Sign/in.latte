@@ -3,11 +3,11 @@
         {control signInForm}
         <section id="password-reset-form" class="border-top mt-4 pt-4" hidden>
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2 class="h3 mb-0">Obnova hesla</h2>
-                <button type="button" class="btn-close" data-password-reset-close aria-label="Zavřít"></button>
+                <h2 class="h3 mb-0">{_'admin.auth.resetPassword'}</h2>
+                <button type="button" class="btn-close" data-password-reset-close aria-label="{_'admin.common.close'}"></button>
             </div>
             {control resetPasswordForm}
         </section>
     </div>
-    <p class="text-center mt-3" n:if="$allowRegister">Nemáte účet? <a n:href="Sign:up">Registrovat</a></p>
+    <p class="text-center mt-3" n:if="$allowRegister">{_'admin.auth.noAccount'} <a n:href="Sign:up">{_'admin.auth.register'}</a></p>
 {/block}

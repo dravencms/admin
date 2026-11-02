@@ -14,7 +14,7 @@
             <div class="card-body">
                 <b>PHP:</b> {=\PHP_VERSION}<br/>
                 {ifset $_SERVER['SERVER_SOFTWARE']}
-                    <b>Server:</b> {$_SERVER['SERVER_SOFTWARE']}<br/>
+                    <b>{_'admin.presenter.homepage.server'}</b> {$_SERVER['SERVER_SOFTWARE']}<br/>
                 {/ifset}
             </div>
         </div>

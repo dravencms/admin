@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{$lang}" data-bs-navbar-position="combined">
+<html lang="{$presenter->translator->getLocale()}" data-bs-navbar-position="combined">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,12 +10,12 @@
 </head>
 <body>
 <div class="page">
-    <aside class="navbar navbar-vertical navbar-expand-lg admin-sidebar" aria-label="Administration">
+    <aside class="navbar navbar-vertical navbar-expand-lg admin-sidebar" aria-label="{_'admin.layout.administration'}">
         <div class="container-fluid">
             <a n:href=":Admin:Homepage:Homepage:" class="navbar-brand">
                 <img src="{$basePath}/assets/admin/img/favicon.ico" alt=""> DravenCMS
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#admin-navigation" aria-controls="admin-navigation" aria-expanded="false" aria-label="Menu">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#admin-navigation" aria-controls="admin-navigation" aria-expanded="false" aria-label="{_'admin.layout.menu'}">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="admin-navigation">
@@ -56,6 +56,7 @@
         </main>
     </div>
 </div>
+{include 'translations.latte'}
 {control js}
 {ifset js}{include js}{/ifset}
 {include 'global.latte'}

@@ -63,25 +63,25 @@ class SignUpForm extends BaseControl
         $form->addHidden('id');
 
         $form->addText('firstName')
-            ->setRequired('Prosím zadejte jméno.');
+            ->setRequired('admin.validation.firstNameRequired');
 
         $form->addText('lastName')
-            ->setRequired('Prosím zadejte příjmení.');
+            ->setRequired('admin.validation.lastNameRequired');
 
         $form->addText('email')
             ->setHtmlType('email')
-            ->addRule(Form::EMAIL, 'Prosím zadejte email.')
-            ->setRequired('Prosím zadejte email.');
+            ->addRule(Form::EMAIL, 'admin.validation.emailInvalid')
+            ->setRequired('admin.validation.emailRequired');
 
         $form->addPassword('password');
 
         $form->addPassword('passwordAgain')
-            ->setRequired(true)
-            ->addRule(Form::EQUAL, 'Hesla nejsou shodná.', $form['password']);
+            ->setRequired('admin.validation.passwordAgainRequired')
+            ->addRule(Form::EQUAL, 'admin.validation.passwordsMismatch', $form['password']);
 
         $form->addCaptcha();
 
-        $form->addSubmit('send');
+        $form->addSubmit('send', 'admin.auth.register');
 
         $form->onValidate[] = [$this, 'signUpFormValidate'];
         $form->onSuccess[] = [$this, 'signUpFormSucceeded'];
@@ -97,7 +97,7 @@ class SignUpForm extends BaseControl
         $values = $form->getValues();
 
         if ($this->userRepository->getOneByEmail($values->email, $this->namespace)) {
-            $form->addError('Tento email již je zabrán, zvolte prosím jiný.');
+            $form->addError('admin.validation.emailTaken');
         }
     }
 

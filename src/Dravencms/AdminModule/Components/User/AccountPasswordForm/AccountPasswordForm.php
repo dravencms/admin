@@ -75,18 +75,18 @@ class AccountPasswordForm extends Control
         $form = $this->baseFormFactory->create();
 
         $form->addPassword('oldPassword')
-            ->setRequired('Zadejte prosím staré heslo.');
+            ->setRequired('admin.validation.oldPasswordRequired');
 
         $form->addPassword('newPassword')
-            ->setRequired('Zadejte prosím nové heslo.')
-            ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespon %d znaků.', 8);
+            ->setRequired('admin.validation.newPasswordRequired')
+            ->addRule(Form::MIN_LENGTH, 'admin.validation.passwordMinLength', 8);
 
         $form->addPassword('newPasswordAgain')
-            ->setRequired('Zadejte prosím nové heslo znovu.')
+            ->setRequired('admin.validation.passwordAgainRequired')
             ->addConditionOn($form["newPassword"], Form::FILLED)
-            ->addRule(Form::EQUAL, "Hesla se neshodují.", $form["newPassword"]);
+            ->addRule(Form::EQUAL, "admin.validation.passwordsMismatch", $form["newPassword"]);
 
-        $form->addSubmit('send');
+        $form->addSubmit('send', 'admin.common.save');
 
         $form->onValidate[] = [$this, 'editFormValidate'];
         $form->onSuccess[] = [$this, 'editFormSucceeded'];
@@ -102,7 +102,7 @@ class AccountPasswordForm extends Control
         
         if (!$this->passwordManager->verify($values->oldPassword, $this->user->getPassword()))
         {
-            $form->addError('Nesprávné staré heslo.');
+            $form->addError('admin.validation.oldPasswordInvalid');
         }
     }
 

@@ -69,17 +69,17 @@ class AccountForm extends Control
         $form = $this->baseFormFactory->create();
 
         $form->addText('firstName')
-            ->setRequired('Prosím zadejte jméno.');
+            ->setRequired('admin.validation.firstNameRequired');
 
         $form->addText('lastName')
-            ->setRequired('Prosím zadejte příjmení.');
+            ->setRequired('admin.validation.lastNameRequired');
 
         $form->addText('email')
             ->setHtmlType('email')
-            ->addRule(Form::EMAIL, 'Prosím zadejte email.')
-            ->setRequired('Prosím zadejte email.');
+            ->addRule(Form::EMAIL, 'admin.validation.emailInvalid')
+            ->setRequired('admin.validation.emailRequired');
 
-        $form->addSubmit('send');
+        $form->addSubmit('send', 'admin.common.save');
 
         if ($this->user)
         {
@@ -102,7 +102,7 @@ class AccountForm extends Control
     {
         $values = $form->getValues();
         if (!$this->userRepository->isEmailFree($values->email, $this->user->getNamespace(), $this->user)) {
-            $form->addError('Tento email je již zabrán.');
+            $form->addError('admin.validation.emailTaken');
         }
     }
 

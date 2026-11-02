@@ -1,20 +1,20 @@
 <form n:name="form">
-    <h1 class="h2 text-center mb-4">Přihlášení</h1>
+    <h1 class="h2 text-center mb-4">{_'admin.auth.signInTitle'}</h1>
     <ul class="alert alert-danger" n:if="$form->hasErrors()">
         <li n:foreach="$form->errors as $error">{$error}</li>
     </ul>
     <div class="mb-3">
-        <label n:name="email" class="form-label">Email</label>
+        <label n:name="email" class="form-label">{_'admin.form.email'}</label>
         <input n:name="email" autofocus autocomplete="username" class="form-control">
     </div>
     <div class="mb-3">
-        <label n:name="password" class="form-label">Heslo</label>
+        <label n:name="password" class="form-label">{_'admin.form.password'}</label>
         <input n:name="password" autocomplete="current-password" class="form-control">
     </div>
     <label class="form-check mb-4">
         <input n:name="remember" class="form-check-input">
-        <span class="form-check-label">Neodhlašovat</span>
+        <span class="form-check-label">{_'admin.auth.remember'}</span>
     </label>
-    <input n:name="sign" class="btn btn-primary w-100" value="Přihlásit">
-    <div class="text-center mt-3"><a href="#password-reset-form" id="forgot-password-link">Zapomenuté heslo?</a></div>
+    <input n:name="sign" class="btn btn-primary w-100" value="{_'admin.auth.signIn'}">
+    <div class="text-center mt-3"><a href="#password-reset-form" id="forgot-password-link">{_'admin.auth.forgotPassword'}</a></div>
 </form>

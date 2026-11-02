@@ -2,6 +2,7 @@ import { initializeWidgets } from './widgets.js';
 import Chart from 'chart.js/auto';
 import './datagrid.js';
 import { initializeThemeSwitcher } from './theme.js';
+import 'summernote/dist/lang/summernote-cs-CZ.js';
 
 function initializeAdmin() {
     initializeThemeSwitcher();
@@ -37,6 +38,7 @@ function initializeAdmin() {
     });
     document.querySelectorAll('.wysiwyg').forEach(element => {
         $(element).summernote({
+            lang: document.documentElement.lang?.startsWith('cs') ? 'cs-CZ' : 'en-US',
             height: 240,
             dialogsInBody: true,
             toolbar: [
@@ -66,7 +68,7 @@ function initializeAdmin() {
         element.append(canvas);
         new Chart(canvas, {
             type: 'line',
-            data: { labels: data.map(row => row.period), datasets: [{ label: 'Amount', data: data.map(row => row.amount), borderColor: '#206bc4', backgroundColor: '#206bc420', fill: true }] },
+            data: { labels: data.map(row => row.period), datasets: [{ label: window.Tools.translate('amount'), data: data.map(row => row.amount), borderColor: '#206bc4', backgroundColor: '#206bc420', fill: true }] },
             options: { responsive: true }
         });
     });

@@ -2,9 +2,9 @@
 
 {block content}
     <ul class="nav nav-tabs">
-        <li class="nav-item"><a class="nav-link active" href="#home" data-bs-toggle="tab">Základní informace</a></li>
-        <li class="nav-item"><a class="nav-link" href="#password-change" data-bs-toggle="tab">Změna hesla</a></li>
-        <li class="nav-item"><a class="nav-link" href="#avatar-change" data-bs-toggle="tab">Avatar</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#home" data-bs-toggle="tab">{_'admin.account.basicInformation'}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#password-change" data-bs-toggle="tab">{_'admin.account.changePassword'}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#avatar-change" data-bs-toggle="tab">{_'admin.account.avatar'}</a></li>
     </ul>
 
     <div class="tab-content">
@@ -19,7 +19,7 @@
                 <!--img n:gravatar="$userInfo->getEmail(), 100" alt="Gravatar"/-->
                 <img src="{$gravatar}" alt="Gravatar"/>
             </div>
-            <p>Váš avatar si můžete změnit na <a href="https://gravatar.com/" target="_blank">https://gravatar.com/</a></p>
+            <p>{_'admin.account.changeAvatarAt'} <a href="https://gravatar.com/" target="_blank">https://gravatar.com/</a></p>
         </div>
     </div>
 {/block}

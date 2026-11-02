@@ -69,10 +69,10 @@ class ResetPasswordForm extends BaseControl
         $form = $this->baseFormFactory->create();
 
         $form->addText('email')
-            ->setRequired('Please enter your email.')
-            ->addRule(Form::EMAIL, 'Please enter a valid email');
+            ->setRequired('admin.validation.emailRequired')
+            ->addRule(Form::EMAIL, 'admin.validation.emailInvalid');
 
-        $form->addSubmit('send');
+        $form->addSubmit('send', 'admin.auth.sendResetLink');
 
         $form->onSuccess[] = [$this, 'onSuccessForm'];
         $form->onValidate[] = [$this, 'onValidateForm'];
@@ -87,7 +87,7 @@ class ResetPasswordForm extends BaseControl
     {
         $values = $form->getValues();
         if (!$this->userRepository->getOneByEmail($values->email, $this->namespace)) {
-            $form->addError('Email was not found');
+            $form->addError('admin.validation.emailNotFound');
         }
     }
 

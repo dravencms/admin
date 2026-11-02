@@ -28,7 +28,7 @@
         var body = '<div class="note-file-manager-holder"></div>';
 
         this.$dialog = ui.dialog({
-          title: "Select file or image you want to insert",
+          title: Tools.translate('selectFile'),
           body: body
         }).render().appendTo($container);
         this.$dialog.find('.modal-dialog').addClass('modal-lg');
@@ -36,6 +36,7 @@
 
         var button = ui.button({
           className: 'note-btn-bold',
+          tooltip: Tools.translate('selectFile'),
           contents: '<i class="fa fa-archive">',
           click: function (e) {
 

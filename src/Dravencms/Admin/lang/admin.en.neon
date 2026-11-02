@@ -13,10 +13,100 @@ presenter:
     homepage:
         SystemInfo: System information
         Welcome: Welcome
-        WelcomeToDravenCMSaContentManagementSystem: "Welocome in DravenCMS a content management system"
+        WelcomeToDravenCMSaContentManagementSystem: "Welcome to DravenCMS, a content management system"
+        server: 'Server:'
 
 layout:
     HideMenu: Hide menu
     MyProfile: My profile
     LogOut: Log Out
     Welcome: Welcome
+    administration: Administration
+    menu: Menu
+
+common:
+    save: Save
+    close: Close
+    previous: Previous
+    next: Next
+    playPause: Play / pause
+
+form:
+    firstName: First name
+    lastName: Last name
+    email: Email
+    password: Password
+    passwordAgain: Repeat password
+    oldPassword: Current password
+    newPassword: New password
+    newPasswordAgain: Repeat new password
+    antispam: Spam protection
+
+auth:
+    signInTitle: Sign in
+    signIn: Sign in
+    remember: Keep me signed in
+    forgotPassword: Forgot your password?
+    createAccount: Create an account
+    register: Register
+    registration: Registration
+    resetPassword: Reset password
+    resetPasswordTitle: Reset your DravenCMS password
+    sendResetLink: Send password reset link
+    noAccount: Don't have an account?
+    hasAccount: Already have an account?
+
+account:
+    title: 'User "%name%"'
+    basicInformation: Basic information
+    changePassword: Change password
+    avatar: Avatar
+    changeAvatarAt: You can change your avatar at
+
+validation:
+    firstNameRequired: Please enter your first name.
+    lastNameRequired: Please enter your last name.
+    emailRequired: Please enter your email.
+    emailInvalid: Please enter a valid email.
+    emailTaken: This email is already in use. Please choose another.
+    emailNotFound: Email not found.
+    passwordRequired: Please enter your password.
+    oldPasswordRequired: Please enter your current password.
+    oldPasswordInvalid: Your current password is incorrect.
+    newPasswordRequired: Please enter your new password.
+    passwordAgainRequired: Please enter your password again.
+    passwordsMismatch: Passwords do not match.
+    passwordMinLength: Your password must contain at least %d characters.
+    authenticationFailed: Sign-in failed.
+    userNotFound: User not found.
+    userInactive: This user account is inactive.
+    invalidCredentials: Incorrect email or password.
+
+flash:
+    signedOut: You have been signed out.
+    resetEmailSent: An email with a password reset link has been sent.
+    passwordChanged: Your password has been changed successfully.
+    registered: Registration completed successfully.
+    saved: Changes have been saved.
+    passwordChangedSignIn: Your password has been changed. Please sign in with your new password.
+
+client:
+    amount: Amount
+    noResults: No results found.
+    remove: Remove
+    selectFile: Select a file or image to insert
+    row: Row
+    column: Column
+    structureSaved: The layout has been saved successfully.
+    requestFailed: The request failed. Please try again.
+    dropFiles: Drop files here to upload
+    fallbackMessage: Your browser does not support drag-and-drop uploads.
+    fallbackText: Please use the form below to upload your files.
+    fileTooBig: 'The file is too big ({{filesize}} MiB). Maximum file size is {{maxFilesize}} MiB.'
+    invalidFileType: You cannot upload files of this type.
+    uploadResponseError: 'The server responded with status {{statusCode}}.'
+    cancelUpload: Cancel upload
+    uploadCanceled: Upload canceled.
+    cancelUploadConfirmation: Are you sure you want to cancel this upload?
+    removeFile: Remove file
+    maxFilesExceeded: You cannot upload any more files.

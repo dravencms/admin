@@ -47,7 +47,7 @@ class AccountPresenter extends SecuredPresenter
     public function renderDefault(): void
     {
         $user = $this->getUserEntity();
-        $this->template->h1 = 'Uživatel „' . $user->getFirstName() . ' ' . $user->getLastName() . '“';
+        $this->template->h1 = $this->translator->translate('admin.account.title', ['name' => $user->getFirstName() . ' ' . $user->getLastName()]);
         $this->template->userInfo = $user;
     }
 
@@ -59,7 +59,7 @@ class AccountPresenter extends SecuredPresenter
         $control = $this->accountFormFactory->create($this->getUserEntity());
         $control->onSuccess[] = function()
         {
-            $this->flashMessage('Změny byly uloženy.', Flash::SUCCESS);
+            $this->flashMessage($this->translator->translate('admin.flash.saved'), Flash::SUCCESS);
             $this->redirect('Account:');
         };
         return $control;
@@ -73,7 +73,7 @@ class AccountPresenter extends SecuredPresenter
         $control = $this->accountPasswordFormFactory->create($this->getUserEntity());
         $control->onSuccess[] = function()
         {
-            $this->flashMessage('Heslo bylo změněno a byli jste odhlášeni, prosím přihlašte se novým heslem.', Flash::SUCCESS);
+            $this->flashMessage($this->translator->translate('admin.flash.passwordChangedSignIn'), Flash::SUCCESS);
             $this->getUser()->logout();
             $this->redirect('Account:#password-change');
         };

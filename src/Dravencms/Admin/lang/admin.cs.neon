@@ -6,17 +6,107 @@ theme:
 
 component:
     breadcrumb:
-        YouAreHere: Jse zde
+        YouAreHere: Jste zde
         Home: Domů
 
 presenter:
     homepage:
         SystemInfo: Systémové informace
+        server: 'Server:'
         Welcome: Vítejte
         WelcomeToDravenCMSaContentManagementSystem: "Vítejte v DravenCMS, systému pro správu obsahu"
 
 layout:
     HideMenu: Skrýt menu
-    MyProfile: Múj profil
+    MyProfile: Můj profil
     LogOut: Odhlásit
     Welcome: Vítejte
+    administration: Administrace
+    menu: Nabídka
+
+common:
+    save: Uložit
+    close: Zavřít
+    previous: Předchozí
+    next: Další
+    playPause: Přehrát / pozastavit
+
+form:
+    firstName: Jméno
+    lastName: Příjmení
+    email: E-mail
+    password: Heslo
+    passwordAgain: Heslo znovu
+    oldPassword: Současné heslo
+    newPassword: Nové heslo
+    newPasswordAgain: Nové heslo znovu
+    antispam: Ochrana proti spamu
+
+auth:
+    signInTitle: Přihlášení
+    signIn: Přihlásit se
+    remember: Neodhlašovat
+    forgotPassword: Zapomenuté heslo?
+    createAccount: Vytvořit nový účet
+    register: Registrovat se
+    registration: Registrace
+    resetPassword: Obnovit heslo
+    resetPasswordTitle: Obnova hesla DravenCMS
+    sendResetLink: Odeslat odkaz pro obnovu hesla
+    noAccount: Nemáte účet?
+    hasAccount: Máte již účet?
+
+account:
+    title: 'Uživatel "%name%"'
+    basicInformation: Základní informace
+    changePassword: Změna hesla
+    avatar: Avatar
+    changeAvatarAt: Svůj avatar můžete změnit na
+
+validation:
+    firstNameRequired: Zadejte prosím jméno.
+    lastNameRequired: Zadejte prosím příjmení.
+    emailRequired: Zadejte prosím e-mail.
+    emailInvalid: Zadejte prosím platný e-mail.
+    emailTaken: Tento e-mail je již používán. Zvolte prosím jiný.
+    emailNotFound: E-mail nebyl nalezen.
+    passwordRequired: Zadejte prosím heslo.
+    oldPasswordRequired: Zadejte prosím současné heslo.
+    oldPasswordInvalid: Současné heslo není správné.
+    newPasswordRequired: Zadejte prosím nové heslo.
+    passwordAgainRequired: Zadejte prosím heslo znovu.
+    passwordsMismatch: Hesla se neshodují.
+    passwordMinLength: Heslo musí mít alespoň %d znaků.
+    authenticationFailed: Přihlášení se nezdařilo.
+    userNotFound: Uživatel nebyl nalezen.
+    userInactive: Uživatelský účet není aktivní.
+    invalidCredentials: Nesprávný e-mail nebo heslo.
+
+flash:
+    signedOut: Byli jste odhlášeni.
+    resetEmailSent: E-mail s odkazem pro obnovu hesla byl odeslán.
+    passwordChanged: Heslo bylo úspěšně změněno.
+    registered: Registrace proběhla úspěšně.
+    saved: Změny byly uloženy.
+    passwordChangedSignIn: Heslo bylo změněno. Přihlaste se prosím novým heslem.
+
+client:
+    amount: Počet
+    noResults: Nebyly nalezeny žádné výsledky.
+    remove: Odebrat
+    selectFile: Vyberte soubor nebo obrázek k vložení
+    row: Řádek
+    column: Sloupec
+    structureSaved: Rozložení bylo úspěšně uloženo.
+    requestFailed: Požadavek se nezdařil. Zkuste to prosím znovu.
+    dropFiles: Sem přetáhněte soubory k nahrání
+    fallbackMessage: Váš prohlížeč nepodporuje nahrávání přetažením souborů.
+    fallbackText: Použijte prosím níže uvedený formulář.
+    fileTooBig: 'Soubor je příliš velký ({{filesize}} MiB). Maximální velikost je {{maxFilesize}} MiB.'
+    invalidFileType: Tento typ souboru nelze nahrát.
+    uploadResponseError: 'Server odpověděl kódem {{statusCode}}.'
+    cancelUpload: Zrušit nahrávání
+    uploadCanceled: Nahrávání bylo zrušeno.
+    cancelUploadConfirmation: Opravdu chcete zrušit nahrávání?
+    removeFile: Odebrat soubor
+    maxFilesExceeded: Další soubory již nelze nahrát.

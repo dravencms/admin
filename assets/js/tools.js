@@ -1,4 +1,9 @@
 var Tools = {
+  translate: function(key)
+  {
+    return window.DravenAdminMessages[key];
+  },
+
   setCookie: function(cname, cvalue, exdays)
   {
     var d = new Date();

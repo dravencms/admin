@@ -34,15 +34,15 @@ class SignInForm extends BaseControl
         $form = $this->baseFormFactory->create();
 
         $form->addText('email')
-            ->setRequired('Please enter your email.')
-            ->addRule(Form::EMAIL, 'Please enter a valid email');
+            ->setRequired('admin.validation.emailRequired')
+            ->addRule(Form::EMAIL, 'admin.validation.emailInvalid');
 
         $form->addPassword('password')
-            ->setRequired('Please enter password.');
+            ->setRequired('admin.validation.passwordRequired');
 
         $form->addCheckbox('remember');
 
-        $form->addSubmit('sign');
+        $form->addSubmit('sign', 'admin.auth.signIn');
 
         $form->onSuccess[] = function (Form $form, $values): void {
             $this->onSuccess($form, $values);

@@ -116,7 +116,12 @@ class SignPresenter extends BasePresenter
 
             $this->redirect($redirect, $parameters);
         } catch (AuthenticationException $e) {
-            $form->addError($e->getMessage());
+            $form->addError(match ($e->getMessage()) {
+                'User not found' => 'admin.validation.userNotFound',
+                'User is not active' => 'admin.validation.userInactive',
+                'Invalid credentials' => 'admin.validation.invalidCredentials',
+                default => 'admin.validation.authenticationFailed',
+            });
         }
 
     }
@@ -124,7 +129,7 @@ class SignPresenter extends BasePresenter
     public function actionOut(): void
     {
         $this->getUser()->logout();
-        $this->flashMessage('You have been signed out.', Flash::INFO);
+        $this->flashMessage($this->translator->translate('admin.flash.signedOut'), Flash::INFO);
         $this->redirect('in');
     }
 
@@ -136,7 +141,7 @@ class SignPresenter extends BasePresenter
         $control = $this->resetPasswordFormFactory->create();
         $control->onSuccess[] = function()
         {
-            $this->flashMessage('Email with reset url was send.', Flash::SUCCESS);
+            $this->flashMessage($this->translator->translate('admin.flash.resetEmailSent'), Flash::SUCCESS);
             $this->redirect('in');
         };
         return $control;
@@ -164,7 +169,7 @@ class SignPresenter extends BasePresenter
     {
         $control = $this->doResetPasswordFormFactory->create($this->foundPasswordReset);
         $control->onSuccess[] = function(){
-            $this->flashMessage('Password has been successfully changed', Flash::SUCCESS);
+            $this->flashMessage($this->translator->translate('admin.flash.passwordChanged'), Flash::SUCCESS);
             $this->redirect('Sign:in');
         };
 
@@ -177,7 +182,7 @@ class SignPresenter extends BasePresenter
             $this->error();
         }
 
-        $this->template->h1 = 'Registrace';
+        $this->template->h1 = $this->translator->translate('admin.auth.registration');
     }
 
     public function renderIn(): void
@@ -193,7 +198,7 @@ class SignPresenter extends BasePresenter
         $component = $this->signUpFormFactory->create();
         $component->onSuccess[] = function()
         {
-            $this->flashMessage('Registrace proběhla úspěšně.', Flash::SUCCESS);
+            $this->flashMessage($this->translator->translate('admin.flash.registered'), Flash::SUCCESS);
             $this->redirect('Sign:in');
         };
         return $component;

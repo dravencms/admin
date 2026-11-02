@@ -215,7 +215,7 @@ $(document).ready(function () {
                     $.each(row, function (ck, col) {
                         var $col = $('<div class="col-editable col-' + col.type + '-' + col.col + '">');
                         var $colInner = $('<div class="col-editable-holder">');
-                        $colInner.html('ROW:' + (rk + 1) + ' COL:' + (ck + 1));
+                        $colInner.text(Tools.translate('row') + ': ' + (rk + 1) + ' ' + Tools.translate('column') + ': ' + (ck + 1));
                         $colInner.append(self.buildComponentSelect(col, col.component, col.action));
                         $col.append($colInner);
                         $row.append($col);
@@ -246,13 +246,13 @@ $(document).ready(function () {
                 url: self.$layourEditor.data('suri'),
                 data: {'structureTree': self.layoutData}
             }).done(function (data) {
-                self.renderMessage('Structure has been saved successfully', 'success');
+                self.renderMessage(Tools.translate('structureSaved'), 'success');
                 self.savedLayoutData = jQuery.extend(true, {}, self.layoutData);
                 self.$saveButton.removeAttr('aria-busy');
                 self.needsSave();
             }).fail(function (jqXHR, textStatus) {
                 self.$saveButton.prop('disabled', false).removeAttr('aria-busy');
-                self.renderMessage(textStatus, 'error');
+                self.renderMessage(Tools.translate('requestFailed'), 'error');
             });
         });
     }

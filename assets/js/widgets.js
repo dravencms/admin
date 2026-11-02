@@ -27,6 +27,13 @@ export function initializeWidgets(root = document) {
     });
     root.querySelectorAll('select').forEach(select => {
         if (select.closest('[data-datagrid-name], .flatpickr-calendar') || select.tomselect || select.hidden || select.dataset.nativeSelect !== undefined) return;
-        new Select(select, { create: false, allowEmptyOption: true, plugins: select.multiple ? ['remove_button'] : [] });
+        new Select(select, {
+            create: false,
+            allowEmptyOption: true,
+            plugins: select.multiple ? { remove_button: { title: window.Tools.translate('remove') } } : [],
+            render: {
+                no_results: (_, escape) => '<div class="no-results">' + escape(window.Tools.translate('noResults')) + '</div>'
+            }
+        });
     });
 }

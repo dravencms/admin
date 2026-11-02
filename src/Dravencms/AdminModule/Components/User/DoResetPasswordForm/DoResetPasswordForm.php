@@ -66,10 +66,10 @@ class DoResetPasswordForm extends BaseControl
         $form->addPassword('password');
 
         $form->addPassword('passwordAgain')
-            ->setRequired(true)
-            ->addRule(Form::EQUAL, 'Hesla nejsou shodná.', $form['password']);
+            ->setRequired('admin.validation.passwordAgainRequired')
+            ->addRule(Form::EQUAL, 'admin.validation.passwordsMismatch', $form['password']);
 
-        $form->addSubmit('send');
+        $form->addSubmit('send', 'admin.auth.resetPassword');
 
         $form->onSuccess[] = [$this, 'onSuccessForm'];
         $form->onValidate[] = [$this, 'onValidateForm'];
