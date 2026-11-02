@@ -7,6 +7,43 @@
     padding: 0;
     max-width: 100%;
     overflow-x: auto;
+    color: var(--tblr-body-color);
+    background-color: var(--tblr-bg-surface);
+}
+
+/* The upstream grid stylesheet uses fixed light colors for these surfaces. */
+[data-datagrid-name] table thead tr.row-group-actions th,
+[data-datagrid-name] table th.col-checkbox,
+[data-datagrid-name] .row-grid-bottom {
+    background-color: var(--tblr-bg-surface-secondary);
+}
+
+[data-datagrid-name] .row-grid-bottom,
+[data-datagrid-name] .datagrid-row-columns-summary td,
+[data-datagrid-name] .datagrid-row-columns-summary td:first-child,
+[data-datagrid-name] .datagrid-row-columns-summary td:last-child {
+    border-color: var(--tblr-border-color);
+}
+
+[data-datagrid-name] table thead tr th .datagrid-column-header-additions a[data-datagrid-reset-filter-by-column],
+[data-datagrid-name] .pagination > a.disabled {
+    color: var(--tblr-secondary);
+}
+
+[data-datagrid-name] .datagrid-tree .datagrid-tree-item.ui-sortable-placeholder {
+    background-color: var(--tblr-active-bg);
+}
+
+[data-datagrid-name] .datagrid-tree .datagrid-tree-item .datagrid-tree-item-content {
+    box-shadow: inset 0 -1px 1px -1px var(--tblr-border-color);
+}
+
+[data-datagrid-name] .datagrid-tree .datagrid-tree-item .datagrid-tree-item-content .datagrid-tree-item-left > .chevron {
+    background-color: var(--tblr-bg-surface);
+}
+
+[data-datagrid-name] .datagrid-tree .datagrid-tree-item .datagrid-tree-item-content .datagrid-tree-item-left > .chevron:hover {
+    box-shadow: 0 0 3px var(--tblr-border-color);
 }
 
 [data-datagrid-name] .datagrid-col-filter-range-delimiter {

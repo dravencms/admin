@@ -7,10 +7,12 @@
     <meta name="robots" content="noindex,nofollow">
     <title>{block title}DravenCMS{/block}</title>
     <link rel="icon" href="{$basePath}/assets/admin/img/favicon.ico">
+    {include '../../theme-init.latte'}
     {control css}
 </head>
 <body>
     <main class="admin-auth">
+        <div class="d-flex justify-content-end mb-3">{include '../../theme-switcher.latte'}</div>
         <a n:href=":Admin:Homepage:Homepage:default" class="admin-auth-brand">
             <img src="{$basePath}/assets/admin/img/favicon.ico" alt=""> DravenCMS
         </a>

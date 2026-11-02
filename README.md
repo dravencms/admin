@@ -21,6 +21,8 @@ The DravenCMS package loader copies the package assets to `%wwwDir%/assets/admin
 
 The admin router handles URLs below `/admin` and supports an optional two-letter locale segment.
 
+The theme menu is available in the admin header and on authentication pages. It follows the operating system by default, with optional light or dark overrides saved in the browser. Selecting System clears the override and resumes automatic changes. Preferences synchronize between tabs and do not affect the public website.
+
 ## Building Assets
 
 Frontend dependencies are recorded in `assets/package.json`. Install or refresh them from the package's `assets` directory before publishing a release that changes the asset dependency tree:
@@ -28,6 +30,7 @@ Frontend dependencies are recorded in `assets/package.json`. Install or refresh 
 ```bash
 npm ci
 npm run build:admin
+npm run test:theme
 ```
 
 The generated `assets/js/admin.bundle.js` and `assets/css/admin.bundle.css` are shipped with the package. Rebuild both whenever the entry points or their dependencies change.

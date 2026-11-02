@@ -3,7 +3,8 @@
   "version": "1.3",
   "private": true,
   "scripts": {
-    "build:admin": "esbuild js/admin.js --bundle --minify --target=es2020 --outfile=js/admin.bundle.js && esbuild css/admin.css --bundle --minify --outfile=css/admin.bundle.css"
+    "build:admin": "esbuild js/admin.js --bundle --minify --target=es2020 --outfile=js/admin.bundle.js && esbuild css/admin.css --bundle --minify --outfile=css/admin.bundle.css",
+    "test:theme": "node --test tests/theme.test.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.25"

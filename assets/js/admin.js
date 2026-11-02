@@ -1,8 +1,10 @@
 import { initializeWidgets } from './widgets.js';
 import Chart from 'chart.js/auto';
 import './datagrid.js';
+import { initializeThemeSwitcher } from './theme.js';
 
 function initializeAdmin() {
+    initializeThemeSwitcher();
     const $ = window.jQuery;
     initializeWidgets();
     $.nette.init();

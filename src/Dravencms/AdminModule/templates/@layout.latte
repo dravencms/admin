@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{ifset $h1}{$h1} | {/ifset}DravenCMS</title>
     <link rel="icon" href="{$basePath}/assets/admin/img/favicon.ico">
+    {include 'theme-init.latte'}
     {control css}
 </head>
 <body>
@@ -25,6 +26,7 @@
     <header class="navbar navbar-expand-md d-print-none">
         <div class="container-fluid">
             <div class="navbar-nav flex-row ms-auto align-items-center gap-3">
+                {include 'theme-switcher.latte'}
                 {control menuNotification}
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex align-items-center gap-2" data-bs-toggle="dropdown" aria-expanded="false">

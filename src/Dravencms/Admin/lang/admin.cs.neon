@@ -1,3 +1,9 @@
+theme:
+    label: Barevný motiv
+    system: Podle systému
+    light: Světlý
+    dark: Tmavý
+
 component:
     breadcrumb:
         YouAreHere: Jse zde

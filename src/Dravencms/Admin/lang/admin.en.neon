@@ -1,3 +1,9 @@
+theme:
+    label: Color theme
+    system: System
+    light: Light
+    dark: Dark
+
 component:
     breadcrumb:
         YouAreHere: You are here
