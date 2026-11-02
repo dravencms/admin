@@ -26,7 +26,7 @@ export function initializeWidgets(root = document) {
         if (input instanceof HTMLInputElement && !input.closest('[data-datagrid-name]')) initializeDateInput(input);
     });
     root.querySelectorAll('select').forEach(select => {
-        if (select.closest('[data-datagrid-name]') || select.tomselect || select.hidden || select.dataset.nativeSelect !== undefined) return;
+        if (select.closest('[data-datagrid-name], .flatpickr-calendar') || select.tomselect || select.hidden || select.dataset.nativeSelect !== undefined) return;
         new Select(select, { create: false, allowEmptyOption: true, plugins: select.multiple ? ['remove_button'] : [] });
     });
 }

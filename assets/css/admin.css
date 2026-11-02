@@ -25,6 +25,20 @@ fieldset { margin-bottom: 20px; padding: 16px; border: 1px solid var(--tblr-bord
 fieldset legend { float: none; width: auto; padding: 0 8px; font-size: 14px; font-weight: 600; }
 .tab-pane { padding-top: 16px; }
 .file-manager-selector-id { display: none; }
+.dropzone.filemanager-dropzone {
+    background: var(--tblr-bg-surface);
+}
+.dropzone.filemanager-dropzone.dz-clickable:not(.dz-started) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dropzone.filemanager-dropzone .dz-message {
+    width: 100%;
+    margin: 0;
+    color: var(--tblr-body-color);
+    overflow-wrap: anywhere;
+}
 .filemanager .files {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
@@ -125,7 +139,58 @@ fieldset legend { float: none; width: auto; padding: 0 8px; font-size: 14px; fon
 .note-editor .note-toolbar .note-btn-group { margin: 0; }
 .CodeMirror { border: 1px solid var(--tblr-border-color); border-radius: 4px; }
 .ts-wrapper { min-width: 0; }
-.flatpickr-calendar { z-index: 1100; }
+.flatpickr-calendar {
+    z-index: 1100;
+    color: var(--tblr-body-color);
+    background: var(--tblr-bg-surface);
+    box-shadow: 0 0 0 1px var(--tblr-border-color), var(--tblr-shadow-dropdown);
+}
+.flatpickr-calendar.arrowTop::before { border-bottom-color: var(--tblr-border-color); }
+.flatpickr-calendar.arrowTop::after { border-bottom-color: var(--tblr-bg-surface); }
+.flatpickr-calendar.arrowBottom::before { border-top-color: var(--tblr-border-color); }
+.flatpickr-calendar.arrowBottom::after { border-top-color: var(--tblr-bg-surface); }
+.flatpickr-calendar .flatpickr-months .flatpickr-month,
+.flatpickr-calendar .flatpickr-current-month input.cur-year,
+.flatpickr-calendar .flatpickr-day,
+.flatpickr-calendar .flatpickr-time input,
+.flatpickr-calendar .flatpickr-time .flatpickr-time-separator,
+.flatpickr-calendar .flatpickr-time .flatpickr-am-pm { color: var(--tblr-body-color); }
+.flatpickr-calendar .flatpickr-monthDropdown-months,
+.flatpickr-calendar .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+    color: var(--tblr-body-color);
+    background: var(--tblr-bg-surface);
+}
+.flatpickr-calendar .flatpickr-months .flatpickr-prev-month,
+.flatpickr-calendar .flatpickr-months .flatpickr-next-month { color: var(--tblr-body-color); fill: currentColor; }
+.flatpickr-calendar .flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-calendar .flatpickr-months .flatpickr-next-month:hover svg { fill: var(--tblr-primary); }
+.flatpickr-calendar .flatpickr-weekday,
+.flatpickr-calendar .flatpickr-day.prevMonthDay,
+.flatpickr-calendar .flatpickr-day.nextMonthDay,
+.flatpickr-calendar .flatpickr-day.flatpickr-disabled { color: var(--tblr-secondary); }
+.flatpickr-calendar .flatpickr-day.today { border-color: var(--tblr-primary); }
+.flatpickr-calendar .flatpickr-day:not(.selected):not(.startRange):not(.endRange):not(.flatpickr-disabled):hover,
+.flatpickr-calendar .flatpickr-day:not(.selected):not(.startRange):not(.endRange):not(.flatpickr-disabled):focus {
+    background: var(--tblr-hover-bg);
+    border-color: var(--tblr-hover-bg);
+}
+.flatpickr-calendar .flatpickr-day.selected,
+.flatpickr-calendar .flatpickr-day.startRange,
+.flatpickr-calendar .flatpickr-day.endRange {
+    color: #fff;
+    background: var(--tblr-primary);
+    border-color: var(--tblr-primary);
+}
+.flatpickr-calendar .numInputWrapper:hover,
+.flatpickr-calendar .numInputWrapper span:hover,
+.flatpickr-calendar .flatpickr-time input:hover,
+.flatpickr-calendar .flatpickr-time input:focus,
+.flatpickr-calendar .flatpickr-time .flatpickr-am-pm:hover,
+.flatpickr-calendar .flatpickr-time .flatpickr-am-pm:focus { background: var(--tblr-hover-bg); }
+.flatpickr-calendar .numInputWrapper span,
+.flatpickr-calendar.hasTime .flatpickr-time { border-color: var(--tblr-border-color); }
+.flatpickr-calendar .numInputWrapper span.arrowUp::after { border-bottom-color: var(--tblr-body-color); }
+.flatpickr-calendar .numInputWrapper span.arrowDown::after { border-top-color: var(--tblr-body-color); }
 .navbar-notifications { max-height: 320px; overflow-y: auto; }
 @media (max-width: 767px) {
     .admin-auth { margin-top: 24px; }
