@@ -1,2 +1,5 @@
 .idea/
+/assets/node_modules/*
+!/assets/node_modules/nette-forms/
+!/assets/node_modules/bootstrap/
 vendor

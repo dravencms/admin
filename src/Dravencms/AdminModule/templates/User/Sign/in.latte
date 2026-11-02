@@ -1,39 +1,13 @@
 {block content}
-    <div class="signin-container">
-        <div class="signin-info">
-            <a n:href=":Admin:Homepage:Homepage:default" class="logo">
-                <img src="{$basePath}/assets/admin/img/favicon.ico" alt="{$name}" style="margin-top: -5px;">&nbsp;
-                {$name}
-            </a>
-            <div class="slogan">
-                Simple. Flexible. Powerful.
+    <div class="card">
+        {control signInForm}
+        <section id="password-reset-form" class="border-top mt-4 pt-4" hidden>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h3 mb-0">Obnova hesla</h2>
+                <button type="button" class="btn-close" data-password-reset-close aria-label="Zavřít"></button>
             </div>
-            <ul>
-                <li><i class="fa fa-heart signin-icon"></i> Crafted with love</li>
-            </ul>
-        </div>
-
-        <div class="signin-form">
-            {control signInForm}
-            {*<div class="signin-with">
-              <a href="index.html" class="signin-with-btn" style="background:#4f6faa;background:rgba(79, 111, 170, .8);">Sign In with <span>Facebook</span></a>
-            </div>*}
-
-            <div class="password-reset-form" id="password-reset-form">
-                <div class="header">
-                    <div class="signin-text">
-                        <span>Obnova hesla</span>
-                        <div class="close">&times;</div>
-                    </div>
-                </div>
-
-                {control resetPasswordForm}
-            </div>
-        </div>
+            {control resetPasswordForm}
+        </section>
     </div>
-    {if $allowRegister}
-        <div class="not-a-member">
-            Nemáte účet ? <a n:href="Sign:up">Registrovat</a>
-        </div>
-    {/if}
+    <p class="text-center mt-3" n:if="$allowRegister">Nemáte účet? <a n:href="Sign:up">Registrovat</a></p>
 {/block}

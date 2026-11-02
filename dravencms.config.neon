@@ -1,110 +1,71 @@
 extensions:
-    admin: Dravencms\Admin\DI\AdminExtension
+	admin: Dravencms\Admin\DI\AdminExtension
 
 services:
-    routeFactory.Admin: Dravencms\Admin\RouteFactory
-    route:
-        setup:
-            - addRouteFactory(@routeFactory.Admin)
+	routeFactory.Admin: Dravencms\Admin\RouteFactory
+	route:
+		setup:
+			- addRouteFactory(@routeFactory.Admin)
 
-    admin.homepagePresenter:
-        class: Dravencms\AdminModule\HomepageModule\HomepagePresenter
+	admin.homepagePresenter:
+		class: Dravencms\AdminModule\HomepageModule\HomepagePresenter
 
-    admin.notificationPresenter:
-        class: Dravencms\AdminModule\NotificationModule\NotificationPresenter
+	admin.notificationPresenter:
+		class: Dravencms\AdminModule\NotificationModule\NotificationPresenter
 
-    admin.accountPresenter:
-        class: Dravencms\AdminModule\UserModule\AccountPresenter
+	admin.accountPresenter:
+		class: Dravencms\AdminModule\UserModule\AccountPresenter
 
-    admin.signPresenter:
-        class: Dravencms\AdminModule\UserModule\SignPresenter
-
+	admin.signPresenter:
+		class: Dravencms\AdminModule\UserModule\SignPresenter
 
 nettrine.orm:
-    managers:
-        default:
-            mapping:
-                admin:
-                    type: attributes
-                    directories:
-                        - %appDir%/../vendor/dravencms/admin/src/Dravencms/Model/Admin
-                    namespace: Dravencms\Model\Admin
+	managers:
+		default:
+			mapping:
+				admin:
+					type: attributes
+					directories:
+						- %appDir%/../vendor/dravencms/admin/src/Dravencms/Model/Admin
+
+					namespace: Dravencms\Model\Admin
 
 webloader:
-    css:
-        admin:
-            files:
-                - admin/node_modules/bootstrap/dist/css/bootstrap.min.css
-                - admin/node_modules/@fortawesome/fontawesome-free/css/all.min.css
-                - admin/node_modules/@fortawesome/fontawesome-free/css/v4-shims.min.css
-                - admin/css/pixel-admin.min.css
-                - admin/css/pages.min.css
-                - admin/css/typeahead.css
-                - admin/css/rtl.min.css
-                - admin/css/themes.min.css
-                - admin/css/custom.css
-                - admin/node_modules/dropzone/dist/min/dropzone.min.css
-                #- admin/node_modules/happy/dist/happy.css
-                - admin/node_modules/ublaboo-datagrid/assets/datagrid.css
-                - admin/node_modules/ublaboo-datagrid/assets/datagrid-spinners.css
-                - admin/node_modules/blueimp-gallery/css/blueimp-gallery.min.css
-                - admin/node_modules/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css
-                - admin/node_modules/summernote/dist/summernote.css
-                - admin/node_modules/select2/dist/css/select2.css
-                - admin/node_modules/morris.js/morris.css
-                - admin/css/select2-bootstrap.css
-                - admin/node_modules/pace-js/themes/blue/pace-theme-minimal.css
-                - admin/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css
-                - admin/node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css
-                - admin/node_modules/flag-icon-css/css/flag-icons.min.css
-                - admin/node_modules/codemirror/lib/codemirror.css
-                - admin/css/widgets.scss
-                - admin/css/pixeladmin.scss
-                - admin/css/style.scss
-            filters:
-                #- @cssMin
-            fileFilters:
-                - @wlCssFilter
-                - @sassFilter
+	css:
+		admin:
+			files:
+				- admin/css/admin.bundle.css
+				- admin/node_modules/@fortawesome/fontawesome-free/css/all.min.css
+				- admin/node_modules/@fortawesome/fontawesome-free/css/v4-shims.min.css
+				- admin/node_modules/dropzone/dist/min/dropzone.min.css
+				- admin/node_modules/blueimp-gallery/css/blueimp-gallery.min.css
+				- admin/node_modules/summernote/dist/summernote-bs5.min.css
+				- admin/node_modules/flag-icon-css/css/flag-icons.min.css
+				- admin/node_modules/codemirror/lib/codemirror.css
 
-    js:
-        admin:
-            files:
-                - admin/js/tools.js
-                - admin/node_modules/moment/min/moment.min.js
-                - admin/node_modules/jquery/dist/jquery.min.js
-                - admin/node_modules/jquery.maskedinput/src/jquery.maskedinput.js
-                - admin/node_modules/bootstrap/dist/js/bootstrap.min.js
-                - admin/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js
-                - admin/node_modules/bootstrap-daterangepicker/daterangepicker.js
-                - admin/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js
-                - admin/node_modules/typeahead.js/dist/typeahead.bundle.min.js
-                - admin/node_modules/nette-forms/src/assets/netteForms.js
-                - admin/node_modules/nette.ajax.js/nette.ajax.js
-                #- admin/node_modules/happy/dist/happy.js
-                #- admin/node_modules/jquery-ui-sortable/jquery-ui-sortable.js
-                - admin/node_modules/ublaboo-datagrid/assets/datagrid.js
-                - admin/node_modules/ublaboo-datagrid/assets/datagrid-spinners.js
-                - admin/node_modules/blueimp-gallery/js/jquery.blueimp-gallery.min.js
-                - admin/node_modules/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js
-                - admin/node_modules/summernote/dist/summernote.min.js
-                - admin/js/files-plugin.js
-                - admin/js/layout-editor.js
-                - admin/js/file-selector.js
-                - admin/node_modules/pace-js/pace.min.js
-                - admin/node_modules/select2/dist/js/select2.min.js
-                - admin/node_modules/dropzone/dist/min/dropzone.min.js
-                - admin/js/dropzone-fix.js
-                #- admin/node_modules/raphael/raphael.min.js
-                - admin/node_modules/morris.js/morris.min.js
-                - admin/node_modules/codemirror/lib/codemirror.js
-                - admin/node_modules/codemirror/mode/xml/xml.js
-                - admin/node_modules/codemirror/mode/javascript/javascript.js
-                - admin/node_modules/codemirror/mode/css/css.js
-                - admin/node_modules/codemirror/mode/htmlmixed/htmlmixed.js
-                - admin/node_modules/jquery-slimscroll/jquery.slimscroll.min.js
-                - admin/js/menu.js
-                - admin/js/main.js
+			fileFilters:
+				- @wlCssFilter
 
-            fileFilters:
-                #- @jsMin
+	js:
+		admin:
+			files:
+				- admin/js/tools.js
+				- admin/node_modules/jquery/dist/jquery.min.js
+				- admin/node_modules/jquery.maskedinput/src/jquery.maskedinput.js
+				- admin/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js
+				- admin/node_modules/typeahead.js/dist/typeahead.bundle.min.js
+				- admin/node_modules/nette-forms/src/assets/netteForms.js
+				- admin/node_modules/nette.ajax.js/nette.ajax.js
+				- admin/node_modules/blueimp-gallery/js/blueimp-gallery.min.js
+				- admin/node_modules/summernote/dist/summernote-bs5.min.js
+				- admin/js/files-plugin.js
+				- admin/js/layout-editor.js
+				- admin/js/file-selector.js
+				- admin/node_modules/dropzone/dist/min/dropzone.min.js
+				- admin/js/dropzone-fix.js
+				- admin/node_modules/codemirror/lib/codemirror.js
+				- admin/node_modules/codemirror/mode/xml/xml.js
+				- admin/node_modules/codemirror/mode/javascript/javascript.js
+				- admin/node_modules/codemirror/mode/css/css.js
+				- admin/node_modules/codemirror/mode/htmlmixed/htmlmixed.js
+				- admin/js/admin.bundle.js

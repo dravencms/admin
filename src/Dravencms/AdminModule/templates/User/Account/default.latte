@@ -2,19 +2,19 @@
 
 {block content}
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#home" data-toggle="tab">Základní informace</a></li>
-        <li><a href="#password-change" data-toggle="tab">Změna hesla</a></li>
-        <li><a href="#avatar-change" data-toggle="tab">Avatar</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#home" data-bs-toggle="tab">Základní informace</a></li>
+        <li class="nav-item"><a class="nav-link" href="#password-change" data-bs-toggle="tab">Změna hesla</a></li>
+        <li class="nav-item"><a class="nav-link" href="#avatar-change" data-bs-toggle="tab">Avatar</a></li>
     </ul>
 
     <div class="tab-content">
-        <div class="tab-pane fade in active" id="home">
+        <div class="tab-pane fade show active" id="home">
             {control formAccount}
         </div>
-        <div class="tab-pane fade in" id="password-change">
+        <div class="tab-pane fade show" id="password-change">
             {control formAccountPassword}
         </div>
-        <div class="tab-pane fade in" id="avatar-change">
+        <div class="tab-pane fade show" id="avatar-change">
             <div>
                 <!--img n:gravatar="$userInfo->getEmail(), 100" alt="Gravatar"/-->
                 <img src="{$gravatar}" alt="Gravatar"/>

@@ -1,127 +1,61 @@
-{var $name = 'DravenCMS'}
-<!DOCTYPE html>
-<!--[if IE 8]>
-<html class="ie8" lang="{$lang}"> <![endif]-->
-<!--[if IE 9]>
-<html class="ie9 gt-ie8" lang="{$lang}"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<html class="gt-ie8 gt-ie9 not-ie" lang="{$lang}"> <!--<![endif]-->
+<!doctype html>
+<html lang="{$lang}" data-bs-navbar-position="combined">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="author" content="Adam Schubert <adam.schubert@sg1-game.net>">
-    <link rel="shortcut icon" href="{$basePath}/assets/admin/img/favicon.ico"/>
-    <title>{$name|upper}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{ifset $h1}{$h1} | {/ifset}DravenCMS</title>
+    <link rel="icon" href="{$basePath}/assets/admin/img/favicon.ico">
     {control css}
 </head>
-
-<body class="theme-default main-menu-animated {ifset $bodyClass} {$bodyClass} {/ifset}">
-
-<div id="main-wrapper">
-
-
-    <!-- 2. $MAIN_NAVIGATION ===========================================================================
-
-        Main navigation
-    -->
-    <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
-        <!-- Main menu toggle -->
-        <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">{_"admin.layout.HideMenu"}</span></button>
-
-        <div class="navbar-inner px-navbar">
-            <!-- Main navbar header -->
-            <div class="navbar-header">
-
-                <!-- Logo -->
-                <a n:href=":Admin:Homepage:Homepage:" class="navbar-brand">
-                    {$name|stripHtml|upper}
-                </a>
-
-                <!-- Main navbar toggle -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
-
-            </div> <!-- / .navbar-header -->
-
-            <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
-                <div>
-
-                    <div class="right clearfix">
-                        <ul class="nav navbar-nav pull-right right-navbar-nav">
-                            {control menuNotification}
-                            {*
-                                <li>
-                                    <form class="navbar-form pull-left nav-search" action="{link Search:default}" method="get">
-                                        <input type="text" name="q" value="{$q}" class="form-control search-main" autocomplete="off" placeholder="Vyhledat..."
-                                               data-target="{link Search:whisper, 'query' => '%QUERY'}">
-                                    </form>
-                                </li>
-                            *}
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                                    <img src="{$gravatar}">
-                                    <!--img n:gravatar="$userInfo->getEmail(), 100" alt="{$userInfo->getFirstName()} {$userInfo->getLastName()}"-->
-                                    <span>{$userInfo->getFirstName()} {$userInfo->getLastName()}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <!--li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li-->
-                                    <li><a n:href=":Admin:User:Account:"><!--span class="badge badge-primary pull-right">New</span--><i class="dropdown-icon fa fa-user"></i>&nbsp;&nbsp;{_"admin.layout.MyProfile"}</a>
-                                    </li>
-                                    <!--li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li-->
-                                    <li class="divider"></li>
-                                    <li><a n:href=":Admin:User:Sign:out"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;{_"admin.layout.LogOut"}</a></li>
-                                </ul>
-                            </li>
-                        </ul> <!-- / .navbar-nav -->
-                    </div> <!-- / .right -->
-                </div>
-            </div> <!-- / #main-navbar-collapse -->
-        </div> <!-- / .navbar-inner -->
-    </div>
-
-    <div id="main-menu" role="navigation">
-        <div id="main-menu-inner">
-            <div class="menu-content top animated fadeIn" id="menu-content-demo">
-                <div>
-                    <div class="text-bg"><span class="text-slim">{_"admin.layout.Welcome"},</span> <span class="text-semibold">{$userInfo->getFirstName()}</span></div>
-                    <img src="{$gravatar}">
-                    <!--img n:gravatar="$userInfo->getEmail(), 100" alt="{$userInfo->getFirstName()} {$userInfo->getLastName()}" class=""-->
-                    <div class="btn-group">
-                        <!--a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a-->
-                        <a n:href=":Admin:User:Account:" class="btn btn-xs btn-primary btn-outline dark" title="{_"admin.layout.MyProfile"}"><i class="fa fa-user"></i></a>
-                        <!--a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a-->
-                        <a n:href=":Admin:User:Sign:out" class="btn btn-xs btn-danger btn-outline dark" title="{_"admin.layout.LogOut"}"><i class="fa fa-power-off"></i></a>
+<body>
+<div class="page">
+    <aside class="navbar navbar-vertical navbar-expand-lg admin-sidebar" aria-label="Administration">
+        <div class="container-fluid">
+            <a n:href=":Admin:Homepage:Homepage:" class="navbar-brand">
+                <img src="{$basePath}/assets/admin/img/favicon.ico" alt=""> DravenCMS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#admin-navigation" aria-controls="admin-navigation" aria-expanded="false" aria-label="Menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="admin-navigation">
+                {control menu}
+            </div>
+        </div>
+    </aside>
+    <header class="navbar navbar-expand-md d-print-none">
+        <div class="container-fluid">
+            <div class="navbar-nav flex-row ms-auto align-items-center gap-3">
+                {control menuNotification}
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link d-flex align-items-center gap-2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="avatar avatar-sm" src="{$gravatar}" alt="">
+                        <span>{$userInfo->getFirstName()} {$userInfo->getLastName()}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a n:href=":Admin:User:Account:" class="dropdown-item"><i class="fa fa-user me-2"></i>{_"admin.layout.MyProfile"}</a>
+                        <a n:href=":Admin:User:Sign:out" class="dropdown-item"><i class="fa fa-power-off me-2"></i>{_"admin.layout.LogOut"}</a>
                     </div>
                 </div>
             </div>
-            {control menu}
-        </div> <!-- / #main-menu-inner -->
-    </div> <!-- / #main-menu -->
-    <!-- /4. $MAIN_MENU -->
-
-
-    <div id="content-wrapper">
-        <div n:foreach="$flashes as $flash" class="alert alert-page alert {$flash->type}" data-animate="true">{$flash->message|noescape}</div>
-        {control menuBreadcrumb}
-        <div class="page-header" n:ifset="$h1">
-            <div class="row">
-                <div class="col-md-4">
-                    <h1>{$h1}</h1>
-                </div>
+        </div>
+    </header>
+    <div class="page-wrapper">
+        <div class="page-header d-print-none">
+            <div class="container-fluid">
+                {control menuBreadcrumb}
+                <h1 class="page-title" n:ifset="$h1">{$h1}</h1>
             </div>
         </div>
-        {include #content}
-    </div> <!-- / #content-wrapper -->
-    <div id="main-menu-bg"></div>
-</div> <!-- / #main-wrapper -->
+        <main class="page-body" id="content-wrapper">
+            <div class="container-fluid">
+                <div n:foreach="$flashes as $flash" class="alert {$flash->type}" role="alert">{$flash->message|noescape}</div>
+                {include content}
+            </div>
+        </main>
+    </div>
+</div>
 {control js}
-{ifset #js}
-    <!--JS from included templates-->
-    {include #js}
-{/ifset}
-
+{ifset js}{include js}{/ifset}
 {include 'global.latte'}
-
 </body>
 </html>

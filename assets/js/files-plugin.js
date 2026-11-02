@@ -25,12 +25,13 @@
       this.initialize = function () {
         var $container = options.dialogsInBody ? $(document.body) : $editor;
 
-        var body = '<style>.note-files-dialog .modal-dialog{  width: 900px;}</style><div class="note-file-manager-holder"></div>';
+        var body = '<div class="note-file-manager-holder"></div>';
 
         this.$dialog = ui.dialog({
           title: "Select file or image you want to insert",
           body: body
         }).render().appendTo($container);
+        this.$dialog.find('.modal-dialog').addClass('modal-lg');
 
 
         var button = ui.button({
@@ -105,6 +106,7 @@
         $fileManagerHolder = $filesDialog.find('.note-file-manager-holder');
         $('<div>').load(managerUrl, params, function(){
           $filesManager = $($(this).html());
+          $filesManager.filter('.filemanager').add($filesManager.find('.filemanager')).addClass('filemanager-select');
 
           $filesManager.find(".fileitem").click(function(e){
             e.preventDefault();

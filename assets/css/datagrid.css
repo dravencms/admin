@@ -1,0 +1,31 @@
+@import '@contributte/datagrid/assets/css/datagrid.css';
+
+[data-datagrid-name] {
+    position: relative;
+    border: 1px solid var(--tblr-border-color);
+    border-radius: 4px;
+    padding: 0;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+[data-datagrid-name] .datagrid-col-filter-range-delimiter {
+    padding: 5px;
+    align-self: center;
+}
+
+[data-datagrid-name] .table {
+    margin-bottom: 0;
+}
+
+[data-datagrid-name] .pagination {
+    margin: 0;
+}
+
+[data-datagrid-name] .col-action {
+    white-space: nowrap;
+}
+
+[data-datagrid-name] .col-action .btn + .btn {
+    margin-left: 4px;
+}

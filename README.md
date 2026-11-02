@@ -8,7 +8,7 @@ Administration shell for DravenCMS applications. It provides authenticated prese
 - ACL-aware navigation and breadcrumbs.
 - User sign-in, sign-up, password reset, and account forms.
 - Admin notifications and viewed-state tracking.
-- Bootstrap, Datagrid, Select2, Dropzone, Summernote, CodeMirror, and FontAwesome assets.
+- Tabler / Bootstrap 5 administration, Contributte Datagrid 7, Tom Select, Flatpickr, Dropzone, Summernote, CodeMirror, and FontAwesome assets.
 - Doctrine entities for menus and notifications.
 
 ## Installation
@@ -26,8 +26,15 @@ The admin router handles URLs below `/admin` and supports an optional two-letter
 Frontend dependencies are recorded in `assets/package.json`. Install or refresh them from the package's `assets` directory before publishing a release that changes the asset dependency tree:
 
 ```bash
-npm install
+npm ci
+npm run build:admin
 ```
+
+The generated `assets/js/admin.bundle.js` and `assets/css/admin.bundle.css` are shipped with the package. Rebuild both whenever the entry points or their dependencies change.
+
+The theme uses [Tabler](https://github.com/tabler/tabler) (MIT) and Bootstrap 5. PixelAdmin and the Bootstrap 3 compatibility layer are no longer loaded. Naja handles grid requests; existing non-grid AJAX components continue using `nette.ajax.js`.
+
+See [MIGRATION_BOOTSTRAP5.md](MIGRATION_BOOTSTRAP5.md) for application and feature-package migration requirements. This is a breaking admin UI change and must be released together with migrated feature templates.
 
 After changing admin assets in an application, clear generated WebLoader bundles in `www/webtemp` so they are rebuilt.
 

@@ -241,17 +241,17 @@ $(document).ready(function () {
         };
 
         this.$saveButton.click(function () {
-            self.$saveButton.button('loading');
+            self.$saveButton.prop('disabled', true).attr('aria-busy', 'true');
             $.ajax({
                 url: self.$layourEditor.data('suri'),
                 data: {'structureTree': self.layoutData}
             }).done(function (data) {
                 self.renderMessage('Structure has been saved successfully', 'success');
                 self.savedLayoutData = jQuery.extend(true, {}, self.layoutData);
-                self.$saveButton.button('reset');
+                self.$saveButton.removeAttr('aria-busy');
                 self.needsSave();
             }).fail(function (jqXHR, textStatus) {
-                self.$saveButton.button('reset');
+                self.$saveButton.prop('disabled', false).removeAttr('aria-busy');
                 self.renderMessage(textStatus, 'error');
             });
         });

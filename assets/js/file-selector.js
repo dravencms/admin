@@ -10,28 +10,14 @@ $(document).ready(function () {
             $('<div>').load($imageHolder.data('link'), {'filesStructureFilesId': filesid}, function () {
                 var $selectedImage = $($(this).html());
 
-                $selectedImage.mouseenter(function () {
-                    $(this).find(".box:not(.back)").animate({
-                        top: "-26px"
-                    }, {
-                        queue: !1,
-                        duration: 300
-                    });
-                }).mouseleave(function () {
-                    $(this).find(".box:not(.back)").animate({
-                        top: "0px"
-                    }, {
-                        queue: !1,
-                        duration: 300
-                    });
-                });
-
                 $selectedImage.find('.rename').hide();
                 $selectedImage.find('.info').hide();
                 $selectedImage.find('.download').hide();
-                $selectedImage.find('.delete').click(function (e) {
+                var removeLabel = $imageHolder.closest('.filemanager').data('remove-label');
+                $selectedImage.find('.delete').attr({href: '#', title: removeLabel, 'aria-label': removeLabel}).removeAttr('data-confirm').click(function (e) {
                     e.preventDefault();
-                    $sId.val(null);
+                    e.stopPropagation();
+                    $sId.val('').trigger('change');
                     $selectedImage.remove();
                 });
 
@@ -42,7 +28,7 @@ $(document).ready(function () {
     };
 
     var loader = function (obj, params) {
-        var $target = $(obj.data('target'));
+        var $target = $(obj.attr('data-bs-target'));
         $('<div>').load(obj.data('link'), params, function () {
             var $manager = $($(this).html());
             $manager.find(".fileitem").click(function (e) {
@@ -50,7 +36,7 @@ $(document).ready(function () {
                 e.stopPropagation();
                 var filesid = $(this).data('filesid');
                 var $sId = obj.closest('.file-manager-selector').find('.file-manager-selector-id');
-                $sId.val(filesid);
+                $sId.val(filesid).trigger('change');
                 loadItem($sId, filesid);
 
                 $target.modal('hide');

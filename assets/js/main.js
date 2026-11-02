@@ -230,8 +230,7 @@ $(document).ready(function () {
 });
 
 function initAjaxDependend() {
-    $("select").not(".datagrid select").select2({'width': 'resolve'});
-    $(".datagrid select[multiple]").select2({'width': 'resolve'});
+    $("select").not("[data-datagrid-name] select").select2({'width': 'resolve'});
     
     $('.invalidator').each(function () {
         var elem = $(this);
