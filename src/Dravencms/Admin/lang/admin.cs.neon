@@ -42,6 +42,10 @@ form:
     newPasswordAgain: Nové heslo znovu
     antispam: Ochrana proti spamu
 
+email:
+    passwordResetSubject: Obnova hesla
+    passwordResetRequest: 'Někdo požádal o obnovu hesla účtu %email% na serveru %domain%.'
+
 auth:
     signInTitle: Přihlášení
     signIn: Přihlásit se

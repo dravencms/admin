@@ -42,6 +42,10 @@ form:
     newPasswordAgain: Repeat new password
     antispam: Spam protection
 
+email:
+    passwordResetSubject: Password reset
+    passwordResetRequest: 'A password reset was requested for the account %email% on %domain%.'
+
 auth:
     signInTitle: Sign in
     signIn: Sign in

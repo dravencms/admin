@@ -102,7 +102,7 @@ class ResetPasswordForm extends BaseControl
         /** @var User $user */
         $user = $this->userRepository->getOneByEmail($values->email, $this->namespace);
         if (!$user) {
-            $this->presenter->error();
+            $this->getPresenter()->error();
         }
         // Softdelte any previous password resets
         $this->passwordResetRepository->cleanPreviousPasswordResetsForUser($user);
@@ -116,13 +116,14 @@ class ResetPasswordForm extends BaseControl
         $this->entityManager->persist($newPasswordReset);
         $this->entityManager->flush();
 
+        $subject = $form->getTranslator()->translate('admin.email.passwordResetSubject');
         $this->templatedEmail->resetPassword([
-            'title' => 'Password reset',
+            'title' => $subject,
             'email' => $user->getEmail(),
             'hash' => $newPasswordReset->getHash()
         ])
             ->addTo($user->getEmail())
-            ->setSubject('Password reset')
+            ->setSubject($subject)
             ->send();
 
         $this->onSuccess();
