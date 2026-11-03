@@ -1,0 +1,10 @@
+{var $adminLocales = $presenter->getAdminLocales()}
+{var $currentLanguage = substr($presenter->translator->getLocale(), 0, 2)}
+<nav n:if="count($adminLocales) > 1" class="d-flex align-items-center gap-1" aria-label="{_'admin.language.label'}" data-language-switcher>
+    {foreach $adminLocales as $code => $language}
+        <a n:href="this, locale => $code" class="btn btn-icon btn-ghost-secondary{if $code === $currentLanguage} active{/if}" title="{$language['name']}" aria-label="{$language['name']}" aria-current="{$code === $currentLanguage ? 'true' : null}" hreflang="{$code}" lang="{$code}">
+            <span class="flag-icon flag-icon-{$language['flag']}" aria-hidden="true"></span>
+            <span class="visually-hidden">{$language['name']}</span>
+        </a>
+    {/foreach}
+</nav>

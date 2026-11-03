@@ -12,7 +12,10 @@
 </head>
 <body>
     <main class="admin-auth">
-        <div class="d-flex justify-content-end mb-3">{include '../../theme-switcher.latte'}</div>
+        <div class="d-flex justify-content-end align-items-center gap-3 mb-3">
+            {include '../../language-switcher.latte'}
+            {include '../../theme-switcher.latte'}
+        </div>
         <a n:href=":Admin:Homepage:Homepage:default" class="admin-auth-brand">
             <img src="{$basePath}/assets/admin/img/favicon.ico" alt=""> DravenCMS
         </a>

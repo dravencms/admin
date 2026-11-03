@@ -15,6 +15,18 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     use TLocalizedPresenter;
     use TUserPresenter;
 
+    /** @return array<string, array{flag: string, name: string}> */
+    public function getAdminLocales(): array
+    {
+        $supported = [
+            'cs' => ['flag' => 'cz', 'name' => 'Čeština'],
+            'en' => ['flag' => 'gb', 'name' => 'English'],
+        ];
+        $available = $this->translator->getLocalesWhitelist() ?? $this->translator->getAvailableLocales();
+        $languages = array_map(static fn(string $locale): string => substr($locale, 0, 2), $available);
+        return array_intersect_key($supported, array_flip($languages));
+    }
+
     /**
      * @param $element
      */

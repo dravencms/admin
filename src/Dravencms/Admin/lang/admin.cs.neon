@@ -1,3 +1,6 @@
+language:
+    label: Jazyk rozhraní
+
 theme:
     label: Barevný motiv
     system: Podle systému
