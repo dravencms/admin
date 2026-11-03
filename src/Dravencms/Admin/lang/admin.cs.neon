@@ -71,6 +71,8 @@ account:
     changeAvatarAt: Svůj avatar můžete změnit na
 
 validation:
+    tooManyAttempts: 'Příliš mnoho pokusů o přihlášení. Zkuste to prosím později.'
+    invalidReset: 'Odkaz pro obnovu hesla je neplatný nebo vypršel.'
     firstNameRequired: Zadejte prosím jméno.
     lastNameRequired: Zadejte prosím příjmení.
     emailRequired: Zadejte prosím e-mail.
@@ -91,13 +93,15 @@ validation:
 
 flash:
     signedOut: Byli jste odhlášeni.
-    resetEmailSent: E-mail s odkazem pro obnovu hesla byl odeslán.
+    resetEmailSent: Pokud pro tento e-mail existuje aktivní účet, bude na něj odeslán odkaz pro obnovu hesla.
     passwordChanged: Heslo bylo úspěšně změněno.
     registered: Registrace proběhla úspěšně.
     saved: Změny byly uloženy.
     passwordChangedSignIn: Heslo bylo změněno. Přihlaste se prosím novým heslem.
 
 client:
+    confirmDelete: 'Opravdu chcete tento záznam odstranit?'
+    confirmBulkAction: 'Použít akci na vybrané záznamy?'
     amount: Počet
     noResults: Nebyly nalezeny žádné výsledky.
     remove: Odebrat

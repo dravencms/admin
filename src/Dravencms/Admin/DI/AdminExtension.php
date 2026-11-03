@@ -20,6 +20,7 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
     public function getConfigSchema(): \Nette\Schema\Schema
     {
         return \Nette\Schema\Expect::structure([
+            'authRateLimitDirectory' => \Nette\Schema\Expect::string()->default($this->getContainerBuilder()->parameters['tempDir'] . '/admin-auth-limits'),
             'menu' => \Nette\Schema\Expect::structure([
                 'homepage' => \Nette\Schema\Expect::string()->nullable()->default(null),
                 'overrides' => \Nette\Schema\Expect::array()->default([]),
@@ -35,6 +36,7 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
     public function loadConfiguration()
     {
         $builder = $this->getContainerBuilder();
+        $builder->addDefinition($this->prefix('authLimiter'))->setFactory(\Dravencms\Admin\AuthRateLimiter::class, [$this->getConfig()->authRateLimitDirectory]);
 
 
         $builder->addDefinition($this->prefix('admin'))

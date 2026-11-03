@@ -49,6 +49,9 @@ class SignPresenter extends BasePresenter
     /** @var AdminAuthenticator @inject */
     public $authenticator;
 
+    /** @var \Dravencms\Admin\AuthRateLimiter @inject */
+    public $authRateLimiter;
+
     private $allowRegister = false; //!FIXME INTO CONFIG
 
     private $foundPasswordReset = null;
@@ -79,6 +82,10 @@ class SignPresenter extends BasePresenter
     {
         $user = $this->getUser();
         $values = $form->getValues();
+        if (!$this->authRateLimiter->consume('login', $values->email, $this->getHttpRequest()->getRemoteAddress() ?? 'unknown')) {
+            $form->addError('admin.validation.tooManyAttempts');
+            return;
+        }
         if ($values->remember) {
             $user->setExpiration('14 days', false);
         } else {
@@ -88,6 +95,7 @@ class SignPresenter extends BasePresenter
         try {
             $user->setAuthenticator($this->authenticator);
             $user->login($values->email, $values->password);
+            \Dravencms\Security\MutationGuard::rotate($this->getSession());
 
 
             // Custom implementation of restoreRequest
@@ -114,19 +122,16 @@ class SignPresenter extends BasePresenter
 
             $this->redirect($redirect, $parameters);
         } catch (AuthenticationException $e) {
-            $form->addError(match ($e->getMessage()) {
-                'User not found' => 'admin.validation.userNotFound',
-                'User is not active' => 'admin.validation.userInactive',
-                'Invalid credentials' => 'admin.validation.invalidCredentials',
-                default => 'admin.validation.authenticationFailed',
-            });
+            $form->addError('admin.validation.invalidCredentials');
         }
 
     }
 
+    #[\Dravencms\Security\Mutation]
     public function actionOut(): void
     {
-        $this->getUser()->logout();
+        $this->getUser()->logout(true);
+        \Dravencms\Security\MutationGuard::rotate($this->getSession());
         $this->flashMessage($this->translator->translate('admin.flash.signedOut'), Flash::INFO);
         $this->redirect('in');
     }
@@ -152,7 +157,7 @@ class SignPresenter extends BasePresenter
     public function actionPasswordReset(string $hash): void
     {
         $foundPasswordReset = $this->userPasswordResetRepository->getActiveByHash($hash);
-        if(!$foundPasswordReset)
+        if (!$foundPasswordReset || !$foundPasswordReset->getUser()->isActive() || $foundPasswordReset->getUser()->getNamespace() !== 'Admin')
         {
             $this->error();
         }
@@ -165,6 +170,7 @@ class SignPresenter extends BasePresenter
      */
     public function createComponentDoPasswordReset(): DoResetPasswordForm
     {
+        if ($this->foundPasswordReset === null) { $this->error(); }
         $control = $this->doResetPasswordFormFactory->create($this->foundPasswordReset);
         $control->onSuccess[] = function(){
             $this->flashMessage($this->translator->translate('admin.flash.passwordChanged'), Flash::SUCCESS);
@@ -172,6 +178,11 @@ class SignPresenter extends BasePresenter
         };
 
         return $control;
+    }
+
+    public function actionUp(): void
+    {
+        if (!$this->allowRegister) { $this->error(); }
     }
 
     public function renderUp(): void
@@ -193,6 +204,7 @@ class SignPresenter extends BasePresenter
      */
     public function createComponentSignUpForm(): SignUpForm
     {
+        if (!$this->allowRegister) { $this->error(); }
         $component = $this->signUpFormFactory->create();
         $component->onSuccess[] = function()
         {

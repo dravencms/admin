@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {isMutationUrl,protectNaja,protectLegacyAjax} from '../js/mutations.mjs';
+const base='https://admin.example.test/admin/cs/file.file';
+for(const signal of ['delete','up','down','fileDelete','structureDelete','structureSave','edit','changeStatus','actionCallback'])assert(isMutationUrl(`?do=grid-${signal}`,base));
+for(const signal of ['page','sort','export','fileDownload','getItemDetail'])assert(!isMutationUrl(`?do=grid-${signal}`,base));
+assert(!isMutationUrl('https://other.example.test/?do=delete',base));
+globalThis.location=new URL(base);globalThis.document={querySelector:()=>({content:'csrf'})};
+const calls=[];const naja={makeRequest:(method,href,data,options)=>{calls.push({method,href,data,options});return Promise.resolve({ok:true});}};
+protectNaja(naja);assert.deepEqual(await naja.makeRequest('GET','?do=delete',{id:1}),{ok:true});
+assert.equal(calls[0].method,'POST');assert.equal(calls[0].options.fetch.headers.get('X-Admin-CSRF'),'csrf');
+await naja.makeRequest('GET','?do=page',null);assert.equal(calls[1].method,'GET');assert.equal(calls[1].options.fetch,undefined);
+await naja.makeRequest('POST','https://other.example.test/',null);assert.equal(calls[2].options.fetch,undefined);
+let prefilter;protectLegacyAjax({ajaxPrefilter:fn=>prefilter=fn});const options={url:'?do=structureSave',type:'GET'};prefilter(options);assert.equal(options.type,'POST');assert.equal(options.headers['X-Admin-CSRF'],'csrf');
+const external={url:'https://other.example.test/',type:'POST'};prefilter(external);assert.equal(external.headers,undefined);
+console.log('Mutation routing and AJAX transport preserve reads and never send tokens cross-origin.');

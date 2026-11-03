@@ -76,11 +76,11 @@ class AccountPasswordForm extends Control
         $form->addPassword('oldPassword')
             ->setRequired('admin.validation.oldPasswordRequired');
 
-        $form->addPassword('newPassword')
+        $form->addPassword('newPassword')->addFilter(\Nette\Utils\Strings::trim(...))
             ->setRequired('admin.validation.newPasswordRequired')
             ->addRule(Form::MIN_LENGTH, 'admin.validation.passwordMinLength', 8);
 
-        $form->addPassword('newPasswordAgain')
+        $form->addPassword('newPasswordAgain')->addFilter(\Nette\Utils\Strings::trim(...))
             ->setRequired('admin.validation.passwordAgainRequired')
             ->addConditionOn($form["newPassword"], Form::FILLED)
             ->addRule(Form::EQUAL, "admin.validation.passwordsMismatch", $form["newPassword"]);

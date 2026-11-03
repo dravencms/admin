@@ -1,12 +1,16 @@
+import { initializeMutations, protectLegacyAjax } from './mutations.mjs';
 import { initializeWidgets } from './widgets.js';
 import Chart from 'chart.js/auto';
 import './datagrid.js';
 import { initializeThemeSwitcher } from './theme.js';
 import 'summernote/dist/lang/summernote-cs-CZ.js';
 
+initializeMutations();
+
 function initializeAdmin() {
     initializeThemeSwitcher();
     const $ = window.jQuery;
+    protectLegacyAjax($);
     initializeWidgets();
     $.nette.init();
     $.nette.ext('admin-widgets', { success: () => initializeWidgets() });

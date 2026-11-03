@@ -34,6 +34,9 @@ class ResetPasswordForm extends BaseControl
     private $passwordResetRepository;
 
     /** @var string */
+    private \Dravencms\Admin\AuthRateLimiter $rateLimiter;
+    private \Nette\Http\IRequest $httpRequest;
+
     private $namespace = 'Admin';
 
     public $onSuccess = [];
@@ -44,16 +47,22 @@ class ResetPasswordForm extends BaseControl
      * @param TemplatedEmail $templatedEmail
      * @param UserRepository $userRepository
      * @param EntityManager $entityManager
-     * @param PasswordResetRepository $passwordResetRepository
+     * @param PasswordResetRepository $passwordResetRepository,
+        \Dravencms\Admin\AuthRateLimiter $rateLimiter,
+        \Nette\Http\IRequest $httpRequest
      */
     public function __construct(
         BaseFormFactory $baseFormFactory,
         TemplatedEmail $templatedEmail,
         UserRepository $userRepository,
         EntityManager $entityManager,
-        PasswordResetRepository $passwordResetRepository
+        PasswordResetRepository $passwordResetRepository,
+        \Dravencms\Admin\AuthRateLimiter $rateLimiter,
+        \Nette\Http\IRequest $httpRequest
     )
     {
+        $this->rateLimiter = $rateLimiter;
+        $this->httpRequest = $httpRequest;
         $this->baseFormFactory = $baseFormFactory;
         $this->templatedEmail = $templatedEmail;
         $this->userRepository = $userRepository;
@@ -85,10 +94,7 @@ class ResetPasswordForm extends BaseControl
      */
     public function onValidateForm(Form $form): void
     {
-        $values = $form->getValues();
-        if (!$this->userRepository->getOneByEmail($values->email, $this->namespace)) {
-            $form->addError('admin.validation.emailNotFound');
-        }
+
     }
 
     /**
@@ -99,10 +105,13 @@ class ResetPasswordForm extends BaseControl
     {
         $values = $form->getValues();
 
+        if (!$this->rateLimiter->consume('reset', $values->email, $this->httpRequest->getRemoteAddress() ?? 'unknown')) {
+            $this->onSuccess(); return;
+        }
         /** @var User $user */
         $user = $this->userRepository->getOneByEmail($values->email, $this->namespace);
-        if (!$user) {
-            $this->getPresenter()->error();
+        if (!$user || !$user->isActive()) {
+            $this->onSuccess(); return;
         }
         // Softdelte any previous password resets
         $this->passwordResetRepository->cleanPreviousPasswordResetsForUser($user);
@@ -120,7 +129,7 @@ class ResetPasswordForm extends BaseControl
         $this->templatedEmail->resetPassword([
             'title' => $subject,
             'email' => $user->getEmail(),
-            'hash' => $newPasswordReset->getHash()
+            'hash' => $newPasswordReset->getToken()
         ])
             ->addTo($user->getEmail())
             ->setSubject($subject)

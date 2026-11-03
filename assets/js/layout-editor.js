@@ -244,6 +244,7 @@ $(document).ready(function () {
             self.$saveButton.prop('disabled', true).attr('aria-busy', 'true');
             $.ajax({
                 url: self.$layourEditor.data('suri'),
+                type: 'POST',
                 data: {'structureTree': self.layoutData}
             }).done(function (data) {
                 self.renderMessage(Tools.translate('structureSaved'), 'success');

@@ -71,6 +71,8 @@ account:
     changeAvatarAt: You can change your avatar at
 
 validation:
+    tooManyAttempts: 'Too many sign-in attempts. Please try again later.'
+    invalidReset: 'This password-reset link is invalid or has expired.'
     firstNameRequired: Please enter your first name.
     lastNameRequired: Please enter your last name.
     emailRequired: Please enter your email.
@@ -91,13 +93,15 @@ validation:
 
 flash:
     signedOut: You have been signed out.
-    resetEmailSent: An email with a password reset link has been sent.
+    resetEmailSent: If an active account exists for this email, a password reset link will be sent.
     passwordChanged: Your password has been changed successfully.
     registered: Registration completed successfully.
     saved: Changes have been saved.
     passwordChangedSignIn: Your password has been changed. Please sign in with your new password.
 
 client:
+    confirmDelete: 'Delete this record?'
+    confirmBulkAction: 'Apply this action to the selected records?'
     amount: Amount
     noResults: No results found.
     remove: Remove

@@ -1,3 +1,4 @@
+import { protectNaja } from './mutations.mjs';
 import naja from 'naja';
 import Select from 'tom-select';
 import {
@@ -8,6 +9,8 @@ import {
 } from '@contributte/datagrid/assets/index.ts';
 import { NajaAjax } from '@contributte/datagrid/assets/ajax/index.ts';
 import { initializeDateInput } from './widgets.js';
+
+protectNaja(naja);
 
 function prepareGrids() {
     document.querySelectorAll('[data-datagrid-name] .ajax').forEach(element => {

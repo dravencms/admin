@@ -28,6 +28,8 @@ class DoResetPasswordForm extends BaseControl
     /** @var PasswordReset */
     private $passwordReset;
 
+    private \Dravencms\Model\User\Repository\PasswordResetRepository $passwordResetRepository;
+
     /** @var PasswordManager */
     private $passwordManager;
 
@@ -40,20 +42,23 @@ class DoResetPasswordForm extends BaseControl
      * @param BaseFormFactory $baseFormFactory
      * @param UserRepository $userRepository
      * @param EntityManager $entityManager
-     * @param PasswordManager $passwordManager
+     * @param PasswordManager $passwordManager,
+        \Dravencms\Model\User\Repository\PasswordResetRepository $passwordResetRepository
      */
     public function __construct(
         PasswordReset $passwordReset,
         BaseFormFactory $baseFormFactory,
         UserRepository $userRepository,
         EntityManager $entityManager,
-        PasswordManager $passwordManager
+        PasswordManager $passwordManager,
+        \Dravencms\Model\User\Repository\PasswordResetRepository $passwordResetRepository
     ) {
         $this->baseFormFactory = $baseFormFactory;
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
         $this->passwordReset = $passwordReset;
         $this->passwordManager = $passwordManager;
+        $this->passwordResetRepository = $passwordResetRepository;
     }
 
     /**
@@ -63,9 +68,10 @@ class DoResetPasswordForm extends BaseControl
     {
         $form = $this->baseFormFactory->create();
 
-        $form->addPassword('password');
+        $form->addPassword('password')->addFilter(\Nette\Utils\Strings::trim(...))->setRequired('admin.validation.passwordRequired')
+            ->addRule(Form::MIN_LENGTH, 'admin.validation.passwordMinLength', 8);
 
-        $form->addPassword('passwordAgain')
+        $form->addPassword('passwordAgain')->addFilter(\Nette\Utils\Strings::trim(...))
             ->setRequired('admin.validation.passwordAgainRequired')
             ->addRule(Form::EQUAL, 'admin.validation.passwordsMismatch', $form['password']);
 
@@ -92,17 +98,9 @@ class DoResetPasswordForm extends BaseControl
     {
         $values = $form->getValues();
 
-        $this->passwordReset->setIsUsed(true);
-
-        $user = $this->passwordReset->getUser();
-        $user->changePassword($values->password, function($password){
-            return $this->passwordManager->hash($password);
-        });
-
-        $this->entityManager->persist($this->passwordReset);
-        $this->entityManager->persist($user);
-
-        $this->entityManager->flush();
+        if (!$this->passwordResetRepository->consume($this->passwordReset, $values->password, $this->passwordManager)) {
+            $form->addError('admin.validation.invalidReset'); return;
+        }
 
         $this->onSuccess();
     }

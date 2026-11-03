@@ -5,7 +5,8 @@
   "scripts": {
     "build:admin": "esbuild js/admin.js --bundle --minify --target=es2020 --outfile=js/admin.bundle.js && esbuild css/admin.css --bundle --minify --outfile=css/admin.bundle.css",
     "test:theme": "node --test tests/theme.test.mjs",
-    "test:acl": "node --test tests/acl-permissions.test.mjs"
+    "test:acl": "node --test tests/acl-permissions.test.mjs",
+    "test:security": "node --test tests/mutations.test.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.25"

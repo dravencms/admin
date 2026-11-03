@@ -15,6 +15,11 @@ abstract class BasePresenter extends \Dravencms\BasePresenter
     use TLocalizedPresenter;
     use TUserPresenter;
 
+    public function getAdminMutationToken(): string
+    {
+        return \Dravencms\Security\MutationGuard::token($this->getSession());
+    }
+
     /** @return array<string, array{flag: string, name: string}> */
     public function getAdminLocales(): array
     {

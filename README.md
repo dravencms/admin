@@ -17,7 +17,7 @@ Administration shell for DravenCMS applications. It provides authenticated prese
 composer require dravencms/admin
 ```
 
-The DravenCMS package loader copies the package assets to `%wwwDir%/assets/admin` and loads `dravencms.config.neon`. Apply the package's Doctrine schema through the application's migration workflow and load its fixtures when the default administration menu is required.
+The DravenCMS package loader copies the package assets to `%wwwDir%/assets/admin` and loads `dravencms.config.neon`. Apply the package's Doctrine schema through the application's migration workflow before using administration. Navigation and permission definitions come from providers.
 
 The admin router handles URLs below `/admin` and supports an optional two-letter locale segment.
 
@@ -88,7 +88,7 @@ Disabled or unauthorized homepages fall back to an accessible provider-defined h
 
 ### Upgrading from the database menu
 
-Admin 3 no longer reads `adminMenu`. Menu fixtures and the old tree-recovery command are no longer registered. Existing menu rows and the mapped entity remain untouched, so this update does not require dropping or migrating a table. Recreate any custom database menu entries as a project provider and port custom ordering, visibility and homepage choices to the configuration above before deploying. ACL fixture installation and existing grants are unchanged. Clear the application's compiled Nette container cache as part of deployment.
+Admin 3 no longer reads `adminMenu`. Menu fixtures and the old tree-recovery command are no longer registered. Existing menu rows and the mapped entity remain untouched, so this update does not require dropping or migrating a table. Recreate any custom database menu entries as a project provider and port custom ordering, visibility and homepage choices to the configuration above before deploying. ACL definitions now come from providers; group grants remain stored in the database. Clear the application's compiled Nette container cache as part of deployment.
 
 
 Use the established DravenCMS base-form and base-grid factories for consistent controls and translations.
@@ -100,3 +100,13 @@ This package is licensed under the LGPL-3.0 license.
 ## Permission assignment
 
 Admin 3.1 integrates the User 3 provider-backed permission picker. Prerequisites are checked automatically and labeled with the permissions requiring them; **Assign independently** retains a prerequisite as a direct assignment. ACL definition editing is no longer available. See the User package migration instructions before deploying the identifier-only schema.
+
+## Security transport and authentication (Admin 3.2)
+
+Use User 3.1 and the matching plugin releases. Run `user:security:migrate --apply` in maintenance mode before enabling password reset; see the User upgrade instructions. Synchronize the admin assets, including `admin.bundle.js` and `layout-editor.js`, and clear compiled container/browser caches. Old sessions and old reset links require a fresh sign-in or reset request.
+
+All destructive signal links and logout use POST with a session-bound action token. Read-only links stay GET. Grid bulk forms also use Nette form CSRF protection, and delete/bulk actions require confirmation. The shared transport covers Naja and legacy jQuery AJAX and never attaches tokens to another origin. New mutation links should carry `data-admin-mutation`; custom AJAX must send POST with the `X-Admin-CSRF` header. The token is exposed by the `admin-mutation-token` meta tag.
+
+Login responses use a generic credentials error. Password-reset requests show the same success response for existing, missing, inactive and throttled accounts. Per-account and per-IP fixed-window limits are persisted across sessions/workers on this host: login allows 10/account and 30/IP per 15 minutes; reset allows 3/account and 10/IP per hour. `admin.authRateLimitDirectory` overrides the writable limiter directory (default `%tempDir%/admin-auth-limits`). Multi-host deployments must use an appropriate shared limiter backend or enforce equivalent limits at the edge.
+
+Registration is rejected before form dispatch when disabled. Account activity writes are throttled by User rather than flushed on every request.

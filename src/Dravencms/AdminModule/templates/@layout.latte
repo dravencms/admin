@@ -2,6 +2,7 @@
 <html lang="{$presenter->translator->getLocale()}" data-bs-navbar-position="combined">
 <head>
     <meta charset="utf-8">
+    <meta name="admin-mutation-token" content="{$presenter->getAdminMutationToken()}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{ifset $h1}{$h1} | {/ifset}DravenCMS</title>
     <link rel="icon" href="{$basePath}/assets/admin/img/favicon.ico">
@@ -36,7 +37,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
                         <a n:href=":Admin:User:Account:" class="dropdown-item"><i class="fa fa-user me-2"></i>{_"admin.layout.MyProfile"}</a>
-                        <a n:href=":Admin:User:Sign:out" class="dropdown-item"><i class="fa fa-power-off me-2"></i>{_"admin.layout.LogOut"}</a>
+                        <a n:href=":Admin:User:Sign:out" data-admin-mutation class="dropdown-item"><i class="fa fa-power-off me-2"></i>{_"admin.layout.LogOut"}</a>
                     </div>
                 </div>
             </div>

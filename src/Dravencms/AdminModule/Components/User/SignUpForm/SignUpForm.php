@@ -73,9 +73,11 @@ class SignUpForm extends BaseControl
             ->addRule(Form::EMAIL, 'admin.validation.emailInvalid')
             ->setRequired('admin.validation.emailRequired');
 
-        $form->addPassword('password');
+        $form->addPassword('password')->addFilter(\Nette\Utils\Strings::trim(...))
+            ->setRequired('admin.validation.passwordRequired')
+            ->addRule(Form::MIN_LENGTH, 'admin.validation.passwordMinLength', 8);
 
-        $form->addPassword('passwordAgain')
+        $form->addPassword('passwordAgain')->addFilter(\Nette\Utils\Strings::trim(...))
             ->setRequired('admin.validation.passwordAgainRequired')
             ->addRule(Form::EQUAL, 'admin.validation.passwordsMismatch', $form['password']);
 

@@ -8,7 +8,6 @@ use Dravencms\AdminModule\Components\Admin\MenuNavbar\MenuNavbarFactory;
 use Dravencms\AdminModule\Components\Admin\Breadcrumb\BreadcrumbFactory;
 use Dravencms\AdminModule\Components\Admin\MenuNotification\MenuNotification;
 use Dravencms\AdminModule\Components\Admin\MenuNotification\MenuNotificationFactory;
-use Dravencms\User\DefaultDataCreator;
 use Dravencms\Database\EntityManager;
 use Dravencms\User\TSecuredPresenter;
 
@@ -34,8 +33,6 @@ abstract class SecuredPresenter extends BasePresenter
     /** @var EntityManager @inject */
     public $entityManager;
 
-    /** @var DefaultDataCreator @inject */
-    public $defaultDataCreator;
 
 
     /**
