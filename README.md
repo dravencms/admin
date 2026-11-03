@@ -110,3 +110,16 @@ All destructive signal links and logout use POST with a session-bound action tok
 Login responses use a generic credentials error. Password-reset requests show the same success response for existing, missing, inactive and throttled accounts. Per-account and per-IP fixed-window limits are persisted across sessions/workers on this host: login allows 10/account and 30/IP per 15 minutes; reset allows 3/account and 10/IP per hour. `admin.authRateLimitDirectory` overrides the writable limiter directory (default `%tempDir%/admin-auth-limits`). Multi-host deployments must use an appropriate shared limiter backend or enforce equivalent limits at the edge.
 
 Registration is rejected before form dispatch when disabled. Account activity writes are throttled by User rather than flushed on every request.
+
+
+## Public assets
+
+Released packages include a generated `public/` directory. Packager 3 links it to
+`www/assets/` on every Composer install/update; existing asset URLs stay the same.
+Development sources, package metadata and tests are kept outside the public directory.
+
+After editing assets, install Composer dependencies and run `composer build:assets`.
+The explicit runtime file list is `assets/public-assets.json`; local CSS dependencies
+are included automatically. Commit `public/` and `public-assets.manifest.json` with
+the source changes. The builder rejects missing dependencies and locally modified
+or unmanaged generated files. Admin's `npm run build:admin` also rebuilds public assets.

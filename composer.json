@@ -20,7 +20,8 @@
     "dravencms/user": "^3.1",
     "symfony/cache": "^6.4 || ^7.0 || ^8.0",
     "symfony/lock": "^6.4 || ^7.0 || ^8.0",
-    "symfony/rate-limiter": "^6.4 || ^7.0 || ^8.0"
+    "symfony/rate-limiter": "^6.4 || ^7.0 || ^8.0",
+    "dravencms/packager": "^3.0"
   },
   "autoload": {
     "psr-0": {
@@ -29,10 +30,10 @@
   },
   "extra": {
     "dravencms": {
-      "files": {
-        "assets/*": "%wwwDir%/assets/admin"
-      },
-      "configuration": "dravencms.config.neon"
+      "configuration": "dravencms.config.neon",
+      "assets": {
+        "public": "%wwwDir%/assets/admin"
+      }
     }
   },
   "conflict": {
@@ -51,5 +52,8 @@
     "dravencms/seo": "<3.8.0",
     "dravencms/structure": "<2.8.0",
     "dravencms/tag": "<2.6.0"
+  },
+  "scripts": {
+    "build:assets": "build-public-assets"
   }
 }
