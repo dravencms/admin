@@ -93,7 +93,7 @@ validation:
 
 flash:
     signedOut: Byli jste odhlášeni.
-    resetEmailSent: Pokud pro tento e-mail existuje aktivní účet, bude na něj odeslán odkaz pro obnovu hesla.
+    resetEmailSent: 'Pokud pro tento e-mail existuje aktivní účet, bude na něj odeslán odkaz pro obnovu hesla.'
     passwordChanged: Heslo bylo úspěšně změněno.
     registered: Registrace proběhla úspěšně.
     saved: Změny byly uloženy.

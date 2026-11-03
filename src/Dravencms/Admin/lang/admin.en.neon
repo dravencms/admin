@@ -93,7 +93,7 @@ validation:
 
 flash:
     signedOut: You have been signed out.
-    resetEmailSent: If an active account exists for this email, a password reset link will be sent.
+    resetEmailSent: 'If an active account exists for this email, a password reset link will be sent.'
     passwordChanged: Your password has been changed successfully.
     registered: Registration completed successfully.
     saved: Changes have been saved.
