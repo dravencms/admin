@@ -1,3 +1,4 @@
+import { initializeAclPickers } from './acl-permissions.mjs';
 import flatpickr from 'flatpickr';
 import { Czech } from 'flatpickr/dist/l10n/cs.js';
 import Select from 'tom-select';
@@ -22,6 +23,7 @@ export function initializeDateInput(input, grid = false) {
 }
 
 export function initializeWidgets(root = document) {
+    initializeAclPickers(root);
     root.querySelectorAll('.date, .datetime, .time').forEach(input => {
         if (input instanceof HTMLInputElement && !input.closest('[data-datagrid-name]')) initializeDateInput(input);
     });

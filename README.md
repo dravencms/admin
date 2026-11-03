@@ -96,3 +96,7 @@ Use the established DravenCMS base-form and base-grid factories for consistent c
 ## License
 
 This package is licensed under the LGPL-3.0 license.
+
+## Permission assignment
+
+Admin 3.1 integrates the User 3 provider-backed permission picker. Prerequisites are checked automatically and labeled with the permissions requiring them; **Assign independently** retains a prerequisite as a direct assignment. ACL definition editing is no longer available. See the User package migration instructions before deploying the identifier-only schema.

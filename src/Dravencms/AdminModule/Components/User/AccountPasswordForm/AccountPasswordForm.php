@@ -23,7 +23,6 @@ namespace Dravencms\AdminModule\Components\User\AccountPasswordForm;
 use Dravencms\Components\BaseForm\BaseFormFactory;
 use Dravencms\Security\PasswordManager;
 use Dravencms\Model\User\Entities\User;
-use Dravencms\Model\User\Repository\AclOperationRepository;
 use Dravencms\Model\User\Repository\UserRepository;
 use Dravencms\Database\EntityManager;
 use Nette\Application\UI\Control;
@@ -42,7 +41,7 @@ class AccountPasswordForm extends Control
     /** @var EntityManager */
     private $entityManager;
 
-    /** @var AclOperationRepository */
+    /** @var UserRepository */
     private $userRepository;
 
     /** @var PasswordManager */
