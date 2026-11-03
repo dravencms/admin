@@ -53,7 +53,7 @@ abstract class SecuredPresenter extends BasePresenter
      */
     public function createComponentMenu(): MenuNavbar
     {
-        return $this->menuNavbarFactory->create($this->getUserEntity());
+        return $this->menuNavbarFactory->create();
     }
 
     /**
@@ -61,7 +61,7 @@ abstract class SecuredPresenter extends BasePresenter
      */
     public function createComponentMenuBreadcrumb(): Breadcrumb
     {
-        return $this->menuBreadcrumbFactory->create($this->getUserEntity());
+        return $this->menuBreadcrumbFactory->create();
     }
 
     /**

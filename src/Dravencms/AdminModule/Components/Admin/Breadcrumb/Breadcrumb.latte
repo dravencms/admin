@@ -1,18 +1,10 @@
 <ol class="breadcrumb mb-2">
-    {if $homepage}
-        <li class="breadcrumb-item"><a href="{plink $homepage->getPresenter().':'.$homepage->getAction() (expand)$homepage->getParameters()}">{_"admin.component.breadcrumb.Home"}</a></li>
-    {else}
-        <li class="breadcrumb-item"><a href="{plink :Admin:Homepage:Homepage:}">{_"admin.component.breadcrumb.Home"}</a></li>
-    {/if}
-
-    <li n:foreach="$breadcrumbs as $breadcrumb" class="breadcrumb-item{if $thisPage == $breadcrumb} active{/if}">
-        {if $thisPage == $breadcrumb}
-            {$breadcrumb->getName()}
+    <li class="breadcrumb-item"><a href="{plink ($homepage ? $homepage->destination : ':Admin:Homepage:Homepage:default'), (expand) ($homepage ? $homepage->parameters : [])}">{_'admin.component.breadcrumb.Home'}</a></li>
+    <li n:foreach="$breadcrumbs as $item" n:if="$item->id !== 'admin.home'" class="breadcrumb-item{$iterator->isLast() ? ' active'}">
+        {if !$iterator->isLast() && $item->destination !== null}
+            <a href="{plink $item->destination, (expand) $item->parameters}">{_$item->label}</a>
         {else}
-            <a{if !$breadcrumb->getChildren()} href="{plink $breadcrumb->getPresenter().':'.$breadcrumb->getAction()}" {/if}>
-                {$breadcrumb->getName()}
-            </a>
+            <span aria-current="{$iterator->isLast() ? 'page' : null}">{_$item->label}</span>
         {/if}
     </li>
-
 </ol>

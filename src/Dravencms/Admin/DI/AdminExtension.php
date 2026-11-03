@@ -17,6 +17,16 @@ use Nette\DI\CompilerExtension;
  */
 class AdminExtension extends CompilerExtension implements TranslationProviderInterface
 {
+    public function getConfigSchema(): \Nette\Schema\Schema
+    {
+        return \Nette\Schema\Expect::structure([
+            'menu' => \Nette\Schema\Expect::structure([
+                'homepage' => \Nette\Schema\Expect::string()->nullable()->default(null),
+                'overrides' => \Nette\Schema\Expect::array()->default([]),
+            ]),
+        ]);
+    }
+
     public function getTranslationResources(): array
     {
         return [__DIR__.'/../lang'];
@@ -36,6 +46,13 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
         $builder->addDefinition($this->prefix('adminFiltersLatte'))
             ->setFactory(Latte::class);
 
+        $builder->addDefinition($this->prefix('menuRegistry'))
+            ->setFactory(\Dravencms\Admin\Menu\AdminMenuRegistry::class, [
+                'overrides' => $this->getConfig()->menu->overrides,
+                'homepage' => $this->getConfig()->menu->homepage,
+            ]);
+        $builder->addDefinition($this->prefix('coreMenuProvider'))->setFactory(\Dravencms\Admin\Menu\CoreMenuProvider::class);
+
         $this->loadComponents();
         $this->loadModels();
         $this->loadConsole();
@@ -48,6 +65,12 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
 
         $latteFactoryService = $builder->getDefinitionByType(LatteFactory::class);
         $latteFactoryService->getResultDefinition()->addSetup('addFilter', ['formatCounter', [$this->prefix('@adminFiltersLatte'), 'formatCounter']]);
+
+        $menu = $builder->getDefinition($this->prefix('menuRegistry'));
+        foreach ($builder->findByType(\Dravencms\Admin\Menu\AdminMenuProviderInterface::class) as $serviceName => $service) {
+            $menu->addSetup('addProvider', ['@' . $serviceName]);
+        }
+        $menu->addSetup('getItems');
 
         $notification = $builder->getDefinition($this->prefix('notifications'));
 

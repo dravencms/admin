@@ -43,7 +43,53 @@ After changing admin assets in an application, clear generated WebLoader bundles
 
 ## Extending the Administration
 
-Feature presenters should extend `Dravencms\AdminModule\SecuredPresenter`. Package fixtures can add `Dravencms\Model\Admin\Entities\Menu` entries linked to ACL operations; the navbar automatically filters entries for the current user.
+Feature presenters should extend `Dravencms\AdminModule\SecuredPresenter`.
+
+### Plugin-provided admin navigation
+
+Register services implementing `Dravencms\Admin\Menu\AdminMenuProviderInterface`. Admin discovers them through Nette DI. Each provider returns immutable `AdminMenuItem` definitions:
+
+```php
+public function getItems(): iterable
+{
+    yield new AdminMenuItem(
+        id: 'example.records',
+        label: 'example.menu.records',
+        destination: ':Admin:Example:Record:default',
+        parent: 'content',
+        icon: 'fa-list',
+        order: 100,
+        resource: 'example',
+        privilege: 'edit',
+        activeDestinations: [':Admin:Example:Picture:*'],
+    );
+}
+```
+
+Register the provider only when `AdminExtension` is enabled if administration is optional for your plugin. Add a Composer conflict with `dravencms/admin <3.0` for such integrations. Shared core IDs are `admin.home` and `content`; other plugins can attach descendants using a parent's stable, namespaced ID. Missing parents, duplicate IDs, cycles and unknown overrides are errors. Provider discovery order does not affect sorting: entries sort by `order`, then ID.
+
+Labels are translation keys resolved at rendering time. The sidebar, active groups, breadcrumbs and login homepage all use the same registry. Menu definitions are cached in memory, while ACL filtering runs for the current user on every call. Existing resource/privilege checks remain in force; presenters must continue enforcing access themselves. Groups without visible children are hidden. Match parameters distinguish links to the same action; `activeDestinations` associate detail presenters with their overview entry. A same-presenter fallback keeps overview entries selected on edit actions.
+
+Applications can register their own providers and customize entries in configuration:
+
+```neon
+admin:
+    menu:
+        homepage: example.records
+        overrides:
+            example.records:
+                parent: null
+                order: 10
+            example.unused:
+                enabled: false
+```
+
+Disabled or unauthorized homepages fall back to an accessible provider-defined homepage, normally `admin.home`. Disabling a parent hides its descendants. All overrides must reference installed menu items.
+
+### Upgrading from the database menu
+
+Admin 3 no longer reads `adminMenu`. Menu fixtures and the old tree-recovery command are no longer registered. Existing menu rows and the mapped entity remain untouched, so this update does not require dropping or migrating a table. Recreate any custom database menu entries as a project provider and port custom ordering, visibility and homepage choices to the configuration above before deploying. ACL fixture installation and existing grants are unchanged. Clear the application's compiled Nette container cache as part of deployment.
+
 
 Use the established DravenCMS base-form and base-grid factories for consistent controls and translations.
 

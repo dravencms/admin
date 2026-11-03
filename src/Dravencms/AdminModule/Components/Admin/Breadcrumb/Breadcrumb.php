@@ -1,52 +1,26 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Dravencms\AdminModule\Components\Admin\Breadcrumb;
 
+use Dravencms\Admin\Menu\AdminMenuRegistry;
 use Dravencms\Components\BaseControl\BaseControl;
-use Dravencms\Model\Admin\Repository\MenuRepository;
-use Dravencms\Model\User\Entities\User;
+use Nette\Security\User;
 
-/**
- * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
- */
 class Breadcrumb extends BaseControl
 {
-    /** @var MenuRepository */
-    private $menuRepository;
-
-    /** @var User */
-    private $user;
-
-    public function __construct(User $user, MenuRepository $menuRepository)
+    public function __construct(private AdminMenuRegistry $menu, private User $user)
     {
-        $this->user = $user;
-        $this->menuRepository = $menuRepository;
     }
 
     public function render(): void
     {
-        $template = $this->template;
         $presenter = $this->getPresenter();
-        $thisPage = $this->menuRepository->getByPresenterAndAction(':'.$presenter->getName(), $presenter->getAction());
-
-        if (!$thisPage)
-        {
-            $thisPage = $this->menuRepository->getOneByPresenter(':'.$presenter->getName());
-        }
-
-        $template->thisPage = $thisPage;
-        if ($thisPage)
-        {
-            $template->breadcrumbs = $this->menuRepository->buildParentTree($thisPage);
-        }
-        else
-        {
-            $template->breadcrumbs = [];
-        }
-
-        $template->homepage = $this->menuRepository->getHomePageForUser($this->user);
-
-        $template->setFile(__DIR__.'/Breadcrumb.latte');
-        $template->render();
+        $allowed = fn(string $resource, ?string $privilege): bool => $this->user->isAllowed($resource, $privilege);
+        $items = $this->menu->getVisibleItems($allowed);
+        $active = $this->menu->getActiveItem($items, $presenter->getName(), $presenter->getAction(), $presenter->getParameters());
+        $this->template->breadcrumbs = $this->menu->getBreadcrumbs($items, $active);
+        $this->template->homepage = $this->menu->getHomePage($allowed);
+        $this->template->setFile(__DIR__ . '/Breadcrumb.latte');
+        $this->template->render();
     }
 }

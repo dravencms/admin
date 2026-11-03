@@ -13,8 +13,7 @@ use Dravencms\AdminModule\Components\User\SignInForm\SignInFormFactory;
 use Dravencms\AdminModule\Components\User\SignUpForm\SignUpForm;
 use Dravencms\AdminModule\Components\User\SignUpForm\SignUpFormFactory;
 use Dravencms\Flash;
-use Dravencms\Model\Admin\Entities\Menu;
-use Dravencms\Model\Admin\Repository\MenuRepository;
+use Dravencms\Admin\Menu\AdminMenuRegistry;
 use Dravencms\Security\Authenticator;
 use Dravencms\Model\User\Repository\PasswordResetRepository;
 use Nette\Application\Attributes\Persistent;
@@ -32,8 +31,8 @@ class SignPresenter extends BasePresenter
     /** @var PasswordResetRepository @inject */
     public $userPasswordResetRepository;
 
-    /** @var MenuRepository @inject */
-    public $adminMenuRepository;
+    /** @var AdminMenuRegistry @inject */
+    public $adminMenuRegistry;
 
     /** @var SignInFormFactory @inject */
     public $signInFormFactory;
@@ -105,10 +104,9 @@ class SignPresenter extends BasePresenter
                 }
             }
 
-            /** @var Menu $homepage */
-            if ($homepage = $this->adminMenuRepository->getHomePageForUser($this->getUserEntity())) {
-                $redirect = $homepage->getPresenter() . ($homepage->getAction() ? ':' . $homepage->getAction() : ':default');
-                $parameters = $homepage->getParameters();
+            if ($homepage = $this->adminMenuRegistry->getHomePage(fn(string $resource, ?string $privilege): bool => $user->isAllowed($resource, $privilege))) {
+                $redirect = $homepage->destination;
+                $parameters = $homepage->parameters;
             } else {
                 $redirect = ':Admin:Homepage:Homepage:default';
                 $parameters = [];

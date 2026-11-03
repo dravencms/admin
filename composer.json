@@ -15,8 +15,9 @@
     }
   ],
   "require": {
+    "php": ">=8.2",
     "dravencms/application": ">=0.0.3",
-    "dravencms/user": ">=v2.0"
+    "dravencms/user": ">=2.6"
   },
   "autoload": {
     "psr-0": {
@@ -30,5 +31,22 @@
       },
       "configuration": "dravencms.config.neon"
     }
+  },
+  "conflict": {
+    "dravencms/api": "<0.4.0",
+    "dravencms/article": "<2.6.0",
+    "dravencms/carousel": "<2.3.0",
+    "dravencms/cookie-consent": "<1.8.0",
+    "dravencms/file": "<2.6.0",
+    "dravencms/file-download": "<2.4.0",
+    "dravencms/form": "<2.5.0",
+    "dravencms/gallery": "<2.4.0",
+    "dravencms/locale": "<2.5.0",
+    "dravencms/location": "<1.5.0",
+    "dravencms/map": "<2.3.0",
+    "dravencms/partner": "<2.4.0",
+    "dravencms/seo": "<3.5.0",
+    "dravencms/structure": "<2.6.0",
+    "dravencms/tag": "<2.4.0"
   }
 }

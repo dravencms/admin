@@ -1,17 +1,8 @@
-<?php declare(strict_types = 1);
-/**
- * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
- */
+<?php declare(strict_types=1);
 
 namespace Dravencms\AdminModule\Components\Admin\MenuNavbar;
 
-use Dravencms\Model\User\Entities\User;
-
 interface MenuNavbarFactory
 {
-    /**
-     * @param User $user
-     * @return MenuNavbar
-     */
-    public function create(User $user): MenuNavbar;
+    public function create(): MenuNavbar;
 }

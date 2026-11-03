@@ -1,1 +1,27 @@
-{$htmlTree|noescape}
+{define menuNodes, $nodes, $root = false}
+<ul class="navbar-nav {$root ? 'pt-lg-3' : 'ms-3'}">
+    <li n:foreach="$nodes as $node" class="nav-item{$node['active'] ? ' active'}">
+        {var $item = $node['item']}
+        {if $node['children']}
+            <details open="{$node['active']}">
+                <summary class="nav-link">
+                    <span class="nav-link-icon"><i class="fa {$item->icon}" aria-hidden="true"></i></span>
+                    {if $item->destination !== null}
+                        <a href="{plink $item->destination, (expand) $item->parameters}" class="nav-link-title">{_$item->label}</a>
+                    {else}
+                        <span class="nav-link-title">{_$item->label}</span>
+                    {/if}
+                    <i class="fa fa-angle-down ms-auto" aria-hidden="true"></i>
+                </summary>
+                {include menuNodes, $node['children']}
+            </details>
+        {else}
+            <a href="{plink $item->destination, (expand) $item->parameters}" class="nav-link" aria-current="{$node['active'] ? 'page' : null}">
+                <span class="nav-link-icon"><i class="fa {$item->icon}" aria-hidden="true"></i></span>
+                <span class="nav-link-title">{_$item->label}</span>
+            </a>
+        {/if}
+    </li>
+</ul>
+{/define}
+{include menuNodes, $nodes, true}

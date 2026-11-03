@@ -117,3 +117,7 @@ client:
     cancelUploadConfirmation: Are you sure you want to cancel this upload?
     removeFile: Remove file
     maxFilesExceeded: You cannot upload any more files.
+
+menu:
+    dashboard: Dashboard
+    content: Content

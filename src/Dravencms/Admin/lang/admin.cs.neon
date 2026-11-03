@@ -117,3 +117,7 @@ client:
     cancelUploadConfirmation: Opravdu chcete zrušit nahrávání?
     removeFile: Odebrat soubor
     maxFilesExceeded: Další soubory již nelze nahrát.
+
+menu:
+    dashboard: Přehled
+    content: Obsah
