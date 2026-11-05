@@ -41,7 +41,7 @@
     "dravencms/article": "<2.8.0",
     "dravencms/carousel": "<2.5.0",
     "dravencms/cookie-consent": "<1.10.0",
-    "dravencms/file": "<2.8.0",
+    "dravencms/file": "<4.0",
     "dravencms/file-download": "<2.6.0",
     "dravencms/form": "<2.7.0",
     "dravencms/gallery": "<2.7.0",
