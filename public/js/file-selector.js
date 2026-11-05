@@ -8,6 +8,12 @@
         if (!states.has(root)) states.set(root, { version: 0, objectUrl: null });
         return states.get(root);
     };
+    function updateClearButton(root) {
+        const empty = !get(root, 'id').value && !get(root, 'upload')?.files.length;
+        const button = get(root, 'clear');
+        button.hidden = empty;
+        button.classList.toggle('d-none', empty);
+    }
     function reset(root) {
         const current = state(root);
         current.version++;
@@ -32,6 +38,7 @@
         const upload = get(root, 'upload');
         if (upload) upload.value = '';
         get(root, 'id').value = id;
+        updateClearButton(root);
         const url = new URL(root.dataset.previewUrl, location.href);
         url.searchParams.set('filesStructureFilesId', id);
         if (root.dataset.fileType) url.searchParams.set('type', root.dataset.fileType);
@@ -96,11 +103,15 @@
         }
     });
     document.addEventListener('change', event => {
+        if (event.target.matches('[data-file-picker-id]')) {
+            updateClearButton(event.target.closest('[data-file-picker]'));
+            return;
+        }
         const upload = event.target.closest('[data-file-picker-upload]');
         if (!upload) return;
         const root = upload.closest('[data-file-picker]'); reset(root);
         const file = upload.files[0];
-        if (!file) return;
+        if (!file) { updateClearButton(root); return; }
         get(root, 'id').value = '';
         if (file.type.startsWith('image/')) state(root).objectUrl = URL.createObjectURL(file);
         preview(root, file.name, state(root).objectUrl);
@@ -109,7 +120,7 @@
     document.addEventListener('reset', event => {
         setTimeout(() => event.target.querySelectorAll('[data-file-picker]').forEach(root => {
             const id = get(root, 'id').value;
-            if (id) select(root, id); else reset(root);
+            if (id) select(root, id); else { reset(root); updateClearButton(root); }
         }), 0);
     });
 })();
