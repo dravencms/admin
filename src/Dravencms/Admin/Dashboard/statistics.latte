@@ -1,0 +1,8 @@
+<dl class="row g-3 mb-0">
+    {foreach $metrics as $metric}
+        <div class="col-6">
+            <dt class="text-secondary fw-normal mb-1">{_$metric->label}</dt>
+            <dd class="h2 mb-0">{if $metric->bytes}{$metric->value|bytes}{else}{$metric->value}{/if}</dd>
+        </div>
+    {/foreach}
+</dl>

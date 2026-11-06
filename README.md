@@ -123,3 +123,55 @@ The explicit runtime file list is `assets/public-assets.json`; local CSS depende
 are included automatically. Commit `public/` and `public-assets.manifest.json` with
 the source changes. The builder rejects missing dependencies and locally modified
 or unmanaged generated files. Admin's `npm run build:admin` also rebuilds public assets.
+
+
+## Package dashboard components (Admin 3.5)
+
+Dashboard panels are services implementing `Dravencms\Admin\Dashboard\IDashboardComponent`
+and extending Nette UI `Control`. Register them in your package DI extension or NEON:
+
+```neon
+services:
+    - MyPackage\Admin\OverviewPanel
+```
+
+```php
+final class OverviewPanel extends Nette\Application\UI\Control implements IDashboardComponent
+{
+    public function getDefinition(): DashboardDefinition
+    {
+        return new DashboardDefinition('my-package.overview', 'myPackage.dashboard.title', 100,
+            resource: 'myPackage', privilege: 'edit', destination: ':Admin:MyPackage:Overview:default');
+    }
+
+    public function render(): void
+    {
+        // Load data here, not in the constructor or getDefinition().
+        $this->template->setFile(__DIR__ . '/overview.latte');
+        $this->template->render();
+    }
+}
+```
+
+Import the dashboard interface and definition from `Dravencms\Admin\Dashboard`.
+Titles are translation keys; keep their CS/EN catalogs in the owning package.
+IDs must be globally unique and stable. Panels sort by order, then ID. Admin discovers
+services automatically and creates fresh controls through factories. No fixtures,
+menu records or database synchronization are needed.
+
+ACL is checked before constructing a requested panel and again on component access.
+Hidden panels are never rendered, and forged component/signal requests receive 404.
+Registry metadata discovery instantiates each service once: constructors and metadata
+must remain cheap and must not load protected data. Custom panel signals/forms retain
+their normal mutation and operation-level permission checks.
+
+For simple counters, extend `StatisticsComponent` and implement `getMetrics()` yielding
+`DashboardMetric` instances. Its renderer escapes values, translates labels and formats
+byte values when the third argument is true. It also checks panel permission before
+loading metrics. More complex panels can render their own Latte template normally.
+
+Admin supplies the existing system-information card. File, Gallery, User and Article
+provide aggregate summaries when installed with dashboard-capable Admin. Other packages
+need no panel unless they have useful information to show. Project-specific services
+are discovered by the same mechanism. Clear the compiled container and translation
+cache after updating; this feature requires no database migration.

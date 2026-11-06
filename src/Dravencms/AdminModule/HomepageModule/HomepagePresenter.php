@@ -1,17 +1,22 @@
-<?php declare(strict_types = 1);
-
+<?php declare(strict_types=1);
 namespace Dravencms\AdminModule\HomepageModule;
 
+use Dravencms\Admin\Dashboard\DashboardRegistry;
 use Dravencms\AdminModule\SecuredPresenter;
-use Nette;
-use Tracy\Debugger;
+use Nette\Application\UI\Multiplier;
 
-/**
- * Homepage presenter.
- */
 class HomepagePresenter extends SecuredPresenter
 {
-    public function renderDefault()
+    /** @inject */
+    public DashboardRegistry $dashboardRegistry;
+
+    public function renderDefault(): void
     {
+        $this->template->dashboardPanels = $this->dashboardRegistry->getVisiblePanels($this->getUser());
+    }
+
+    protected function createComponentDashboard(): Multiplier
+    {
+        return new Multiplier(fn(string $name) => $this->dashboardRegistry->getComponent($name, $this->getUser()));
     }
 }

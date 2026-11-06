@@ -53,6 +53,8 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
                 'overrides' => $this->getConfig()->menu->overrides,
                 'homepage' => $this->getConfig()->menu->homepage,
             ]);
+        $builder->addDefinition($this->prefix('dashboardRegistry'))->setFactory(\Dravencms\Admin\Dashboard\DashboardRegistry::class);
+        $builder->addDefinition($this->prefix('systemDashboard'))->setFactory(\Dravencms\Admin\Dashboard\SystemComponent::class)->setAutowired(false);
         $builder->addDefinition($this->prefix('coreMenuProvider'))->setFactory(\Dravencms\Admin\Menu\CoreMenuProvider::class);
 
         $this->loadComponents();
@@ -73,6 +75,14 @@ class AdminExtension extends CompilerExtension implements TranslationProviderInt
             $menu->addSetup('addProvider', ['@' . $serviceName]);
         }
         $menu->addSetup('getItems');
+
+        $dashboard = $builder->getDefinition($this->prefix('dashboardRegistry'));
+        foreach ($builder->findByType(\Dravencms\Admin\Dashboard\IDashboardComponent::class) as $serviceName => $service) {
+            if (!is_a($service->getType(), \Nette\Application\UI\Control::class, true)) {
+                throw new \LogicException('Dashboard component must extend Nette UI Control: ' . $serviceName);
+            }
+            $dashboard->addSetup('addFactory', [new \Nette\PhpGenerator\Literal('fn () => $this->createService(?)', [$serviceName])]);
+        }
 
         $notification = $builder->getDefinition($this->prefix('notifications'));
 

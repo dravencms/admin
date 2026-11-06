@@ -1,22 +1,21 @@
-{* This is the welcome page, you can delete it *}
-
 {block content}
-    <div class="jumbotron">
+    <div class="mb-4">
         <h1>{_"admin.presenter.homepage.Welcome"}!</h1>
-        <p>{_"admin.presenter.homepage.WelcomeToDravenCMSaContentManagementSystem"}.</p>
+        <p class="text-secondary">{_"admin.presenter.homepage.WelcomeToDravenCMSaContentManagementSystem"}.</p>
     </div>
-
-    <div class="panels">
-        <div class="card panel-info">
-            <div class="card-header">
-                <h3 class="card-title">{_"admin.presenter.homepage.SystemInfo"}</h3>
+    <div class="row g-3">
+        {foreach $dashboardPanels as $name => $definition}
+            <div class="col-12 col-xl-6">
+                <section class="card h-100" data-dashboard-panel="{$definition->id}">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fa {$definition->icon} me-2" aria-hidden="true"></i>
+                            {if $definition->destination}<a href="{plink $definition->destination}">{_$definition->title}</a>{else}{_$definition->title}{/if}
+                        </h2>
+                    </div>
+                    <div class="card-body">{control "dashboard-$name"}</div>
+                </section>
             </div>
-            <div class="card-body">
-                <b>PHP:</b> {=\PHP_VERSION}<br/>
-                {ifset $_SERVER['SERVER_SOFTWARE']}
-                    <b>{_'admin.presenter.homepage.server'}</b> {$_SERVER['SERVER_SOFTWARE']}<br/>
-                {/ifset}
-            </div>
-        </div>
+        {/foreach}
     </div>
 {/block}

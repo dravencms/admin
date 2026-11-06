@@ -125,3 +125,6 @@ client:
 menu:
     dashboard: Přehled
     content: Obsah
+
+dashboard:
+    php: PHP
